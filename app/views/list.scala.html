@@ -1,0 +1,15 @@
+@(title:String, list: Seq[Media], importForm:Form[String])(implicit sidebarItems:(Seq[Media],Seq[Media]))
+
+
+
+@main("Ep Tracker", importForm) {
+
+  <h4><a href="@routes.Show.shows(0,1)">all shows</a>  >  @title</h4>
+  <ul>
+    @for(media <- list) {
+    @templates.mediaAsLi(media)
+    }
+  </ul>
+
+}
+

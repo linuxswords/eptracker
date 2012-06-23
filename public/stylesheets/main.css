@@ -1,0 +1,377 @@
+dd.error
+{
+    color: #8b0000;
+}
+span.small
+{
+    font-size: 11pt;
+}
+
+img
+{
+    border: none;
+}
+
+img.showpic
+{
+    float: right;
+    width: 320px;
+}
+
+span.flag, span.delete
+{
+    cursor: pointer;
+}
+/*
+sprites
+*/
+
+.sprite {
+    background: url('../images/sprite.png') no-repeat;
+}
+.flag-green {
+    width: 16px;
+    height: 16px;
+    background-position: -54px -0px;
+}
+
+.flag-red {
+    width: 16px;
+    height: 16px;
+    background-position: -27px -27px;
+}
+
+.isohunt {
+    width: 16px;
+    height: 16px;
+    background-position: -0px -27px;
+}
+
+.trash {
+    width: 16px;
+    height: 16px;
+    background-position: -27px -0px;
+}
+
+.update {
+    width: 16px;
+    height: 16px;
+    background-position: -0px -0px;
+}
+
+/*
+styling of autocomplete proposals
+*/
+
+li.ui-menu-item
+{
+    list-style: none;
+
+}
+
+ul.ui-autocomplete
+{
+    background-color: #808080;
+}
+
+/*
+	SiteName by Adonis Ronquillo for Free Website Templates
+	www.freewebsitetemplat.es / www.doni.us
+	Images by Image Base http://imagebase.davidniblack.com/
+	Released under the Creative Commons Attribution 3.0 License.
+*/
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: underline;
+	color: #94c722;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+body {
+	font-size: 11pt;
+	line-height: 1.75em;
+	background: #F0F3F5;
+	color: #3C3D3D;
+	text-align: justify;
+}
+
+body,input {
+	font-family: "Varela", sans-serif;
+}
+
+br.clear {
+	clear: both;
+}
+
+form {
+	margin: 0;
+	padding: 0;
+}
+
+h1,h2,h3,h4 {
+	text-transform: lowercase;
+	font-weight: normal;
+}
+
+h2 {
+	font-size: 1.75em;
+}
+
+h2,h3,h4 {
+	margin-bottom: 1em;
+	font-family: "Sansita One", cursive;
+	color: #000;
+}
+
+h3 {
+	font-size: 1.5em;
+}
+
+h4 {
+	font-size: 1.25em;
+}
+
+img.left {
+	float: left;
+	margin: 8px 20px 20px 0;
+}
+
+img.top {
+	margin: 8px 0 20px 0;
+}
+
+label.login {
+	display: block;
+	margin: 0 0 6px 0;
+}
+
+p {
+	margin-bottom: 1.5em;
+}
+
+ul {
+	margin-bottom: 1.5em;
+}
+
+ul h4 {
+	margin-bottom: 0.35em;
+}
+
+label {
+	text-transform: lowercase;
+}
+
+.blogpost h2 {
+	margin: 0 0 10px 0;
+}
+
+.form {
+	margin: 0 0 28px 0;
+}
+
+.inputBox, .inputTextArea {
+
+	width: 95%;
+	border: dashed 1px #ADAFB0;
+	padding: 4px;
+}
+
+.inputButton {
+	padding: 6px;
+	float: right;
+	color: #FFF;
+	background: #94c722;
+	font-family: "Sansita One", cursive;
+	border: none;
+	text-shadow: 1px 1px 2px #000;
+}
+
+#banner {
+	position: relative;
+	padding: 0;
+	height: 264px;
+	width: 1180px;
+	margin: 0 0 0 0;
+	background: #4E6474;
+}
+
+#box1 {
+	margin: 0 0 24px 0;
+	overflow: hidden;
+}
+
+#box2 {
+	margin: 0 0 24px 0;
+	overflow: hidden;
+}
+
+#box3 {
+	overflow: hidden;
+}
+
+#content {
+	width: 780px;
+	margin: 0 0 0 0px;
+	padding: 0;
+}
+
+#copyright {
+	margin: 0 0 16px 0;
+	padding: 48px 0 76px 0;
+	text-align: center;
+}
+
+#copyright a {
+	color: #3C3D3D;
+}
+
+#header {
+	position: relative;
+	padding: 20px 0px 5px 0px;
+	height: 65px;
+	width: 1124px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 28px;
+	height: 104px;
+	line-height: 104px;
+}
+
+#logo a {
+	text-decoration: none;
+	color: #000;
+}
+
+#logo a span {
+	color: #94c722;
+}
+
+#logo h1 {
+	font-size: 3.25em;
+	font-family: "Sansita One", cursive;
+}
+
+#main {
+	position: relative;
+	padding: 28px;
+	width: 1124px;
+	margin: 0 0 0 0;
+}
+
+#main .sectionList {
+	list-style: none;
+	padding-left: 0;
+}
+
+#main .sectionList li {
+	clear: both;
+	padding: 16px 0 16px 0;
+}
+
+#main ul {
+	list-style: none;
+}
+
+#nav {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 52px;
+	line-height: 52px;
+	padding: 0 28px 0 28px;
+	width: 1124px;
+	margin: 28px 0 0 0;
+	font-family: "Sansita One", cursive;
+}
+
+#nav a {
+	text-decoration: none;
+	text-transform: lowercase;
+	font-size: 1.5em;
+	color: #161616;
+
+}
+
+#nav ul {
+	list-style: none;
+}
+
+#nav ul li {
+	display: inline;
+	padding: 16px;
+}
+
+#nav ul li.first {
+
+}
+
+#nav ul li.active {
+	background: #94c722;
+}
+
+#nav ul li.active a {
+	color: #FFF;
+	text-shadow: 1px 1px 2px #000;
+}
+
+#outer {
+	position: relative;
+	width: 1180px;
+	margin: 0px auto 0 auto;
+}
+
+#search {
+	position: absolute;
+	top: 0;
+	right: 28px;
+	height: 104px;
+	line-height: 104px;
+}
+
+#search input.button {
+	margin-left: 1em;
+	border: 0;
+	color: #FFF;
+	background: #AA6A3C;
+	padding: 4px;
+	font-family: "Sansita One", cursive;
+}
+
+#search input.text {
+	border: dashed 1px #ADAFB0;
+	padding: 4px;
+}
+
+#sidebar1 {
+	width: 300px;
+	float: left;
+	padding: 0;
+}
+
+#sidebar2 {
+	width: 330px;
+	float: right;
+	padding: 0;
+}
+
+div.pagination ul li
+{
+    display: inline;
+}
+
+
+span.date
+{
+    font-size: 8pt;
+}

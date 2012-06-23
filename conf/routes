@@ -3,7 +3,21 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index
+GET     /                                       controllers.Application.index
+
+GET     /import/:name                           controllers.Import.importShow(name)
+POST    /import/                                controllers.Import.importTheShow
+GET     /shows                                  controllers.Show.shows(p:Int ?= 0, s:Int ?= 2)
+GET     /shows/all                              controllers.Show.all(p:Int ?= 0, s:Int ?= 2)
+GET     /show/:name                             controllers.Show.show(name,p:Int ?= 0, s:Int ?= 2)
+GET     /show/:name/delete                      controllers.Show.delete(name)
+GET     /show/:name/consumeAll                  controllers.Show.consumeAll(name:String)
+GET     /show/:name/update                      controllers.Show.update(name:String)
+GET     /show/:id/:consume                      controllers.Show.consume(id:Long, consume:Boolean)
+GET     /recent                                 controllers.Show.recent
+GET     /upcoming                               controllers.Show.upcoming
+GET     /epguidehelper                          controllers.Show.epGuideData
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

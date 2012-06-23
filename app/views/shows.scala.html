@@ -1,0 +1,39 @@
+@(currentPage: Page[TShow], currentOrderBy: Int, importForm:Form[String])(implicit sidebarItems:(Seq[Media],Seq[Media]))
+
+@****************************************
+* Helper generating navigation links    *
+****************************************@
+@link(newPage: Int, newOrderBy: Option[Int] = None) = @{
+    routes.Show.shows(newPage, newOrderBy.map { orderBy =>
+        if(orderBy == scala.math.abs(currentOrderBy)) -currentOrderBy else orderBy
+    }.getOrElse(currentOrderBy))
+
+}
+
+@main("Ep Tracker", importForm) {
+
+  <h4>all shows</h4>
+  @Option(currentPage.items).filterNot(_.isEmpty).map { shows =>
+  <ul>
+     @shows.map {
+      case tshow => {
+          <li><a href="@routes.Show.show(tshow.title)">@tshow.title</a> (@tshow.count)
+            <span class="sprite trash delete" onclick="deleteShow(@tshow.title)" rel="@tshow.title"><img title="delete" src="@routes.Assets.at("images/trans.gif")" alt="delete"></span>
+          </li>
+        }
+      }
+  </ul>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("span.delete").click(function(event){
+<!--@helper.javascriptRouter("consumeEp")(routes.javascript.Show.consume)-->
+      <!-- TODO call here-->
+    });
+  });
+</script>
+
+
+  @templates.paging(currentPage, currentOrderBy, "test")
+  }
+}

@@ -1,0 +1,49 @@
+@(currentPage:Page[_], currentOrderBy: Int, title:String)
+
+
+@****************************************
+* Helper generating navigation links    *
+****************************************@
+@link(newPage: Int, newOrderBy: Option[Int] = None) = @{
+    routes.Show.show(title, newPage, newOrderBy.map { orderBy =>
+        if(orderBy == scala.math.abs(currentOrderBy)) -currentOrderBy else orderBy
+    }.getOrElse(currentOrderBy))
+
+}
+
+
+@if(currentPage.next.isDefined || currentPage.prev.isDefined){
+  <div id="pagination" class="pagination">
+        <ul>
+            @currentPage.prev.map { page =>
+                <li class="prev">
+                    <a href="@link(page)">&lt; Previous</a>
+                </li>
+            }.getOrElse {
+                <li class="prev disabled">
+                   &lt; Previous
+                </li>
+            }
+            <li class="current">
+                Displaying @(currentPage.offset + 1) to @(currentPage.offset + currentPage.items.size) of @currentPage.total
+            </li>
+            @currentPage.next.map { page =>
+                <li class="next">
+                    <a href="@link(page)">Next &gt;</a>
+                </li>
+            }.getOrElse {
+                <li class="next disabled">
+                    Next &gt;
+                </li>
+            }
+            @if(currentPage.total > (currentPage.offset + currentPage.items.size)){
+              <li class="next" >
+                @currentPage.totalPages.map { page =>
+                <a href="@link(page.toInt)">Last &gt;&gt;</a>
+              </li>
+               }
+            }
+
+        </ul>
+    </div>
+}

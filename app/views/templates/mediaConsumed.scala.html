@@ -1,0 +1,5 @@
+@(media:Media)
+
+@defining( if(media.consumed) "flag-green" else "flag-red" ) { clazz =>
+<span class="sprite @clazz flag" rel="@media.id"><img title="mark as seen" src="@routes.Assets.at("images/trans.gif")" alt="mark as seen"></span>
+        }

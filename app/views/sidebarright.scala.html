@@ -1,0 +1,51 @@
+@(name:String, importForm: Form[String])(implicit sidebarItems:(Seq[Media],Seq[Media]))
+<div id="sidebar2">
+
+  <h3><a href="@routes.Show.recent">recent</a></h3>
+  <ul>
+    @for(media <- sidebarItems _1) {
+      @templates.mediaAsLi(media)
+    }
+  </ul>
+
+  <h3><a href="@routes.Show.upcoming">upcoming</a></h3>
+  <ul>
+    @for(media <- sidebarItems _2) {
+      @templates.mediaAsLi(media)
+    }
+  </ul>
+
+  @import helper._
+  <h3>import show</h3>
+  @form(action = routes.Import.importTheShow(),'class -> "form"){
+      @importForm.globalError.map( error => <p class="error">{error.message}</p>)
+
+      @inputText(field = importForm("epGuideId"), 'placeholder -> "show id from epguide.com", '_label -> "enter show id from epguide.com", 'class -> "inputBox importField", '_showConstraints -> false, 'autocomplete -> "off")
+
+  <button class="inputButton">start import</button>
+  }
+
+  @helper.javascriptRouter("jsRoutes")(
+  routes.javascript.Show.epGuideData
+  )
+  <script type="text/javascript">
+    $(document).ready(function(){
+      jsRoutes.controllers.Show.epGuideData().ajax({
+        success: function(data){
+          $("input.importField").autocomplete(
+                  {
+                    source:data,
+                    minLength:2,
+                    autoFocus:true,
+                    position : {
+                      my: 'left bottom',
+                      at: 'left top',
+                      collision:'none'
+                    }
+                  });
+        }
+      });
+    });
+  </script>
+
+</div>
