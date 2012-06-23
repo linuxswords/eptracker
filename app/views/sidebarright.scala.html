@@ -1,4 +1,4 @@
-@(name:String, importForm: Form[String])(implicit sidebarItems:(Seq[Media],Seq[Media]))
+@(name:String, importForm: Form[String])(implicit sidebarItems:(Seq[Media],Seq[Media]), request:Request[AnyContent])
 <div id="sidebar2">
 
   <h3><a href="@routes.Show.recent">recent</a></h3>

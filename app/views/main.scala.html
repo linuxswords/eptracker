@@ -1,4 +1,4 @@
-@(title: String, importForm:Form[String])(content: Html)(implicit sidebarItems:(Seq[Media],Seq[Media]))
+@(title: String, importForm:Form[String])(content: Html)(implicit request:Request[AnyContent], sidebarItems:(Seq[Media],Seq[Media]))
 
 @helper.javascriptRouter("consumeEp")(routes.javascript.Show.consume)
 

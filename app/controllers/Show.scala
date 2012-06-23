@@ -29,21 +29,21 @@ object Show extends Controller
     Ok(Json.parse(Cache.getAs[JsValue]("epguides").mkString))
   }
 
-  def shows(page: Int = 0, sort: Int = 1) = Action{
+  def shows(page: Int = 0, sort: Int = 1) = Action{ implicit request =>
     val recent = Media.recent()
     val upcoming = Media.upcoming()
     implicit val sidebarItems =  (recent, upcoming)
     Ok(views.html.shows(Media.shows(page, 10, sort), sort, importForm))
   }
 
-  def show(name: String, page: Int = 0, sort: Int = 1) = Action {
+  def show(name: String, page: Int = 0, sort: Int = 1) = Action {  implicit request =>
     val recent = Media.recent()
     val upcoming = Media.upcoming()
     implicit val sidebarItems =  (recent, upcoming)
     Ok(views.html.show(Media.show(name, page, 10, sort), sort, name, importForm))
   }
 
-  def recent() = Action {
+  def recent() = Action { implicit request =>
     val recent = Media.recent()
     val upcoming = Media.upcoming()
     implicit val sidebarItems =  (recent, upcoming)
@@ -51,7 +51,7 @@ object Show extends Controller
     Ok(views.html.list("recent", allRecents, importForm))
   }
 
-  def upcoming = Action {
+  def upcoming = Action { implicit request =>
     val recent = Media.recent()
     val upcoming = Media.upcoming()
     implicit val sidebarItems =  (recent, upcoming)
@@ -70,7 +70,7 @@ object Show extends Controller
     Redirect(returnUrl)
   }
 
-  def consume(id:Long, consume : Boolean) = Action {
+  def consume(id:Long, consume : Boolean) = Action {  implicit request =>
     Media.consume(id, consume)
     Ok(consume.toString)
   }
