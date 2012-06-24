@@ -73,53 +73,19 @@ val dataSource = play.db.DB.getDataSource("default")
 
   def shows(page: Int = 0, pageSize: Int = 10, orderBy: Int = 1, filter: String = "%"): Page[TVShow] = {
     val offset = pageSize * page
-
     val shows = queryDao.query(QueryConfig(offset = Some(offset), limit = Some(pageSize)), select from ts)
     val totalRows = queryDao.count(select from ts)
+
     Page(shows, page, offset, totalRows)
-
-
-    //        """
-    //      select title, count(*) as count
-    //      from media
-    //      group by title
-    //      order by {orderBy} nulls last
-    //      limit {pageSize} offset {offset}
-    //      """).on(
-    //        'pageSize -> pageSize,
-    //        'offset -> offset,
-    //        'orderBy -> orderBy
-    //      ).as(TShow.simple *)
-
-    //      val totalRows = SQL(
-    //        """
-    //      select distinct(title) from media
-    //      """
-
-
   }
 
   def all(page: Int = 0, pageSize: Int = 10, orderBy: Int = 1, filter: String = "%"): Page[(Media)] = {
     val offset = pageSize * page
-
     val query: OrderBy[Builder[LongId, Media]] with Builder[LongId, Media] = select from me orderBy(me.title, asc)
     val medias = queryDao.query(QueryConfig(offset = Some(offset), limit = Some(pageSize)), query)
     val totalRows = queryDao.count(query)
-//        """
-//      select * from media
-//      order by {orderBy} nulls last
-//      limit {pageSize} offset {offset}
-//      """).on(
-//        'pageSize -> pageSize,
-//        'offset -> offset,
-//        'orderBy -> orderBy
 
-//      val totalRows = SQL(
-//        """
-//          select count(*) from media
-//        """
-
-      Page(medias, page, offset, totalRows)
+    Page(medias, page, offset, totalRows)
   }
 
   /**
@@ -137,24 +103,7 @@ val dataSource = play.db.DB.getDataSource("default")
     val medias = queryDao.query(QueryConfig(offset = Some(offset), limit = Some(pageSize)), query)
     val totalRows = queryDao.count(query)
 
-//        """
-//      select * from media
-//      where title = {title}
-//      order by publishingDate nulls last
-//      limit {pageSize} offset {offset}
-//      """).on(
-//        'title -> title,
-//        'pageSize -> pageSize,
-//        'offset -> offset,
-//        'orderBy -> orderBy
-//      val totalRows = SQL(
-//              """
-//            select count(*) from media
-//            where title = {title}
-//            """)
-//        .on('title -> title)
-
-      Page(medias, page, offset, totalRows)
+    Page(medias, page, offset, totalRows)
   }
 
   def recent(limit : Int = 4) : Seq[Media] =  {
@@ -163,32 +112,7 @@ val dataSource = play.db.DB.getDataSource("default")
   }
 
   def consume(id:Long, consume:Boolean) = {
-//    DB.withConnection{ implicit connection  =>
-//      SQL(
-//        """
-//        update media
-//        set consumed  = {consume}
-//        where id = {id}
-//        """
-//      ).on(
-//        'consume -> consume,
-//        'id -> id
-//      ).executeUpdate()
-//
-//      if(consume)
-//      {
-//        DB.withConnection{ implicit connection =>
-//          SQL("""
-//          update media
-//          set consumed = 1
-//          where title = (select title from media where id = {id})
-//          and publishingDate < (select publishingDate from media where id = {id})
-//        """).on(
-//            'id -> id
-//          ).executeUpdate()
-//        }
-//      }
-//    }
+    // TODO
   }
 
   def consumeAll(title:String) = {
@@ -207,19 +131,6 @@ val dataSource = play.db.DB.getDataSource("default")
 
   def upcoming(limit : Int = 4) : Seq[Media] =  {
     queryDao.query(QueryConfig(limit = Some(limit)), select from me where me.publishingDate >= DateTime.now orderBy (me.publishingDate, asc))
-//    DB.withConnection{ implicit connection =>
-//    val medias = SQL(
-//      """
-//      select * from media
-//      where publishingDate >= {today}
-//      order by publishingDate asc nulls last
-//      limit {limit}
-//      """).on(
-//      'today -> new java.util.Date(),
-//      'limit -> limit
-//    ).as(simple *)
-//    medias
-//    }
   }
 
   def delete(title: String) = {

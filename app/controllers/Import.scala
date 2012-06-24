@@ -79,27 +79,19 @@ object Import extends Controller
     }
   }
 
-  def formatSql(nr:String, id:String, date:String, subtitle:String, title: String, epGuideId:String) =   {
-    val ctitle = title.replace("'", "''")
-    val stitle = subtitle.replace("'", "''").replace("[Recap]", "").replace("[Trailer]", "")
-    ("insert into Media(consumed,title,subtitle,identifier,publishingDate,showid) select 0,'%s','%s','%s','%s', '%s' from ddual "
-      .format(ctitle.trim, stitle.trim, convertId(id), convertDate(date), epGuideId) +
-      " where not exists (select * from Media where upper(showid) = '%s' and identifier = '%s' and subtitle = '%s');")
-      .format(epGuideId.toUpperCase, convertId(id), stitle.trim)
-  }
-
-
   def processLine(s: String, title: String, epGuideId: String) =
   {
     s match {
       case nrIdDateTitle(nr,id,date,subtitle) =>
-        mapperDao.insert(MediaEntity, new Media(convertDate(date),None, title, Some(subtitle), Option(id), None, false, Option(title)))
-      // formatSql(nr, id, date, subtitle, title, epGuideId)
+        mapperDao.insert(MediaEntity, new Media(convertDate(date),None, cleanString(title), Some(cleanString(subtitle)), Option(convertId(id)), None, false, Option(title)))
       case nrIdProdDateTitle(nr,id,_,date,subtitle) =>
-        mapperDao.insert(MediaEntity, new Media(convertDate(date),None, title, Some(subtitle), Option(id), None, false, Option(title)))
-        //formatSql(nr, id, date, subtitle, title, epGuideId)
+        mapperDao.insert(MediaEntity, new Media(convertDate(date),None, cleanString(title), Some(cleanString(subtitle)), Option(convertId(id)), None, false, Option(title)))
       case _ => ""
     }
+  }
+
+  def cleanString(text:String) = {
+    text.replace("[Recap]","")replace("[Trailer]","")replace("'","''")
   }
 
   def importShowIntoDb(epGuideId: String) = {
@@ -113,17 +105,12 @@ object Import extends Controller
     val file: File = Play.application.getFile("public/images/show/" + epGuideId + "-cast.jpg")
     util.Util.saveFileFromUrl(file, url)
 
-
-    val sql = for{
+    for{
       line <- texts
     } {
       processLine(line, title, epGuideId)
     }
 
-//    println(sql.mkString)
-//    DB.withConnection{ implicit connection =>
-//      SQL(sql.mkString).execute()
-//    }
     title
    }
 }
