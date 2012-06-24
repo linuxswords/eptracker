@@ -41,7 +41,7 @@
                     var title = elem.closest('li').attr('title')
                     var state = elem.hasClass('flag-red');
                     var id = elem.attr('rel');
-                    consumeEp.controllers.Show.consume(id,state ? 1 : 0).ajax({
+                    consumeEp.controllers.Show.consume(id,title,state ? 1 : 0).ajax({
                       success: function(data){
                         if(state)
                           {

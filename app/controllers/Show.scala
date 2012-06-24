@@ -70,8 +70,8 @@ object Show extends Controller
     Redirect(returnUrl)
   }
 
-  def consume(id:Long, consume : Boolean) = Action {  implicit request =>
-    Media.consume(id, consume)
+  def consume(id:String, title:String, consume : Boolean) = Action {  implicit request =>
+    Media.consume(id, title, consume)
     Ok(consume.toString)
   }
 
