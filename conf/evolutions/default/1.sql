@@ -16,6 +16,12 @@ create table media(
   media_parent integer     ,
 --   constraint u_show UNIQUE (title,identifier,subtitle)
 );
+ ;
+create view TVShow as
+select title, count(*)
+from media
+groub by title
+order by title asc;
 
 
 insert into media(consumed,title,subtitle,identifier,publishingDate, showid) values(1, 'Game of Thrones', 'Winter is Coming', 's01e01','2011-04-17', 'GameOfThrones');
@@ -35,4 +41,5 @@ insert into media(consumed,title,subtitle,identifier,publishingDate, showid) val
 # --- !Downs
 
 Drop table media;
+Drop view TVShow
 Drop SEQUENCE media_id_seq;
