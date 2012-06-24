@@ -5,7 +5,7 @@
 create table Media(
   id integer primary key auto_increment,
   showid varchar(255),
-  publishingDate timestamp,
+  publishingDate date,
   author varchar(255),
   title varchar(255),
   subtitle varchar(255),
