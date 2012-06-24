@@ -8,9 +8,13 @@ object ApplicationBuild extends Build {
     val appVersion      = "1.0-SNAPSHOT"
 
     val appDependencies = Seq(
-      // Add your project dependencies here,
+
+    // html access and parsing
       "org.jsoup" % "jsoup" % "1.6.2",
-      "com.googlecode.mapperdao" % "mapperdao" % "1.0.0-rc9"
+
+    // persistence layer
+      "com.googlecode.mapperdao" % "mapperdao" % "1.0.0-rc9",
+      "mysql" % "mysql-connector-java" % "5.1.18"
     )
 
     val main = PlayProject(appName, appVersion, appDependencies, mainLang = SCALA).settings(
