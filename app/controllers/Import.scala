@@ -5,12 +5,14 @@ import org.jsoup.Jsoup
 import play.api.db.DB
 import anorm._
 import play.api.Play.current
-import models.Media
+import models.{MediaEntity, TVShowEntity, Media}
 import controllers.Show._
 import java.text.MessageFormat
 import scala.Predef._
 import play.api.{Play, Logger}
 import java.io.File
+import com.googlecode.mapperdao.utils.Setup
+import org.joda.time.format.DateTimeFormat
 
 /**
  *
@@ -19,6 +21,10 @@ import java.io.File
 
 object Import extends Controller
 {
+  val dataSource = play.db.DB.getDataSource("default")
+  val(jdbc, mapperDao, queryDao, transcationManager) = Setup.mysql(dataSource, List(MediaEntity, TVShowEntity))
+  val fmt = DateTimeFormat.forPattern("yyyy-MM-dd")
+
   val nrIdDateTitle = "(^[0-9]+)\\s*([0-9-]+) {8,}([0-9]{2}/[a-zA-Z]{3}/[0-9]{2})\\s*(.*)".r
   val nrIdProdDateTitle = "(^[0-9]+)\\s*([0-9-]+)\\s+[0-9/a-zA-Z]+\\s*(([0-9]{2}/[a-zA-Z]{3}/[0-9]{2}))\\s{3}(.*)".r
   val dateMatch = """([0-9]{2})/([a-zA-Z]{3})/([0-9]{2})""".r
@@ -61,7 +67,7 @@ object Import extends Controller
     s match {
       case dateMatch(day,month,year) =>
         val fourDigitYear = if(year.toInt > 50) "19" + year else "20" + year
-        fourDigitYear + "-" + monthMap(month) + "-" +day
+        fmt.parseDateTime(fourDigitYear + "-" + monthMap(month) + "-" +day)
     }
   }
 
@@ -76,9 +82,9 @@ object Import extends Controller
   def formatSql(nr:String, id:String, date:String, subtitle:String, title: String, epGuideId:String) =   {
     val ctitle = title.replace("'", "''")
     val stitle = subtitle.replace("'", "''").replace("[Recap]", "").replace("[Trailer]", "")
-    ("insert into media(consumed,title,subtitle,identifier,publishingDate,showid) select 0,'%s','%s','%s','%s', '%s' "
+    ("insert into Media(consumed,title,subtitle,identifier,publishingDate,showid) select 0,'%s','%s','%s','%s', '%s' from ddual "
       .format(ctitle.trim, stitle.trim, convertId(id), convertDate(date), epGuideId) +
-      " where not exists (select * from media where upper(showid) = '%s' and identifier = '%s' and subtitle = '%s');")
+      " where not exists (select * from Media where upper(showid) = '%s' and identifier = '%s' and subtitle = '%s');")
       .format(epGuideId.toUpperCase, convertId(id), stitle.trim)
   }
 
@@ -86,8 +92,12 @@ object Import extends Controller
   def processLine(s: String, title: String, epGuideId: String) =
   {
     s match {
-      case nrIdDateTitle(nr,id,date,subtitle) => formatSql(nr, id, date, subtitle, title, epGuideId)
-      case nrIdProdDateTitle(nr,id,_,date,subtitle) => formatSql(nr, id, date, subtitle, title, epGuideId)
+      case nrIdDateTitle(nr,id,date,subtitle) =>
+        mapperDao.insert(MediaEntity, new Media(convertDate(date),None, title, Some(subtitle), Option(id), None, false, Option(title)))
+      // formatSql(nr, id, date, subtitle, title, epGuideId)
+      case nrIdProdDateTitle(nr,id,_,date,subtitle) =>
+        mapperDao.insert(MediaEntity, new Media(convertDate(date),None, title, Some(subtitle), Option(id), None, false, Option(title)))
+        //formatSql(nr, id, date, subtitle, title, epGuideId)
       case _ => ""
     }
   }
@@ -106,13 +116,14 @@ object Import extends Controller
 
     val sql = for{
       line <- texts
-    } yield {
+    } {
       processLine(line, title, epGuideId)
     }
 
-    DB.withConnection{ implicit connection =>
-      SQL(sql.mkString).execute()
-    }
+//    println(sql.mkString)
+//    DB.withConnection{ implicit connection =>
+//      SQL(sql.mkString).execute()
+//    }
     title
    }
 }
