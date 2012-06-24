@@ -28,7 +28,7 @@
      @medias.map {
       case media => {
     <li title="@media.title">
-      <span class="date">@media.publishingDate</span> @templates.mediaConsumed(media) @media.identifier @media.subtitle
+      <span class="date">@media.publishingDate.toString("yyyy-MM-dd")</span> @templates.mediaConsumed(media) @media.identifier @media.subtitle
       @templates.iso(media)
     </li>
         }
