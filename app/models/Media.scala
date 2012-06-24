@@ -115,31 +115,16 @@ val dataSource = play.db.DB.getDataSource("default")
     val medias = queryDao.querySingleResult(select from me where me.identifier === id and me.title === title)
     medias foreach { media =>
       media.consumed = consume
-      mapperDao.update(MediaEntity, media, media)
+      mapperDao.update(MediaEntity, media)
+      if(consume){
+        val updates = queryDao.query(select from me where me.title === title and me.publishingDate < media.publishingDate)
+        updates foreach { up =>
+          up.consumed = consume
+          mapperDao.update(MediaEntity, up)
+        }
+      }
     }
   }
-//           """
-//           update media
-//           set consumed  = {consume}
-//           where id = {id}
-//           """
-//         ).on(
-//           'consume -> consume,
-//           'id -> id
-//         ).executeUpdate()
-//
-//         if(consume)
-//         {
-//           DB.withConnection{ implicit connection =>
-//             SQL("""
-//             update media
-//             set consumed = 1
-//             where title = (select title from media where id = {id})
-//             and publishingDate < (select publishingDate from media where id = {id})
-//           """).on(
-//               'id -> id
-//             ).ex
-    // TODO
 
 
   def consumeAll(title:String) = {
