@@ -107,7 +107,7 @@ val dataSource = play.db.DB.getDataSource("default")
   }
 
   def recent(limit : Int = 4) : Seq[Media] =  {
-    val medias = queryDao.query(QueryConfig(limit = Some(limit)), select from me where me.publishingDate < DateTime.now  orderBy (me.publishingDate, asc))
+    val medias = queryDao.query(QueryConfig(limit = Some(limit)), select from me where me.publishingDate < DateTime.now  orderBy (me.publishingDate, desc))
     medias
   }
 
