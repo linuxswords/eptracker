@@ -2,17 +2,17 @@ package controllers
 
 import play.api.mvc.{Action, Controller}
 import org.jsoup.Jsoup
-import play.api.db.DB
-import anorm._
 import play.api.Play.current
 import models.{MediaEntity, TVShowEntity, Media}
-import controllers.Show._
-import java.text.MessageFormat
 import scala.Predef._
-import play.api.{Play, Logger}
+import play.api.Play
 import java.io.File
 import com.googlecode.mapperdao.utils.Setup
 import org.joda.time.format.DateTimeFormat
+
+import com.googlecode.mapperdao.Query._
+import com.googlecode.mapperdao.jdbc.Transaction
+import com.googlecode.mapperdao.jdbc.Transaction.{Isolation, Propagation}
 
 /**
  *
@@ -23,6 +23,7 @@ object Import extends Controller
 {
   val dataSource = play.db.DB.getDataSource("default")
   val(jdbc, mapperDao, queryDao, transcationManager) = Setup.mysql(dataSource, List(MediaEntity, TVShowEntity))
+  val me = MediaEntity
   val fmt = DateTimeFormat.forPattern("yyyy-MM-dd")
 
   val nrIdDateTitle = "(^[0-9]+)\\s*([0-9-]+) {8,}([0-9]{2}/[a-zA-Z]{3}/[0-9]{2})\\s*(.*)".r
@@ -79,13 +80,26 @@ object Import extends Controller
     }
   }
 
+  def conditionalInsert(media:Media){
+     val tx = Transaction.get(transcationManager, Propagation.Nested, Isolation.ReadCommited, -1)
+    tx {() =>
+      val result = queryDao.querySingleResult(select from me where me.title === media.title and me.identifier === media.identifier)
+      result match {
+        case None => {
+          mapperDao.insert(me, media)
+        }
+        case _ =>
+      }
+    }
+  }
+
   def processLine(s: String, title: String, epGuideId: String) =
   {
     s match {
       case nrIdDateTitle(nr,id,date,subtitle) =>
-        mapperDao.insert(MediaEntity, new Media(convertDate(date),None, cleanString(title), Some(cleanString(subtitle)), Option(convertId(id)), None, false, Option(title)))
+        conditionalInsert(new Media(convertDate(date),None, cleanString(title), Some(cleanString(subtitle)), convertId(id), None, false, epGuideId))
       case nrIdProdDateTitle(nr,id,_,date,subtitle) =>
-        mapperDao.insert(MediaEntity, new Media(convertDate(date),None, cleanString(title), Some(cleanString(subtitle)), Option(convertId(id)), None, false, Option(title)))
+        conditionalInsert(new Media(convertDate(date),None, cleanString(title), Some(cleanString(subtitle)), convertId(id), None, false, epGuideId))
       case _ => ""
     }
   }

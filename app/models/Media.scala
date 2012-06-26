@@ -4,12 +4,10 @@ import play.api.db._
 import play.api.Play.current
 
 import anorm._
-import anorm.SqlParser._
 import scala.Long
 import org.joda.time.DateTime
 import com.googlecode.mapperdao._
-import anorm.~
-import models.Page
+import com.googlecode.mapperdao.Query._
 import utils.Setup
 
 /**
@@ -18,7 +16,6 @@ import utils.Setup
  */
 
 
-import com.googlecode.mapperdao.Query._
 
 
 /**
@@ -33,8 +30,8 @@ case class Page[A](items: Seq[A], page: Int, offset: Long, total: Long) {
 
 
 case class Media(publishingDate: DateTime, author:Option[String], title: String,
-subtitle : Option[String], identifier: Option[String], description : Option[String],
-var consumed : Boolean = false, showId: Option[String])
+subtitle : Option[String], identifier: String, description : Option[String],
+var consumed : Boolean = false, showId: String)
 
 
 object MediaEntity extends Entity[LongId, Media]{
@@ -43,10 +40,10 @@ object MediaEntity extends Entity[LongId, Media]{
   val author = column("author") option (_.author)
   val title = column("title") to  (_.title)
   val subtitle = column("subtitle") option  (_.subtitle)
-  val identifier = column("identifier") option (_.identifier)
+  val identifier = column("identifier") to (_.identifier)
   val description = column("description") option (_.description)
   val consumed = column("consumed") to (_.consumed)
-  val showId = column("showId") option (_.showId)
+  val showId = column("showId") to (_.showId)
 
   def constructor(implicit m: ValuesMap) =
   new Media(publishingDate, author, title, subtitle, identifier, description, consumed, showId) with LongId with Persisted  {
