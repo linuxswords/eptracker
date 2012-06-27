@@ -64,8 +64,8 @@ object Show extends Controller
     shows()
   }
 
-  def consumeAll(title: String) = Action {  request =>
-    Media.consumeAll(title)
+  def consumeAll(showId: String) = Action {  request =>
+    Media.consumeAll(showId)
     val returnUrl = request.headers.get(REFERER).getOrElse(routes.Application.index.url)
     Redirect(returnUrl)
   }

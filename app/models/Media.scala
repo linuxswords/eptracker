@@ -124,17 +124,11 @@ val dataSource = play.db.DB.getDataSource("default")
   }
 
 
-  def consumeAll(title:String) = {
-    DB.withConnection{ implicit connection  =>
-      SQL(
-      """
-      update media
-      set consumed  = 1
-      where title = {title}
-      """
-      ).on(
-      'title -> title
-      ).executeUpdate()
+  def consumeAll(showId:String) = {
+    val medias = queryDao.query(select from me where me.showId === showId)
+    medias foreach { media =>
+      media.consumed = true
+      mapperDao.update(MediaEntity, media)
     }
   }
 
