@@ -1,3 +1,9 @@
 @(media:Media)
 
-<li title="@media.title"><span class="date">@media.publishingDate.toString("yyyy-MM-dd")</span> @templates.mediaConsumed(media) @media.title @media.identifier @templates.iso(media)</li>
+<li title="@media.title">
+    <span class="date">@media.publishingDate.toString("yyyy-MM-dd")</span>
+    @templates.mediaConsumed(media)
+    <a href="@routes.Show.show(media.title)">@media.title</a>
+    @media.identifier
+    @templates.iso(media)
+</li>
