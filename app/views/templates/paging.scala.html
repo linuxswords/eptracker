@@ -1,23 +1,11 @@
-@(currentPage:Page[_], currentOrderBy: Int, title:String)
-
-
-@****************************************
-* Helper generating navigation links    *
-****************************************@
-@link(newPage: Int, newOrderBy: Option[Int] = None) = @{
-    routes.Show.show(title, newPage, newOrderBy.map { orderBy =>
-        if(orderBy == scala.math.abs(currentOrderBy)) -currentOrderBy else orderBy
-    }.getOrElse(currentOrderBy))
-
-}
-
+@(currentPage:Page[_], currentOrderBy: Int, link:(Int, Option[Int])=>play.api.mvc.Call)
 
 @if(currentPage.next.isDefined || currentPage.prev.isDefined){
   <div id="pagination" class="pagination">
         <ul>
             @currentPage.prev.map { page =>
                 <li class="prev">
-                    <a href="@link(page)">&lt; Previous</a>
+                    <a href="@link(page, None)">&lt; Previous</a>
                 </li>
             }.getOrElse {
                 <li class="prev disabled">
@@ -29,7 +17,7 @@
             </li>
             @currentPage.next.map { page =>
                 <li class="next">
-                    <a href="@link(page)">Next &gt;</a>
+                    <a href="@link(page, None)">Next &gt;</a>
                 </li>
             }.getOrElse {
                 <li class="next disabled">
@@ -39,7 +27,7 @@
             @if(currentPage.total > (currentPage.offset + currentPage.items.size)){
               <li class="next" >
                 @currentPage.totalPages.map { page =>
-                <a href="@link(page.toInt)">Last &gt;&gt;</a>
+                <a href="@link(page.toInt, None)">Last &gt;&gt;</a>
               </li>
                }
             }
