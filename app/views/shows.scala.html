@@ -15,6 +15,9 @@
 @helper.javascriptRouter("deleteEp")(routes.javascript.Show.delete)
 
   <h4>all shows</h4>
+
+  @templates.paging(currentPage, currentOrderBy, link)
+
   @Option(currentPage.items).filterNot(_.isEmpty).map { shows =>
   <ul>
      @shows.map {
@@ -26,6 +29,7 @@
       }
   </ul>
 
+@templates.paging(currentPage, currentOrderBy, link)
 <script type="text/javascript">
 
     function deleteShow(source)
@@ -39,13 +43,8 @@
                  error: function() {
                  alert('An error occurred while saving!');
                  }
-                 }
-         );
-
+        });
     }
 </script>
-
-
-  @templates.paging(currentPage, currentOrderBy, link)
   }
 }

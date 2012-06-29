@@ -23,6 +23,8 @@
 
 <img class="showpic" src="@routes.Assets.at("images/show/"+currentPage.items.head.showId+"-cast.jpg")" alt="cast">
 
+  @templates.paging(currentPage, currentOrderBy, link)
+
   @Option(currentPage.items).filterNot(_.isEmpty).map { medias =>
   <ul>
      @medias.map {
@@ -34,9 +36,6 @@
         }
       }
   </ul>
-
-
     @templates.paging(currentPage, currentOrderBy, link)
 }
-    
 }
