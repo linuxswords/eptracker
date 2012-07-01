@@ -1,6 +1,7 @@
 package util
 
 import io.Source
+import java.net.{URLEncoder, URL}
 
 /**
  *
@@ -12,7 +13,7 @@ case class TVRageShowInfo(id:String, name:String, url:String, premiered:String,
                      country:String, status:String, classification:String,
                      genres:String, network:String, runtime:String)
 
-object TVRage {
+object TVRageUtil {
 
   val url = "http://services.tvrage.com/tools/quickinfo.php?"
 
@@ -37,7 +38,8 @@ object TVRage {
 
 
   def showInfo(showName: String) : Option[TVRageShowInfo]= {
-    val html = Source.fromURL(url + "show=" + showName).mkString
+    val encodedName = URLEncoder.encode(showName, "UTF-8")
+    val html = Source.fromURL(url + "show=" + encodedName).mkString
     html match {
       case urlMatch(id, name, url, premiered,
                            started, ended, latest,

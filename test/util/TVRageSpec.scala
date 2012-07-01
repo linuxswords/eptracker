@@ -15,7 +15,7 @@ class TVRageSpec extends Specification {
 
     "for Alias must return an info object" in {
 
-      val info = TVRage.showInfo("Alias")
+      val info = TVRageUtil.showInfo("Alias")
 
       info must beSome
 
@@ -40,7 +40,7 @@ class TVRageSpec extends Specification {
 //      Runtime@60
 
 
-      val info = TVRage.showInfo("Alias").get
+      val info = TVRageUtil.showInfo("Alias").get
 
       info.id must equalTo("2537")
       info.name must equalTo("Alias")

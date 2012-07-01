@@ -15,11 +15,16 @@
 @main("Ep Tracker", importForm)  {
 
   <h4>
-    <a href="@routes.Show.shows(0,1)">all shows</a>  >  @title
+    <a href="@routes.Show.shows(0,1)">all shows</a>  > <span class="showtitle">@title</span>
     <span class="small">(@currentPage.total episodes)</span>
     <a class="sprite flag-green" title="mark all as seen" href="@routes.Show.consumeAll(currentPage.items.head.showId)"><img src="@routes.Assets.at("images/trans.gif")" alt=""></a>
     <a class="sprite update" title="update show" href="@routes.Show.update(currentPage.items.head.showId)"><img src="@routes.Assets.at("images/trans.gif")" alt=""></a>
   </h4>
+
+
+<div class="showinfo" style="display: none">
+    <img src="@routes.Assets.at("images/ajax-loader.gif")" />
+</div>
 
 <img class="showpic" src="@routes.Assets.at("images/show/"+currentPage.items.head.showId+"-cast.jpg")" alt="cast">
 
@@ -39,3 +44,39 @@
     @templates.paging(currentPage, currentOrderBy, link)
 }
 }
+
+
+@helper.javascriptRouter("tvrageinfo")(routes.javascript.TVRage.info)
+
+<script type="text/javascript">
+    var showing = false;
+    var loaded = false;
+    var titleElement = $('.showtitle');
+    var title = titleElement.html();
+    titleElement.hover(
+            function(){
+                if(!loaded) {
+                    tvrageinfo.controllers.TVRage.info(title).ajax({
+                        success: function(data){
+                            $('.showinfo').html(data);
+                            loaded = true;
+                        },
+                        error: function(data){
+                            $('.showinfo').html("error getting tvrage info");
+                            loaded = false;
+                        }
+                    });
+                }
+
+            },
+            function(){
+                showing = false;
+            }
+    )
+            .click(
+            function(){
+                $('.showinfo').toggle('slow');
+            }
+    )
+            .css('cursor', 'pointer');
+</script>
