@@ -2,16 +2,8 @@ package util
 
 import io.Source
 import java.net.{URLEncoder, URL}
+import models.TVRageShowInfo
 
-/**
- *
- * @author knm
- */
-
-case class TVRageShowInfo(id:String, name:String, url:String, premiered:String,
-                     started:String, ended:String, latest:String,
-                     country:String, status:String, classification:String,
-                     genres:String, network:String, runtime:String)
 
 object TVRageUtil {
 

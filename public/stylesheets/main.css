@@ -74,6 +74,13 @@ ul.ui-autocomplete
     background-color: #808080;
 }
 
+
+div.showinfo
+{
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+}
+
 /*
 	SiteName by Adonis Ronquillo for Free Website Templates
 	www.freewebsitetemplat.es / www.doni.us

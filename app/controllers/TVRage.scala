@@ -12,7 +12,12 @@ object TVRage extends Controller{
 
   def info(name:String) = Action {
     val info = TVRageUtil.showInfo(name)
-    Ok(info.get.status)
+    val result = info match
+    {
+      case Some(info) => info.toHtmlString()
+      case None => "coult not get tvrage info :("
+    }
+    Ok(result)
   }
 
 }
