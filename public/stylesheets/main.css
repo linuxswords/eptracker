@@ -17,6 +17,8 @@ div.characterbox
 
 div.characterbox div.characterepbox
 {
+    position: relative;
+    top: 30px;
     display: none;
     background: #ffffff;
     width: 300px;
@@ -39,7 +41,9 @@ div.characterbox div.characterepbox li.showperCharacter
 
 div.characterbox div.character
 {
-    padding-left: 15px;
+    padding-left: 20px;
+    position: absolute;
+    z-index: 10;
 }
 
 div.characterbox div.character span.charcount
