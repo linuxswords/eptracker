@@ -35,7 +35,15 @@ object Show extends Controller
 
   def epGuideData = Action{
     import play.api.Play.current
-    Ok(Json.parse(Cache.getAs[JsValue]("epguides").mkString))
+    val autocompleteData: Option[JsValue] = Cache.getAs[JsValue]("epguides")
+    autocompleteData match {
+      case Some(value) =>
+      case None =>
+      {
+        util.Util.updateAutocompleteCache()
+      }
+    }
+    Ok(Json.parse(autocompleteData.mkString))
   }
 
   def shows(page: Int = 0, sort: Int = 1) = Action{ implicit request =>
