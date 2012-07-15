@@ -1,4 +1,10 @@
-This is your new Play 2.0 application
-=====================================
+This is a Play 2.0 application for tracking watched tv-episodes
+===============================================================
 
-This file will be packaged with your application, when using `play dist`.
+Requirements:
+
+- scala
+- play! framework 2.0
+- optional, but recommended: local mysql-database
+
+start with 'play run' on the commandline, fire up localhost:9000 and start importing and flagging shows
