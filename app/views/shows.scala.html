@@ -14,9 +14,12 @@
 
 @helper.javascriptRouter("deleteEp")(routes.javascript.Show.delete)
 
-  <h4>all shows</h4>
+  <h4>all shows <a href="@routes.Show.showsByAbc()">by ABC</a></h4>
 
   @templates.paging(currentPage, currentOrderBy, link)
+
+
+
 
   @Option(currentPage.items).filterNot(_.isEmpty).map { shows =>
   <ul>
@@ -29,7 +32,8 @@
       }
   </ul>
 
-@templates.paging(currentPage, currentOrderBy, link)
+  @templates.paging(currentPage, currentOrderBy, link)
+
 <script type="text/javascript">
 
     function deleteShow(source)

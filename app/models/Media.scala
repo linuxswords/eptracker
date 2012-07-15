@@ -9,6 +9,7 @@ import org.joda.time.DateTime
 import com.googlecode.mapperdao._
 import com.googlecode.mapperdao.Query._
 import utils.Setup
+import util.TVShowABCMapCreator
 
 /**
  *
@@ -67,6 +68,10 @@ val dataSource = play.db.DB.getDataSource("default")
      queryDao.querySingleResult(select from me where me.id === id)
    }
 
+  def showsByAbc() = {
+    val shows = queryDao.query(select from ts)
+    TVShowABCMapCreator.createMap(shows)
+  }
 
   def shows(page: Int = 0, pageSize: Int = 10, orderBy: Int = 1, filter: String = "%"): Page[TVShow] = {
     val offset = pageSize * page

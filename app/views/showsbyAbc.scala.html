@@ -1,0 +1,47 @@
+@(showMap: Map[String, List[TVShow]], importForm:Form[String])(implicit request:Request[AnyContent], sidebarItems:(Seq[Media],Seq[Media]))
+
+
+
+@main("Ep Tracker", importForm) {
+
+  <h4>all shows <a href="@routes.Show.shows()">paged</a></h4>
+
+<div class="characters">
+    @for( character <- showMap.keys.toList.sortWith(_ < _ ) ) {
+    <div class="characterbox">
+        <div class="character">
+            @character
+        </div>
+        <div class="characterepbox">
+            <ul>
+                @for(show <- showMap(character)) {
+                <li class="showperCharacter">
+                    <a href="@routes.Show.show(show.title)">@show.title</a> (@show.count)
+                </li>
+                }
+            </ul>
+        </div>
+    </div>
+    }
+</div>
+
+} @* main end *@
+
+
+<script type="text/javascript">
+     $(document).ready(function(){
+        $('.characterbox').hover(
+                function(){
+                    $('.characterepbox').hide();
+                    $(this).find('.characterepbox').show()
+                },
+                function(){
+//                    $('.characterepbox').hide();
+                }
+//                function(){$(this).closest('.characterbox').find('.characterepbox').toggle()}
+        );
+         $('.characters').bind('mouseout', function(){
+//             $('.characterepbox').hide();
+         })
+      });
+</script>

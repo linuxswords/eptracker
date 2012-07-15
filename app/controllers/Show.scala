@@ -24,6 +24,15 @@ object Show extends Controller
   "epGuideId" -> nonEmptyText
   )
 
+  def showsByAbc = Action{ implicit request =>
+      val recent = Media.recent()
+      val upcoming = Media.upcoming()
+      implicit val sidebarItems =  (recent, upcoming)
+      val showMap = Media.showsByAbc()
+    Ok(views.html.showsbyAbc(showMap, importForm))
+  }
+
+
   def epGuideData = Action{
     import play.api.Play.current
     Ok(Json.parse(Cache.getAs[JsValue]("epguides").mkString))
