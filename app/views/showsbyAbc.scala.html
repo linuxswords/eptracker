@@ -11,12 +11,14 @@
     <div class="characterbox">
         <div class="character">
             @character
+            <span class="charcount">@showMap(character).size</span>
         </div>
         <div class="characterepbox">
             <ul>
                 @for(show <- showMap(character)) {
                 <li class="showperCharacter">
                     <a href="@routes.Show.show(show.title)">@show.title</a> (@show.count)
+                    <span class="sprite trash delete" onclick="deleteShow(this)" rel="@show.title"><img title="delete" src="@routes.Assets.at("images/trans.gif")" alt="delete"></span>
                 </li>
                 }
             </ul>
@@ -27,6 +29,7 @@
 
 } @* main end *@
 
+@helper.javascriptRouter("deleteEp")(routes.javascript.Show.delete)
 
 <script type="text/javascript">
      $(document).ready(function(){
@@ -44,4 +47,18 @@
 //             $('.characterepbox').hide();
          })
       });
+
+     function deleteShow(source)
+    {
+        var elem = $(source);
+        var title = elem.attr('rel');
+        deleteEp.controllers.Show.delete(title).ajax({
+                 success: function(data){
+                    elem.closest('li').slideUp();
+                },
+                 error: function() {
+                 alert('An error occurred while saving!');
+                 }
+        });
+    }
 </script>
