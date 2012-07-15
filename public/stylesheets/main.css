@@ -1,23 +1,56 @@
-div.characterepbox
-{
-    display: none;
-    background: #ffffff;
-    width: 300px;
-    z-index: 5;
-    margin-left: -100px;
-    margin-top: 20px;
-    border: 1px solid #000000;
-}
-
 div.characterbox
 {
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
     float: left;
     width:  60px;
     height: 45px;
     border: 1px solid #000000;
     text-align: center;
     padding-top: 20px;
+    margin-right: 5px;
+    margin-top: 5px;
+    background-color:#94c722;
+    font-size: 2em;
 }
+
+div.characterbox div.characterepbox
+{
+    display: none;
+    background: #ffffff;
+    width: 300px;
+    z-index: 50;
+    margin-left: -100px;
+    margin-top: 20px;
+    border: 1px solid #000000;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    font-size: 0.8em;
+
+}
+
+div.characterbox div.characterepbox li.showperCharacter
+{
+    font-size: 15px;
+}
+
+
+div.characterbox div.character
+{
+    padding-left: 15px;
+}
+
+div.characterbox div.character span.charcount
+{
+    position: relative;
+    top: 20px;
+    left: 0px;
+    font-size: 0.5em;
+}
+
+
 
 
 
@@ -173,7 +206,7 @@ h2 {
 	font-size: 1.75em;
 }
 
-h2,h3,h4 {
+h2,h3,h4,div.character {
 	margin-bottom: 1em;
 	font-family: "Sansita One", cursive;
 	color: #000;
