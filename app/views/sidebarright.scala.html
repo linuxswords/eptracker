@@ -1,5 +1,19 @@
-@(name:String, importForm: Form[String])(implicit sidebarItems:(Seq[Media],Seq[Media]), request:Request[AnyContent])
+@(name:String, importForm: Form[String])(implicit sidebarItems:(Seq[Media],Seq[Media]), request:Request[AnyContent],
+  searchForm: Form[forms.SearchText])
+@import helper._
+
+
 <div id="sidebar2">
+
+  <div id="search">
+
+      @form(action = routes.Search.search("text")){
+      <div>
+        <input type="search" class="text" name="text"
+               size="32" maxlength="64" placeholder="search coming soon" />
+      </div>
+      }
+  </div>
 
   <h3><a href="@routes.Show.recent">recent</a></h3>
   <ul>
@@ -15,12 +29,16 @@
     }
   </ul>
 
-  @import helper._
   <h3>import show</h3>
   @form(action = routes.Import.importTheShow(),'class -> "form"){
       @importForm.globalError.map( error => <p class="error">{error.message}</p>)
 
-      @inputText(field = importForm("epGuideId"), 'placeholder -> "show id from epguide.com", '_label -> "enter show id from epguide.com", 'class -> "inputBox importField", '_showConstraints -> false, 'autocomplete -> "off")
+      @inputText(field = importForm("epGuideId"),
+    'placeholder -> "show id from epguide.com",
+    '_label -> "enter show id from epguide.com",
+    'class -> "inputBox importField",
+    '_showConstraints -> false,
+    'autocomplete -> "off")
 
   <button class="inputButton">start import</button>
   }

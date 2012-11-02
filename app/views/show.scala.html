@@ -1,4 +1,5 @@
-@(currentPage: Page[Media], currentOrderBy: Int, title:String, importForm:Form[String])(implicit request:Request[AnyContent], sidebarItems:(Seq[Media],Seq[Media]))
+@(currentPage: Page[Media], currentOrderBy: Int, title:String, importForm:Form[String])(implicit request:Request[AnyContent],
+    sidebarItems:(Seq[Media],Seq[Media]), searchForm: Form[forms.SearchText])
 
 @****************************************
 * Helper generating navigation links    *

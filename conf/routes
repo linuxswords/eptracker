@@ -7,6 +7,9 @@ GET     /                                       controllers.Application.index
 
 GET     /import/:name                           controllers.Import.importShow(name)
 POST    /import/                                controllers.Import.importTheShow
+
+GET     /search/:title                          controllers.Search.search(title)
+
 GET     /shows                                  controllers.Show.shows(p:Int ?= 0, s:Int ?= 2)
 GET     /shows/byAbc                            controllers.Show.showsByAbc()
 GET     /shows/all                              controllers.Show.all(p:Int ?= 0, s:Int ?= 2)
@@ -15,6 +18,7 @@ GET     /show/:name/delete                      controllers.Show.delete(name)
 GET     /show/:name/consumeAll                  controllers.Show.consumeAll(name)
 GET     /show/:name/update                      controllers.Show.update(name)
 GET     /show/:id/:title/:consume               controllers.Show.consume(id, title, consume:Boolean)
+
 GET     /tvrage/:name                           controllers.TVRage.info(name)
 GET     /recent                                 controllers.Show.recent
 GET     /upcoming                               controllers.Show.upcoming

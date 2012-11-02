@@ -1,6 +1,7 @@
 package controllers
 
 
+import forms.SearchForm
 import models.Media
 import play.api.data
 import play.api.data.Form
@@ -18,7 +19,7 @@ import play.api.mvc.{AnyContent, Action, Controller}
  */
 
 
-object Show extends Controller
+object Show extends Controller with SearchForm
 {
   val importForm = Form(
   "epGuideId" -> nonEmptyText

@@ -1,5 +1,6 @@
 package controllers
 
+import forms.SearchForm
 import play.api.mvc.{Action, Controller}
 import org.jsoup.Jsoup
 import play.api.Play.current
@@ -19,7 +20,7 @@ import com.googlecode.mapperdao.jdbc.Transaction.{Isolation, Propagation}
  * @author knm
  */
 
-object Import extends Controller
+object Import extends Controller with SearchForm
 {
   val dataSource = play.db.DB.getDataSource("default")
   val(jdbc, mapperDao, queryDao, transcationManager) = Setup.mysql(dataSource, List(MediaEntity, TVShowEntity))

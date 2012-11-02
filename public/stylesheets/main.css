@@ -417,11 +417,7 @@ label {
 }
 
 #search {
-	position: absolute;
-	top: 0;
-	right: 28px;
-	height: 104px;
-	line-height: 104px;
+		line-height: 104px;
 }
 
 #search input.button {
@@ -433,9 +429,13 @@ label {
 	font-family: "Sansita One", cursive;
 }
 
-#search input.text {
+#search input {
 	border: dashed 1px #ADAFB0;
 	padding: 4px;
+    width: 100%;
+    height:30px;
+    margin-top: 10px;
+    margin-bottom: 15px;
 }
 
 #sidebar1 {
