@@ -34,6 +34,7 @@ object Search extends Controller with SearchForm {
 
       val searchResult = list  filter{ case TVShow(title,_) => title.toLowerCase.contains(text.text.toLowerCase) }
 
+      // different result pages for zero, one or n results
       searchResult match {
         case Nil => Ok(views.html.searchNoResult(text.text))
         case res :: Nil => Ok(views.html.show(Media.show(res.title), 0, res.title))

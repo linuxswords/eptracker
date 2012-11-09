@@ -6,7 +6,11 @@
   <h4><a href="@routes.Show.shows(0,1)">Search Results</a></h4>
   <ul>
     @for(show <- results) {
-      <li>@show.title</li>
+      <li>
+          <a href="@routes.Show.show(show.title)">
+              @show.title
+          </a>
+      </li>
     }
   </ul>
 

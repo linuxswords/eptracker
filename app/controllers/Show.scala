@@ -26,9 +26,6 @@ object Show extends Controller with SearchForm
 
 
   def showsByAbc = EpisodeAction{ implicit request =>
-      val recent = Media.recent()
-      val upcoming = Media.upcoming()
-      implicit val sidebarItems =  (recent, upcoming)
       val showMap = Media.showsByAbc()
     Ok(views.html.showsbyAbc(showMap))
   }
@@ -48,31 +45,19 @@ object Show extends Controller with SearchForm
   }
 
   def shows(page: Int = 0, sort: Int = 1) = EpisodeAction{ implicit request =>
-    val recent = Media.recent()
-    val upcoming = Media.upcoming()
-    implicit val sidebarItems =  (recent, upcoming)
     Ok(views.html.shows(Media.shows(page, 10, sort), sort))
   }
 
   def show(name: String, page: Int = 0, sort: Int = 1) = EpisodeAction{ implicit request =>
-    val recent = Media.recent()
-    val upcoming = Media.upcoming()
-    implicit val sidebarItems =  (recent, upcoming)
     Ok(views.html.show(Media.show(name, page, 10, sort), sort, name))
   }
 
   def recent() = EpisodeAction{ implicit request =>
-    val recent = Media.recent()
-    val upcoming = Media.upcoming()
-    implicit val sidebarItems =  (recent, upcoming)
     val allRecents = Media.recent(10)
     Ok(views.html.list("recent", allRecents))
   }
 
   def upcoming = EpisodeAction{ implicit request =>
-    val recent = Media.recent()
-    val upcoming = Media.upcoming()
-    implicit val sidebarItems =  (recent, upcoming)
     val allUpcomings = Media.upcoming(10)
     Ok(views.html.list("upcoming", allUpcomings))
   }
