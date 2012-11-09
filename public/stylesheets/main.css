@@ -33,6 +33,13 @@ div.characterbox div.characterepbox
 
 }
 
+div.characterbox span.close
+{
+   float: right;
+   cursor: pointer;
+   padding-right: 10px;
+}
+
 div.characterbox div.characterepbox li.showperCharacter
 {
     font-size: 15px;

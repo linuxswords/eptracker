@@ -13,7 +13,7 @@
             @character
             <span class="charcount">@showMap(character).size</span>
         </div>
-        <div class="characterepbox">
+        <div class="characterepbox"> <span class="close">x</span>
             <ul>
                 @for(show <- showMap(character)) {
                 <li class="showperCharacter">
@@ -43,9 +43,13 @@
                 }
 //                function(){$(this).closest('.characterbox').find('.characterepbox').toggle()}
         );
+
+         $('.characterbox span.close').click(function(){
+             $('.characterepbox').hide();
+         })  ;
          $('.characters').bind('mouseout', function(){
 //             $('.characterepbox').hide();
-         })
+         });
       });
 
      function deleteShow(source)
