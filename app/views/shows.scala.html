@@ -1,5 +1,4 @@
-@(currentPage: Page[TVShow], currentOrderBy: Int, importForm:Form[String])(implicit request:Request[AnyContent],
-    sidebarItems:(Seq[Media],Seq[Media]), searchForm: Form[forms.SearchText])
+@(currentPage: Page[TVShow], currentOrderBy: Int)(implicit request:Request[AnyContent], searchForm: Form[forms.SearchText])
 
 @****************************************
 * Helper generating navigation links    *
@@ -11,7 +10,8 @@
 
 }
 
-@main("Ep Tracker", importForm) {
+@import _root_.request.EpisodeRequest.requestToImportForm
+@main("Ep Tracker", request) {
 
 @helper.javascriptRouter("deleteEp")(routes.javascript.Show.delete)
 

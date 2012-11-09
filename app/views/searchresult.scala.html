@@ -1,0 +1,13 @@
+@( results: List[models.TVShow])(implicit request:Request[AnyContent], searchForm: Form[forms.SearchText])
+
+@import _root_.request.EpisodeRequest.requestToImportForm
+@main("Searchresult", request) {
+
+  <h4><a href="@routes.Show.shows(0,1)">Search Results</a></h4>
+  <ul>
+    @for(show <- results) {
+      <li>@show.title</li>
+    }
+  </ul>
+
+}

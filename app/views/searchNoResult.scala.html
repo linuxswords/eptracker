@@ -1,0 +1,10 @@
+@(text: String)(implicit request:Request[AnyContent], searchForm: Form[forms.SearchText])
+
+@import _root_.request.EpisodeRequest.requestToImportForm
+@main("Searchresult", request) {
+
+  <h4>No Results found :(</h4>
+
+        Search for @text yielded no results. Care to search again?
+
+}

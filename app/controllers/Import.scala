@@ -1,6 +1,7 @@
 package controllers
 
 import forms.SearchForm
+import request.EpisodeRequest._
 import play.api.mvc.{Action, Controller}
 import org.jsoup.Jsoup
 import play.api.Play.current
@@ -46,13 +47,14 @@ object Import extends Controller with SearchForm
         "Dec" -> "12"
   )
 
-  def importTheShow() = Action { implicit request =>
-    Show.importForm.bindFromRequest().fold(
+  def importTheShow() = EpisodeAction { implicit request =>
+    val importForm = requestToImportForm(request)
+    importForm.bindFromRequest().fold(
       errorForm =>   {
         val recent = Media.recent()
         val upcoming = Media.upcoming()
         implicit val sidebarItems =  (recent, upcoming)
-        BadRequest(views.html.shows(Media.shows(1, 10, 1), 1, errorForm))
+        BadRequest(views.html.shows(Media.shows(1, 10, 1), 1))
       },
 
       id => Redirect(routes.Import.importShow(id))

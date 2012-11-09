@@ -1,23 +1,12 @@
 package models
 
-import play.api.db._
-import play.api.Play.current
 
-import anorm._
 import scala.Long
 import org.joda.time.DateTime
 import com.googlecode.mapperdao._
 import com.googlecode.mapperdao.Query._
 import utils.Setup
 import util.TVShowABCMapCreator
-
-/**
- *
- * @author knm
- */
-
-
-
 
 /**
  * Helper for pagination.
@@ -27,8 +16,6 @@ case class Page[A](items: Seq[A], page: Int, offset: Long, total: Long) {
   lazy val next = Option(page + 1).filter(_ => (offset + items.size) < total)
   lazy val totalPages = Option(total / items.size.toLong).filter(_>= 0)
 }
-
-
 
 case class Media(publishingDate: DateTime, author:Option[String], title: String,
 subtitle : Option[String], identifier: String, description : Option[String],
@@ -52,11 +39,6 @@ object MediaEntity extends Entity[LongId, Media]{
   }
 }
 
-
-
-
-
-
 object Media {
 
 val dataSource = play.db.DB.getDataSource("default")
@@ -72,6 +54,8 @@ val dataSource = play.db.DB.getDataSource("default")
     val shows = queryDao.query(select from ts)
     TVShowABCMapCreator.createMap(shows)
   }
+
+  def allTitlesWithCount(): List[TVShow] = queryDao.query(select from ts)
 
   def shows(page: Int = 0, pageSize: Int = 10, orderBy: Int = 1, filter: String = "%"): Page[TVShow] = {
     val offset = pageSize * page

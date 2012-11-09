@@ -11,6 +11,8 @@ import play.api.cache.Cache
 import play.api.libs.concurrent.Akka
 import play.api.libs.json.{JsValue, Json}
 import play.api.mvc.{AnyContent, Action, Controller}
+import request.EpisodeRequest.EpisodeAction
+import request.EpisodeRequest._
 
 
 /**
@@ -21,20 +23,18 @@ import play.api.mvc.{AnyContent, Action, Controller}
 
 object Show extends Controller with SearchForm
 {
-  val importForm = Form(
-  "epGuideId" -> nonEmptyText
-  )
 
-  def showsByAbc = Action{ implicit request =>
+
+  def showsByAbc = EpisodeAction{ implicit request =>
       val recent = Media.recent()
       val upcoming = Media.upcoming()
       implicit val sidebarItems =  (recent, upcoming)
       val showMap = Media.showsByAbc()
-    Ok(views.html.showsbyAbc(showMap, importForm))
+    Ok(views.html.showsbyAbc(showMap))
   }
 
 
-  def epGuideData = Action{
+  def epGuideData = EpisodeAction{ implicit request =>
     import play.api.Play.current
     val autocompleteData: Option[JsValue] = Cache.getAs[JsValue]("epguides")
     autocompleteData match {
@@ -47,34 +47,34 @@ object Show extends Controller with SearchForm
     Ok(Json.parse(autocompleteData.mkString))
   }
 
-  def shows(page: Int = 0, sort: Int = 1) = Action{ implicit request =>
+  def shows(page: Int = 0, sort: Int = 1) = EpisodeAction{ implicit request =>
     val recent = Media.recent()
     val upcoming = Media.upcoming()
     implicit val sidebarItems =  (recent, upcoming)
-    Ok(views.html.shows(Media.shows(page, 10, sort), sort, importForm))
+    Ok(views.html.shows(Media.shows(page, 10, sort), sort))
   }
 
-  def show(name: String, page: Int = 0, sort: Int = 1) = Action {  implicit request =>
+  def show(name: String, page: Int = 0, sort: Int = 1) = EpisodeAction{ implicit request =>
     val recent = Media.recent()
     val upcoming = Media.upcoming()
     implicit val sidebarItems =  (recent, upcoming)
-    Ok(views.html.show(Media.show(name, page, 10, sort), sort, name, importForm))
+    Ok(views.html.show(Media.show(name, page, 10, sort), sort, name))
   }
 
-  def recent() = Action { implicit request =>
+  def recent() = EpisodeAction{ implicit request =>
     val recent = Media.recent()
     val upcoming = Media.upcoming()
     implicit val sidebarItems =  (recent, upcoming)
     val allRecents = Media.recent(10)
-    Ok(views.html.list("recent", allRecents, importForm))
+    Ok(views.html.list("recent", allRecents))
   }
 
-  def upcoming = Action { implicit request =>
+  def upcoming = EpisodeAction{ implicit request =>
     val recent = Media.recent()
     val upcoming = Media.upcoming()
     implicit val sidebarItems =  (recent, upcoming)
     val allUpcomings = Media.upcoming(10)
-    Ok(views.html.list("upcoming", allUpcomings, importForm))
+    Ok(views.html.list("upcoming", allUpcomings))
   }
 
   def delete(name:String) = Action {
@@ -82,18 +82,18 @@ object Show extends Controller with SearchForm
     shows()
   }
 
-  def consumeAll(showId: String) = Action {  request =>
+  def consumeAll(showId: String) = EpisodeAction{ implicit request =>
     Media.consumeAll(showId)
     val returnUrl = request.headers.get(REFERER).getOrElse(routes.Application.index.url)
     Redirect(returnUrl)
   }
 
-  def consume(id:String, title:String, consume : Boolean) = Action {  implicit request =>
+  def consume(id:String, title:String, consume : Boolean) = EpisodeAction{ implicit request =>
     Media.consume(id, title, consume)
     Ok(consume.toString)
   }
 
-  def update(name:String) = Action { request =>
+  def update(name:String) = EpisodeAction{ implicit request =>
     Import.importShowIntoDb(name)
     val returnUrl = request.headers.get(REFERER).getOrElse(routes.Application.index.url)
     Redirect(returnUrl)

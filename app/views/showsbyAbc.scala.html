@@ -1,9 +1,8 @@
-@(showMap: Map[String, List[TVShow]], importForm: Form[String])(implicit request:Request[AnyContent],
-    sidebarItems:(Seq[Media],Seq[Media]), searchForm: Form[forms.SearchText])
+@(showMap: Map[String, List[TVShow]])(implicit request:Request[AnyContent],searchForm: Form[forms.SearchText])
 
 
-
-@main("Ep Tracker", importForm) {
+@import _root_.request.EpisodeRequest.requestToImportForm
+@main("Ep Tracker", request) {
 
   <h4>all shows <a href="@routes.Show.shows()">paged</a></h4>
 

@@ -1,5 +1,4 @@
-@(title: String, importForm:Form[String])(content: Html)(implicit request:Request[AnyContent],
-    sidebarItems:(Seq[Media],Seq[Media]), searchForm: Form[forms.SearchText])
+@(title: String, importForm:Form[String])(content: Html)(implicit request:Request[AnyContent],  searchForm: Form[forms.SearchText])
 
 @helper.javascriptRouter("consumeEp")(routes.javascript.Show.consume)
 
@@ -27,7 +26,8 @@
         <img src="@routes.Assets.at("images/head.jpg")" width="1180" height="264" alt="" />
       </div>
     <div id="main">
-       @sidebarright("aber",importForm)
+        @import _root_.request.EpisodeRequest.requestToSidebarItems
+       @sidebarright("aber",importForm, request)
        <div id="content">
           @content
        </div>

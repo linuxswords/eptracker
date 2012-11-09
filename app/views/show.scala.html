@@ -1,5 +1,4 @@
-@(currentPage: Page[Media], currentOrderBy: Int, title:String, importForm:Form[String])(implicit request:Request[AnyContent],
-    sidebarItems:(Seq[Media],Seq[Media]), searchForm: Form[forms.SearchText])
+@(currentPage: Page[Media], currentOrderBy: Int, title:String)(implicit request:Request[AnyContent],searchForm: Form[forms.SearchText])
 
 @****************************************
 * Helper generating navigation links    *
@@ -12,8 +11,8 @@
 }
 
 @helper.javascriptRouter("consumeShow")(routes.javascript.Show.consumeAll)
-
-@main("Ep Tracker", importForm)  {
+@import _root_.request.EpisodeRequest.requestToImportForm
+@main("Ep Tracker", request)  {
 
   <h4>
     <a href="@routes.Show.shows(0,1)">all shows</a>  > <span class="showtitle" title="pull tvrage info">@title</span>

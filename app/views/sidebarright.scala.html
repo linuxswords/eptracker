@@ -1,4 +1,4 @@
-@(name:String, importForm: Form[String])(implicit sidebarItems:(Seq[Media],Seq[Media]), request:Request[AnyContent],
+@(name:String, importForm: Form[String], sidebarItems:(Seq[Media],Seq[Media]))(implicit request:Request[AnyContent],
   searchForm: Form[forms.SearchText])
 @import helper._
 
@@ -10,7 +10,7 @@
       @form(action = routes.Search.search("text")){
       <div>
         <input type="search" class="text" name="text"
-               size="32" maxlength="64" placeholder="search coming soon" />
+               size="32" maxlength="64" placeholder="search" />
       </div>
       }
   </div>
