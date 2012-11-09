@@ -19,15 +19,15 @@
                 <li class="next">
                     <a href="@link(page, None)">Next &gt;</a>
                 </li>
-            }.getOrElse {
-                <li class="next disabled">
-                    Next &gt;
-                </li>
-            }
+            }.getOrElse {}
             @if(currentPage.total > (currentPage.offset + currentPage.items.size)){
               <li class="next" >
                 @currentPage.totalPages.map { page =>
-                <a href="@link(page.toInt, None)">Last &gt;&gt;</a>
+                  @if(currentPage.total % page == 0 ) {
+                  <a href="@link(page.toInt - 1, None)">Last &gt;&gt;</a>
+                  } else {
+                  <a href="@link(page.toInt, None)">Last &gt;&gt;</a>
+                  }
               </li>
                }
             }
