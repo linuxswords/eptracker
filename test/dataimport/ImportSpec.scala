@@ -1,9 +1,7 @@
-import controllers.Import
-import models.Media
-import org.specs2.mutable.Specification
-import play.api.test.FakeApplication
+package dataimport
 
-import play.api.test.Helpers._
+import org.specs2.mutable.Specification
+
 
 /**
  *
