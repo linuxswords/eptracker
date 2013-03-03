@@ -2,7 +2,7 @@ package models
 
 
 import scala.Long
-import org.joda.time.DateTime
+import org.joda.time.{LocalDate, DateTime}
 import com.googlecode.mapperdao._
 import com.googlecode.mapperdao.Query._
 import utils.Setup
@@ -19,7 +19,11 @@ case class Page[A](items: Seq[A], page: Int, offset: Long, total: Long) {
 
 case class Media(publishingDate: DateTime, author:Option[String], title: String,
 subtitle : Option[String], identifier: String, description : Option[String],
-var consumed : Boolean = false, showId: String)
+var consumed : Boolean = false, showId: String){
+
+  def isToday: Boolean = publishingDate.toLocalDate.isEqual(LocalDate.now)
+
+}
 
 
 object MediaEntity extends Entity[LongId, Media]{

@@ -467,3 +467,8 @@ span.date
 {
     font-size: 8pt;
 }
+
+span.today{
+    font-size: 10px;
+    color: #8b0000;
+}
