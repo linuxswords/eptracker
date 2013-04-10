@@ -62,9 +62,10 @@ object Show extends Controller with SearchForm
     Ok(views.html.list("upcoming", allUpcomings))
   }
 
-  def delete(name:String) = Action {
+  def delete(name:String) = EpisodeAction { implicit request =>
     Media.delete(name)
-    shows()
+    val returnUrl = request.headers.get(REFERER).getOrElse(routes.Application.index.url)
+    Redirect(returnUrl)
   }
 
   def consumeAll(showId: String) = EpisodeAction{ implicit request =>

@@ -1,6 +1,6 @@
 import sbt._
 import Keys._
-import PlayProject._
+import play.Project._
 
 object ApplicationBuild extends Build {
 
@@ -13,11 +13,13 @@ object ApplicationBuild extends Build {
       "org.jsoup" % "jsoup" % "1.6.2",
 
     // persistence layer
-      "com.googlecode.mapperdao" % "mapperdao" % "1.0.0-rc9",
-      "mysql" % "mysql-connector-java" % "5.1.18"
+      "com.googlecode.mapperdao" % "mapperdao" % "1.0.0.rc19-2.10.1",
+      "mysql" % "mysql-connector-java" % "5.1.18",
+      jdbc,
+      javaJpa
     )
 
-    val main = PlayProject(appName, appVersion, appDependencies, mainLang = SCALA).settings(
+    val main = play.Project(appName, appVersion, appDependencies).settings(
       // Add your own project settings here      
     )
 

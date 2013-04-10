@@ -23,7 +23,7 @@ import com.googlecode.mapperdao.jdbc.Transaction.{Isolation, Propagation}
 
 object Import extends Controller with SearchForm
 {
-  val dataSource = play.db.DB.getDataSource("default")
+  val dataSource = play.api.db.DB.getDataSource("default")
   val(jdbc, mapperDao, queryDao, transcationManager) = Setup.mysql(dataSource, List(MediaEntity, TVShowEntity))
   val me = MediaEntity
   val fmt = DateTimeFormat.forPattern("yyyy-MM-dd")
