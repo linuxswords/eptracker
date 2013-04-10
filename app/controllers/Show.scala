@@ -13,6 +13,7 @@ import play.api.libs.json.{JsValue, Json}
 import play.api.mvc.{AnyContent, Action, Controller}
 import request.EpisodeRequest.EpisodeAction
 import request.EpisodeRequest._
+import java.net.URLDecoder
 
 
 /**
@@ -49,7 +50,8 @@ object Show extends Controller with SearchForm
   }
 
   def show(name: String, page: Int = 0, sort: Int = 1) = EpisodeAction{ implicit request =>
-    Ok(views.html.show(Media.show(name, page, 10, sort), sort, name))
+    val title = URLDecoder.decode(name, "UTF-8")
+    Ok(views.html.show(Media.show(title, page, 10, sort), sort, name))
   }
 
   def recent() = EpisodeAction{ implicit request =>
