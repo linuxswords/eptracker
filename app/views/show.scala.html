@@ -15,7 +15,7 @@
 @main("Ep Tracker", request)  {
 
   <h4>
-    <a href="@routes.Show.shows(0,1)">all shows</a>  > <span class="showtitle" title="pull tvrage info">@title</span>
+    <a href="@routes.Application.index">all shows</a>  > <span class="showtitle" title="pull tvrage info">@title</span>
     <span class="small">(@currentPage.total episodes)</span>
     <a class="sprite flag-green" title="mark all as seen" href="@routes.Show.consumeAll(currentPage.items.head.showId)"><img src="@routes.Assets.at("images/trans.gif")" alt=""></a>
     <a class="sprite update" title="update show" href="@routes.Show.update(currentPage.items.head.showId)"><img src="@routes.Assets.at("images/trans.gif")" alt=""></a>

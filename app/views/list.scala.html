@@ -4,7 +4,7 @@
 @import _root_.request.EpisodeRequest.requestToImportForm
 @main("Ep Tracker", request) {
 
-  <h4><a href="@routes.Show.shows(0,1)">all shows</a>  >  @title</h4>
+  <h4><a href="@routes.Application.index()">all shows</a>  >  @title</h4>
   <ul>
     @for(media <- list) {
     @templates.mediaAsLi(media)
