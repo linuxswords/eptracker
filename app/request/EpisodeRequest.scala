@@ -9,7 +9,7 @@ import models.Media
 /**
  * Wrapped Request
  */
-case class EpisodeRequest[A](sidebarItems: (Seq[Media],Seq[Media]), importForm: Form[String], request: Request[A]) extends WrappedRequest(request)
+case class EpisodeRequest[A](sidebarItems: (Seq[Media],Seq[Media]), request: Request[A]) extends WrappedRequest(request)
 
 
 object EpisodeRequest {
@@ -17,22 +17,14 @@ object EpisodeRequest {
   def EpisodeAction(block: Request[AnyContent] => Result): Action[AnyContent] = {
     Action { request =>
 
-      val importForm = Form(
-        "epGuideId" -> nonEmptyText
-      )
-
       def recent = Media.recent()
       def upcoming = Media.upcoming()
       val sidebarItems =  (recent, upcoming)
 
-      val episodeRequest = new EpisodeRequest(sidebarItems, importForm, request)
+      val episodeRequest = new EpisodeRequest(sidebarItems, request)
       block(episodeRequest)
 
     }
-  }
-
-  implicit def requestToImportForm[A](request: Request[A]): Form[String] = {
-    request.asInstanceOf[EpisodeRequest[A]].importForm
   }
 
   implicit def requestToSidebarItems[A](request: Request[A]):  (Seq[Media],Seq[Media]) = {

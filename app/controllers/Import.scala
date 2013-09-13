@@ -15,6 +15,7 @@ import org.joda.time.format.DateTimeFormat
 import com.googlecode.mapperdao.Query._
 import com.googlecode.mapperdao.jdbc.Transaction
 import com.googlecode.mapperdao.jdbc.Transaction.{Isolation, Propagation}
+import _root_.forms.ImportForm.importForm
 
 /**
  *
@@ -48,7 +49,7 @@ object Import extends Controller with SearchForm
   )
 
   def importTheShow() = EpisodeAction { implicit request =>
-    val importForm = requestToImportForm(request)
+
     importForm.bindFromRequest().fold(
       errorForm =>   {
         val recent = Media.recent()

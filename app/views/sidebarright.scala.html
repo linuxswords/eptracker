@@ -1,7 +1,7 @@
-@(name:String, importForm: Form[String], sidebarItems:(Seq[Media],Seq[Media]))(implicit request:Request[AnyContent],
+@(name:String, sidebarItems:(Seq[Media],Seq[Media]))(implicit request:Request[AnyContent],
   searchForm: Form[forms.SearchText])
 @import helper._
-
+@import _root_.forms.ImportForm.importForm
 
 <div id="sidebar2">
 

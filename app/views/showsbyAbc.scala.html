@@ -4,8 +4,7 @@
   @helper.javascriptRouter("deleteEp")(routes.javascript.Show.delete)
 }
 
-@import _root_.request.EpisodeRequest.requestToImportForm
-@main("Ep Tracker", request, script = script) {
+@main("Ep Tracker", script = script) {
 
   <h4>all shows <a href="@routes.Show.shows()">paged</a></h4>
 

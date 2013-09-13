@@ -1,4 +1,4 @@
-@(title: String, importForm:Form[String], script: Html = Html(""))(content: Html)(implicit request:Request[AnyContent],  searchForm: Form[forms.SearchText])
+@(title: String, script: Html = Html(""))(content: Html)(implicit request:Request[AnyContent],  searchForm: Form[forms.SearchText])
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +25,7 @@
       </div>
     <div id="main">
         @import _root_.request.EpisodeRequest.requestToSidebarItems
-       @sidebarright("aber",importForm, request)
+       @sidebarright("aber", request)
        <div id="content">
           @content
        </div>

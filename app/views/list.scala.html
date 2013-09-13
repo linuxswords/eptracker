@@ -1,8 +1,7 @@
 @(title:String, list: Seq[Media])(implicit request:Request[AnyContent], searchForm: Form[forms.SearchText])
 
 
-@import _root_.request.EpisodeRequest.requestToImportForm
-@main("Ep Tracker", request) {
+@main("Ep Tracker") {
 
   <h4><a href="@routes.Application.index()">all shows</a>  >  @title</h4>
   <ul>

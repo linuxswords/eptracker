@@ -1,7 +1,6 @@
 @(text: String)(implicit request:Request[AnyContent], searchForm: Form[forms.SearchText])
 
-@import _root_.request.EpisodeRequest.requestToImportForm
-@main("Searchresult", request) {
+@main("Searchresult") {
 
   <h4>No Results found :(</h4>
 
