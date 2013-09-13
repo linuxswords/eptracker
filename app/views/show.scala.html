@@ -1,5 +1,4 @@
 @(currentPage: Page[Media], currentOrderBy: Int, title:String)(implicit request:Request[AnyContent],searchForm: Form[forms.SearchText])
-
 @****************************************
 * Helper generating navigation links    *
 ****************************************@
@@ -9,10 +8,12 @@
     }.getOrElse(currentOrderBy))
 
 }
-
-@helper.javascriptRouter("consumeShow")(routes.javascript.Show.consumeAll)
+@script = {
+  @helper.javascriptRouter("consumeShow")(routes.javascript.Show.consumeAll)
+}
 @import _root_.request.EpisodeRequest.requestToImportForm
-@main("Ep Tracker", request)  {
+@main("Ep Tracker", request, script = script)  {
+
 
   <h4>
     <a href="@routes.Application.index">all shows</a>  > <span class="showtitle" title="pull tvrage info">@title</span>

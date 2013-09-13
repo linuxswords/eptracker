@@ -1,8 +1,11 @@
 @(showMap: Map[String, List[TVShow]])(implicit request:Request[AnyContent],searchForm: Form[forms.SearchText])
 
+@script = {
+  @helper.javascriptRouter("deleteEp")(routes.javascript.Show.delete)
+}
 
 @import _root_.request.EpisodeRequest.requestToImportForm
-@main("Ep Tracker", request) {
+@main("Ep Tracker", request, script = script) {
 
   <h4>all shows <a href="@routes.Show.shows()">paged</a></h4>
 
@@ -29,40 +32,4 @@
 
 } @* main end *@
 
-@helper.javascriptRouter("deleteEp")(routes.javascript.Show.delete)
 
-<script type="text/javascript">
-     $(document).ready(function(){
-        $('.characterbox').hover(
-                function(){
-                    $('.characterepbox').hide();
-                    $(this).find('.characterepbox').show()
-                },
-                function(){
-//                    $('.characterepbox').hide();
-                }
-//                function(){$(this).closest('.characterbox').find('.characterepbox').toggle()}
-        );
-
-         $('.characterbox span.close').click(function(){
-             $('.characterepbox').hide();
-         })  ;
-         $('.characters').bind('mouseout', function(){
-//             $('.characterepbox').hide();
-         });
-      });
-
-     function deleteShow(source)
-    {
-        var elem = $(source);
-        var title = elem.attr('rel');
-        deleteEp.controllers.Show.delete(title).ajax({
-                 success: function(data){
-                    elem.closest('li').slideUp();
-                },
-                 error: function() {
-                 alert('An error occurred while saving!');
-                 }
-        });
-    }
-</script>

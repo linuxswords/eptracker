@@ -43,27 +43,7 @@
   <button class="inputButton">start import</button>
   }
 
-  @helper.javascriptRouter("jsRoutes")(
-  routes.javascript.Show.epGuideData
-  )
-  <script type="text/javascript">
-    $(document).ready(function(){
-      jsRoutes.controllers.Show.epGuideData().ajax({
-        success: function(data){
-          $("input.importField").autocomplete(
-                  {
-                    source:data,
-                    minLength:2,
-                    autoFocus:true,
-                    position : {
-                      my: 'left bottom',
-                      at: 'left top',
-                      collision:'none'
-                    }
-                  });
-        }
-      });
-    });
-  </script>
+  @helper.javascriptRouter("jsRoutes")(routes.javascript.Show.epGuideData)
+
 
 </div>
