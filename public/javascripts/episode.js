@@ -22,6 +22,40 @@ function deleteShow(source) {
 }
 
 $(document).ready(function(){
+
+    var showing = false;
+    var loaded = false;
+    var titleElement = $('.showtitle');
+    var title = titleElement.html();
+    titleElement.hover(
+            function(){
+                if(!loaded) {
+                    tvrageinfo.controllers.TVRage.info(title).ajax({
+                        success: function(data){
+                            $('.showinfo').html(data);
+                            loaded = true;
+                        },
+                        error: function(data){
+                            $('.showinfo').html("error getting tvrage info :(");
+                            loaded = false;
+                        }
+                    });
+                }
+
+            },
+            function(){
+                showing = false;
+            }
+    )
+            .click(
+            function(){
+                $('.showinfo').toggle('slow');
+            }
+    )
+            .css('cursor', 'pointer');
+
+
+
     $('.characterbox').hover(
         function(){
             $('.characterepbox').hide();
