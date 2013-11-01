@@ -7,7 +7,7 @@
     @templates.mediaConsumed(media)
     <a href="@routes.Show.show(media.title)">@media.title</a>
     @media.identifier
-    @templates.iso(media)
+    @templates.torrent(media)
     @if(media.isToday){
       <span class="today">today</span>
     }

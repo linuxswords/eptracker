@@ -1,8 +1,0 @@
-@(media:Media)
-
-@if(!media.consumed){
-<span class="sprite isohunt" rel="@media.identifier">
-  <a target="_blank" alt="search for torrent" title="search for torrent"
-     href="http://isohunt.com/torrents/?ihq=@media.title + @media.identifier"><img src="@routes.Assets.at("images/trans.gif")" alt=""></a>
-</span>
-        }

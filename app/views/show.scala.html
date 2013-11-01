@@ -37,7 +37,7 @@
       case media => {
     <li title="@media.title">
       <span class="date">@media.publishingDate.toString("yyyy-MM-dd")</span> @templates.mediaConsumed(media) @media.identifier @media.subtitle
-      @templates.iso(media)
+      @templates.torrent(media)
         @if(media.isToday){
             <span class="today">today</span>
         }

@@ -112,7 +112,7 @@ $(document).ready(function(){
         }
     );
 
-    $("span.showtitle, a.update, .isohunt a").tooltip();
+    $("span.showtitle, a.update, .torrent a").tooltip();
 
 
 });

@@ -33,8 +33,8 @@ class MediaLiSpec  extends Specification{
     "provide a span date" in {
       contentAsString(html) must contain("""class="date"""")
     }
-    "provide a isohunt" in {
-      contentAsString(html) must contain("""<span class="sprite isohunt" rel="s01e01">""")
+    "provide a torrent" in {
+      contentAsString(html) must contain("""<span class="sprite torrent" rel="s01e01">""")
     }
 
   }
