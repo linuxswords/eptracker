@@ -2,7 +2,7 @@
 
 @import play.api.Play
 
-@if(!media.consumed){
+@if(!media.consumed && media.publishingDate.isBeforeNow){
 <span class="sprite torrent" rel="@media.identifier">
   <a target="_blank" alt="search for torrent" title="search for torrent"
      href="@{Play.current.configuration.getString("torrent.searchstring").getOrElse("") + media.title +" "+ media.identifier}"><img src="@routes.Assets.at("images/trans.gif")" alt=""></a>
