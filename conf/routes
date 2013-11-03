@@ -19,7 +19,6 @@ GET     /show/:name/consumeAll                  controllers.Show.consumeAll(name
 GET     /show/:name/update                      controllers.Show.update(name)
 GET     /show/:id/:title/:consume               controllers.Show.consume(id, title, consume:Boolean)
 
-GET     /tvrage/:name                           controllers.TVRage.info(name)
 GET     /recent                                 controllers.Show.recent
 GET     /upcoming                               controllers.Show.upcoming
 GET     /epguidehelper                          controllers.Show.epGuideData

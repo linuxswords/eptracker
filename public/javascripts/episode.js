@@ -24,24 +24,15 @@ function deleteShow(source) {
 $(document).ready(function(){
 
     var showing = false;
-    var loaded = false;
+    var loading = false;
     var titleElement = $('.showtitle');
     var title = titleElement.html();
     titleElement.hover(
             function(){
-                if(!loaded) {
-                    tvrageinfo.controllers.TVRage.info(title).ajax({
-                        success: function(data){
-                            $('.showinfo').html(data);
-                            loaded = true;
-                        },
-                        error: function(data){
-                            $('.showinfo').html("error getting tvrage info :(");
-                            loaded = false;
-                        }
-                    });
+                if(!loading) {
+                    loading = true;
+                    getDescriptionInto(title, '.showinfo ');
                 }
-
             },
             function(){
                 showing = false;
@@ -116,3 +107,45 @@ $(document).ready(function(){
 
 
 });
+
+function getDescriptionInto(title, selector){
+    var service_url = 'https://www.googleapis.com/freebase/v1/mqlread';
+
+    // get mid
+    var query = [
+        { 'id': null, 'name': title, 'type':'/tv/tv_program', 'mid':null}
+    ];
+
+    // start calls by getting the mid of the tv program first
+    $.getJSON( service_url + '?callback=?', {query:JSON.stringify(query)}, function(response){
+        if(response.result.length > 0) {
+            $.each(response.result, function(i, element){
+                console.log('found series');
+                setDescriptionFrom(element.mid);
+            });
+        } else {
+            $(selector).html('"'+title+'" was not found on freebase');
+        }
+    });
+
+    function setDescriptionFrom(tv_program_mid){
+        var service_url = 'https://www.googleapis.com/freebase/v1/search';
+        var query = {
+            query : tv_program_mid,
+            output : '(description)'
+        };
+
+//    $.getJSON( service_url + '?callback=?', { query:JSON.stringify(query)}, function(response){
+        $.getJSON( service_url + '?query=' + tv_program_mid +'&output=(description)&callback=?', {}, function(response){
+            if(response.result.length > 0) {
+                var description = response.result[0].output.description['/common/topic/description'][0];
+                $(selector).html(description);
+            } else {
+                $(selector).html('no description was not found on freebase');
+
+            }
+        });
+    }
+
+
+}
