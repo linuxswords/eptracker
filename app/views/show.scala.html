@@ -1,4 +1,6 @@
 @(currentPage: Page[Media], currentOrderBy: Int, title:String)(implicit request:Request[AnyContent],searchForm: Form[forms.SearchText])
+
+@import java.net.URLDecoder.decode
 @****************************************
 * Helper generating navigation links    *
 ****************************************@
@@ -15,7 +17,7 @@
 
 
   <h4>
-    <a href="@routes.Application.index">all shows</a>  > <span class="showtitle" title="pull freebase info">@title</span>
+    <a href="@routes.Application.index">all shows</a>  > <span class="showtitle" title="pull freebase info">@decode(title, "UTF-8")</span>
     <span class="small">(@currentPage.total episodes)</span>
     <a class="sprite flag-green" title="mark all as seen" href="@routes.Show.consumeAll(currentPage.items.head.showId)"><img src="@routes.Assets.at("images/trans.gif")" alt=""></a>
     <a class="sprite update" title="update show" href="@routes.Show.update(currentPage.items.head.showId)"><img src="@routes.Assets.at("images/trans.gif")" alt=""></a>
