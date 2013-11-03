@@ -1,19 +1,10 @@
-@(name:String, sidebarItems:(Seq[Media],Seq[Media]))(implicit request:Request[AnyContent],
-  searchForm: Form[forms.SearchText])
+@(name:String, sidebarItems:(Seq[Media],Seq[Media]))(implicit request:Request[AnyContent])
+
 @import helper._
 @import _root_.forms.ImportForm.importForm
 
 <div id="sidebar2">
 
-  <div id="search">
-
-      @form(action = routes.Search.search("text")){
-      <div>
-        <input type="search" class="text" name="text"
-               size="32" maxlength="64" placeholder="search" />
-      </div>
-      }
-  </div>
 
   <h3><a href="@routes.Show.recent">recent</a></h3>
   <ul>

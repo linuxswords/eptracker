@@ -1,33 +1,31 @@
 @(head:String)
+@import helper._
 <div id="header">
   <div id="logo">
     <h1><a href="/">ep<span>tracker</span></a></h1>
   </div>
 
-  <!--div id="nav">
+  <div id="nav">
     <ul>
-      <li class="first active">
-        <a href="#">Home</a>
+      <li class="">
+        <a href="@routes.Show.showsByAbc">Shows by Letter</a>
       </li>
       <li>
-        <a href="#">Services</a>
+        <a href="@routes.Show.shows()">Shows paged</a>
       </li>
       <li>
-        <a href="#">Portfolio</a>
+        <a href="@routes.Show.recent">recent</a>
       </li>
       <li>
-        <a href="#">Blog</a>
+        <a href="@routes.Show.upcoming">upcoming</a>
       </li>
-      <li>
-        <a href="#">About</a>
-      </li>
-      <li>
-        <a href="#">Downloads</a>
-      </li>
-      <li class="last">
-        <a href="#">Contact</a>
+      <li class="search">
+          @form(action = routes.Search.search("text")){
+              <input type="search" class="text inputBox" name="text"
+              size="32" maxlength="64" placeholder="search" />
+          }
       </li>
     </ul>
     <br class="clear" />
-  </div-->
+  </div>
 </div>

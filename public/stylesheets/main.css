@@ -376,14 +376,14 @@ label {
 }
 
 #nav {
-	position: absolute;
+	position: relative;
 	bottom: 0;
-	left: 0;
+	left: 250px;
 	height: 52px;
 	line-height: 52px;
 	padding: 0 28px 0 28px;
 	width: 1124px;
-	margin: 28px 0 0 0;
+	margin: 0;
 	font-family: "Sansita One", cursive;
 }
 
@@ -471,4 +471,12 @@ span.date
 span.today{
     font-size: 10px;
     color: #8b0000;
+}
+
+
+#nav ul li.search{
+    display: inline-block;
+}
+li.search input{
+    width: 200px;
 }
