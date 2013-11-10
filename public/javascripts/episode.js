@@ -34,7 +34,7 @@ $(document).ready(function(){
             var season_number = +$this.data('seasonnumber') || 1;
             var series_title = $this.data('series');
 
-            getEpisodeDescriptionInto(series_title, season_number, ep_number, selectorForDescription);
+            freebase.getEpisodeDescriptionInto(series_title, season_number, ep_number, selectorForDescription);
             $this.data('loaded', true)
             $(selectorForDescription).toggle();
 
@@ -55,7 +55,7 @@ $(document).ready(function(){
             function(){
                 if(!loading) {
                     loading = true;
-                    getDescriptionInto(title, '.showinfo ');
+                    freebase.getDescriptionInto(title, '.showinfo ');
                 }
             },
             function(){
@@ -136,147 +136,3 @@ $(document).ready(function(){
 
 
 });
-
-function getDescriptionInto(title, selector){
-    var service_url = 'https://www.googleapis.com/freebase/v1/mqlread';
-
-    // get mid
-    var query = [
-        { 'id': null, 'name': title, 'type':'/tv/tv_program', 'mid':null}
-    ];
-
-    // start calls by getting the mid of the tv program first
-    $.getJSON( service_url + '?callback=?', {query:JSON.stringify(query)}, function(response){
-        if(response.result.length > 0) {
-            $.each(response.result, function(i, element){
-                console.log('found series');
-                setDescriptionFrom(element.mid);
-            });
-        } else {
-            $(selector).html('"'+title+'" was not found on freebase');
-        }
-    });
-
-    function setDescriptionFrom(tv_program_mid){
-        var service_url = 'https://www.googleapis.com/freebase/v1/search';
-        var query = {
-            query : tv_program_mid,
-            output : '(description)'
-        };
-
-//    $.getJSON( service_url + '?callback=?', { query:JSON.stringify(query)}, function(response){
-        $.getJSON( service_url + '?query=' + tv_program_mid +'&output=(description)&callback=?', {}, function(response){
-            if(response.result.length > 0) {
-                var description = response.result[0].output.description['/common/topic/description'][0];
-                $(selector).html(description);
-            } else {
-                $(selector).html('no description was not found on freebase');
-
-            }
-        });
-    }
-}
-function getEpisodeDescriptionInto(title, season_number, episode_number, selector){
-
-    var service_url = 'https://www.googleapis.com/freebase/v1/mqlread';
-
-    // get mid
-    var query = [
-        { 'id': null, 'name': title, 'type':'/tv/tv_program', 'mid':null}
-    ];
-
-    // start calls by getting the mid of the tv program first
-    $.getJSON( service_url + '?callback=?', {query:JSON.stringify(query)}, function(response){
-        if(response.result.length > 0) {
-            $.each(response.result, function(i, element){
-                console.log('found series');
-                setEpisodeDescriptionFrom(element.mid);
-            });
-        } else {
-            $(selector).text('"'+title+'" was not found on freebase');
-        }
-    });
-
-    function setEpisodeDescriptionFrom(tv_program_mid){
-        var service_url = 'https://www.googleapis.com/freebase/v1/mqlread';
-
-        var query = [{
-            "type": "/tv/tv_series_episode",
-            "/tv/tv_series_episode/season_number": season_number,
-            "/tv/tv_series_episode/episode_number": episode_number,
-            "/tv/tv_series_episode/series": [{
-                "mid": tv_program_mid
-            }],
-            "/common/topic/description": null
-        }];
-
-    $.getJSON( service_url + '?callback=?', { query:JSON.stringify(query)}, function(response){
-//        $.getJSON( service_url + '?query=' + tv_program_mid +'&output=(description)&callback=?', {}, function(response){
-            if(response.result.length > 0) {
-                var description = response.result[0]['/common/topic/description'];
-                console.log("description: " + description);
-                $(selector).text(description);
-            } else {
-                $(selector).text('no description was not found on freebase');
-
-            }
-        });
-    }
-}
-
-var freebasecall = function(text){
-    var text = text || 'breaking bad';
-    var service_url = 'https://www.googleapis.com/freebase/v1/mqlread';
-    var query = [
-        { 'id': null, 'name': text, 'type':'/tv/tv_program', 'mid':null}
-    ];
-    $.getJSON( service_url + '?callback=?', {query:JSON.stringify(query)}, function(response){
-        if(response.result.length > 0) {
-            $.each(response.result, function(i, element){
-                console.log('found series');
-                getPicture(element.mid);
-                getDescription(element.mid);
-            });
-        } else {
-            console.log('did not found a tv programm in freebase for ' + text);
-        }
-
-
-    });
-
-}
-
-function getDescription(mid){
-    var service_url = 'https://www.googleapis.com/freebase/v1/search';
-    var query = {
-        query : mid,
-        output : '(description)'
-    };
-
-//    $.getJSON( service_url + '?callback=?', { query:JSON.stringify(query)}, function(response){
-    $.getJSON( service_url + '?query=' +mid +'&output=(description)&callback=?', {}, function(response){
-        if(response.result.length > 0) {
-            console.log(response.result[0].output.description['/common/topic/description']);
-        } else {
-            console.log('did not found a description for mid=' + mid);
-        }
-    });
-}
-
-var getPicture = function(mid){
-    var service_url = 'https://www.googleapis.com/freebase/v1/mqlread';
-    var imageuri_prefix = 'https://usercontent.googleapis.com/freebase/v1/image';
-    var query = [
-        { 'mid': mid, '/common/topic/image':[{'mid':null}]}
-    ];
-    $.getJSON( service_url + '?callback=?', {query:JSON.stringify(query)}, function(response){
-        if(response.result.length > 0) {
-            $.each(response.result, function(i, element){
-                $('<img src="' + imageuri_prefix + element.mid + '" />').appendTo(document.body);
-            });
-        } else {
-            console.log('did not found any pictures on freebase for mid=' + mid);
-        }
-
-    });
-}
