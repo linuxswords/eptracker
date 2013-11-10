@@ -482,6 +482,7 @@ li.search input{
 }
 
 .descriptionTrigger{
+    margin-right: 330px;
     cursor: pointer;
 }
 .descriptionTrigger .description{
