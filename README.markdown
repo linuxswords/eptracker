@@ -23,7 +23,7 @@ start with 'play run' on the commandline, fire up localhost:9000 and start impor
 Data-Sources
 ------------
 
-[allshows.txt](/eptracker/blob/master/allshows.txt) -> downloadable from http://epguide.com, will be used for the import text field autocomplete
+[allshows.txt](/allshows.txt) -> downloadable from http://epguide.com, will be used for the import text field autocomplete
 episodes and show -> will be imported into configured database, data comes from the http://epguide.com/<showID> and will be parsed by an awk script
 show description -> freebase.com search
 episode description -> freebase.com search
