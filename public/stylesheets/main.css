@@ -480,3 +480,13 @@ span.today{
 li.search input{
     width: 200px;
 }
+
+.descriptionTrigger{
+    cursor: pointer;
+}
+.descriptionTrigger .description{
+    cursor: pointer;
+    font-size: 11px;
+    display: block;
+    
+}

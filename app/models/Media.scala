@@ -23,6 +23,8 @@ var consumed : Boolean = false, showId: String){
 
   def isToday: Boolean = publishingDate.toLocalDate.isEqual(LocalDate.now)
 
+  def epnumber = identifier.substring(4).toInt
+  def seasonnumber = identifier.substring(1,3).toInt
 }
 
 

@@ -36,17 +36,22 @@
   <ul>
      @medias.map {
       case media => {
-    <li title="@media.title">
+    <li title="click for description" class="descriptionTrigger" id="@media.identifier"
+      data-epid="@media.identifier" data-series="@media.title"
+      data-epnumber="@media.epnumber" data-loaded="false"
+      data-seasonnumber="@media.seasonnumber" >
+
       <span class="date">@media.publishingDate.toString("yyyy-MM-dd")</span> @templates.mediaConsumed(media) @media.identifier @media.subtitle
       @templates.torrent(media)
-        @if(media.isToday){
-            <span class="today">today</span>
-        }
-    </li>
-        }
+      @if(media.isToday){
+        <span class="today">today</span>
       }
+      <span class="description"></span>
+    </li>
+      }
+     }
   </ul>
-    @templates.paging(currentPage, currentOrderBy, link)
+  @templates.paging(currentPage, currentOrderBy, link)
 }
 }
 
