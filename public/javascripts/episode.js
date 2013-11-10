@@ -104,8 +104,9 @@ $(document).ready(function(){
 
     $("span.flag").click(
         function(event) {
+            event.stopImmediatePropagation();
             var elem = $(this);
-            var title = elem.closest('li').attr('title')
+            var title = elem.closest('.descriptionTrigger').data('series');
             var state = elem.hasClass('flag-red');
             var id = elem.attr('rel');
             consumeEp.controllers.Show.consume(id,title,state ? 1 : 0).ajax({
@@ -113,11 +114,15 @@ $(document).ready(function(){
                     if(state)
                     {
                         elem.removeClass('flag-red').addClass('flag-green');
-                        elem.closest('li').prevAll('[title=\'' + title + '\']').find('span.flag').removeClass('flag-red').addClass('flag-green');
+                        elem.closest('li')
+                            .prevAll('[title=\'' + title + '\']').find('span.flag').removeClass('flag-red').addClass('flag-green');
+                        elem.closest('li').find('.torrent').hide();
+
                     }
                     else
                     {
                         elem.removeClass('flag-green').addClass('flag-red');
+                        elem.closest('li').find('.torrent').show();
                     }
                 },
                 error: function() {
