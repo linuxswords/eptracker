@@ -1,22 +1,20 @@
-div.characterbox
-{
+div.characterbox {
     -webkit-border-radius: 7px;
     -moz-border-radius: 7px;
     border-radius: 7px;
     float: left;
-    width:  60px;
+    width: 60px;
     height: 45px;
     border: 1px solid #000000;
     text-align: center;
     padding-top: 20px;
     margin-right: 5px;
     margin-top: 5px;
-    background-color:#94c722;
+    background-color: #94c722;
     font-size: 2em;
 }
 
-div.characterbox div.characterepbox
-{
+div.characterbox div.characterepbox {
     position: relative;
     top: 30px;
     display: none;
@@ -33,68 +31,56 @@ div.characterbox div.characterepbox
 
 }
 
-div.characterbox span.close
-{
-   float: right;
-   cursor: pointer;
-   padding-right: 10px;
+div.characterbox span.close {
+    float: right;
+    cursor: pointer;
+    padding-right: 10px;
 }
 
-div.characterbox div.characterepbox li.showperCharacter
-{
+div.characterbox div.characterepbox li.showperCharacter {
     font-size: 15px;
 }
 
-
-div.characterbox div.character
-{
+div.characterbox div.character {
     padding-left: 20px;
     position: absolute;
     z-index: 10;
 }
 
-div.characterbox div.character span.charcount
-{
+div.characterbox div.character span.charcount {
     position: relative;
     top: 20px;
     left: 0;
     font-size: 0.5em;
 }
 
-dd.error
-{
+dd.error {
     color: #8b0000;
 }
-span.small
-{
+
+span.small {
     font-size: 11pt;
 }
 
-img
-{
+img {
     border: none;
 }
 
-img.showpic
-{
+img.showpic {
     float: right;
     width: 320px;
 }
 
-span.flag, span.delete
-{
+span.flag, span.delete {
     cursor: pointer;
 }
 
-
-div.tvragedisclaimer
-{
+div.tvragedisclaimer {
     float: right;
     font-size: 0.75em;
 }
 
-.tooltip
-{
+.tooltip {
     display: none;
     background: white;
     /*transparent url(/media/img/tooltip/black_arrow.png);*/
@@ -110,6 +96,7 @@ sprites
 .sprite {
     background: url('../images/sprite.png') no-repeat;
 }
+
 .flag-green {
     width: 16px;
     height: 16px;
@@ -144,19 +131,16 @@ sprites
 styling of autocomplete proposals
 */
 
-li.ui-menu-item
-{
+li.ui-menu-item {
     list-style: none;
 
 }
 
-ul.ui-autocomplete
-{
+ul.ui-autocomplete {
     background-color: #808080;
 }
 
-div.showinfo
-{
+div.showinfo {
     border-top: 1px solid #000000;
     border-bottom: 1px solid #000000;
 }
@@ -169,140 +153,140 @@ div.showinfo
 */
 
 * {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 a {
-	text-decoration: underline;
-	color: #94c722;
+    text-decoration: underline;
+    color: #94c722;
 }
 
 a:hover {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 body {
-	font-size: 11pt;
-	line-height: 1.75em;
-	background: #F0F3F5;
-	color: #3C3D3D;
-	text-align: justify;
+    font-size: 11pt;
+    line-height: 1.75em;
+    background: #F0F3F5;
+    color: #3C3D3D;
+    text-align: justify;
 }
 
-body,input {
-	font-family: "Varela", sans-serif;
+body, input {
+    font-family: "Varela", sans-serif;
 }
 
 br.clear {
-	clear: both;
+    clear: both;
 }
 
 form {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
-h1,h2,h3,h4 {
-	text-transform: lowercase;
-	font-weight: normal;
+h1, h2, h3, h4 {
+    text-transform: lowercase;
+    font-weight: normal;
 }
 
 h2 {
-	font-size: 1.75em;
+    font-size: 1.75em;
 }
 
-h2,h3,h4,div.character {
-	font-family: "Sansita One", cursive;
-	color: #000;
+h2, h3, h4, div.character {
+    font-family: "Sansita One", cursive;
+    color: #000;
 }
 
 h3 {
-	font-size: 1.5em;
+    font-size: 1.5em;
 }
 
 h4 {
-	font-size: 1.25em;
+    font-size: 1.25em;
 }
 
 img.left {
-	float: left;
-	margin: 8px 20px 20px 0;
+    float: left;
+    margin: 8px 20px 20px 0;
 }
 
 img.top {
-	margin: 8px 0 20px 0;
+    margin: 8px 0 20px 0;
 }
 
 label.login {
-	display: block;
-	margin: 0 0 6px 0;
+    display: block;
+    margin: 0 0 6px 0;
 }
 
 p {
-	margin-bottom: 1.5em;
+    margin-bottom: 1.5em;
 }
 
 ul h4 {
-	margin-bottom: 0.35em;
+    margin-bottom: 0.35em;
 }
 
 label {
-	text-transform: lowercase;
+    text-transform: lowercase;
 }
 
 .blogpost h2 {
-	margin: 0 0 10px 0;
+    margin: 0 0 10px 0;
 }
 
 .form {
-	margin: 0 0 28px 0;
+    margin: 0 0 28px 0;
 }
 
 .inputBox, .inputTextArea {
 
-	width: 95%;
-	border: dashed 1px #ADAFB0;
-	padding: 4px;
+    width: 95%;
+    border: dashed 1px #ADAFB0;
+    padding: 4px;
 }
 
 .inputButton {
-	padding: 6px;
-	float: right;
-	color: #FFF;
-	background: #94c722;
-	font-family: "Sansita One", cursive;
-	border: none;
-	text-shadow: 1px 1px 2px #000;
+    padding: 6px;
+    float: right;
+    color: #FFF;
+    background: #94c722;
+    font-family: "Sansita One", cursive;
+    border: none;
+    text-shadow: 1px 1px 2px #000;
 }
 
 #banner {
-	position: relative;
-	padding: 0;
-	height: 264px;
-	width: 1180px;
-	margin: 0 0 0 0;
-	background: #4E6474;
+    position: relative;
+    padding: 0;
+    height: 264px;
+    width: 1180px;
+    margin: 0 0 0 0;
+    background: #4E6474;
 }
 
 #box1 {
-	margin: 0 0 24px 0;
-	overflow: hidden;
+    margin: 0 0 24px 0;
+    overflow: hidden;
 }
 
 #box2 {
-	margin: 0 0 24px 0;
-	overflow: hidden;
+    margin: 0 0 24px 0;
+    overflow: hidden;
 }
 
 #box3 {
-	overflow: hidden;
+    overflow: hidden;
 }
 
 #content {
-	width: 780px;
-	margin: 0 0 0 0;
-	padding: 0;
+    width: 780px;
+    margin: 0 0 0 0;
+    padding: 0;
 }
 
 #copyright {
@@ -313,86 +297,86 @@ label {
 }
 
 #copyright a {
-	color: #3C3D3D;
+    color: #3C3D3D;
 }
 
 #header {
-	position: relative;
-	padding: 20px 0 5px 0;
-	height: 65px;
-	width: 1124px;
+    position: relative;
+    padding: 20px 0 5px 0;
+    height: 65px;
+    width: 1124px;
 }
 
 #logo {
-	position: absolute;
-	top: 0;
-	left: 28px;
-	height: 104px;
-	line-height: 104px;
+    position: absolute;
+    top: 0;
+    left: 28px;
+    height: 104px;
+    line-height: 104px;
 }
 
 #logo a {
-	text-decoration: none;
-	color: #000;
+    text-decoration: none;
+    color: #000;
 }
 
 #logo a span {
-	color: #94c722;
+    color: #94c722;
 }
 
 #logo h1 {
-	font-size: 3.25em;
-	font-family: "Sansita One", cursive;
+    font-size: 3.25em;
+    font-family: "Sansita One", cursive;
 }
 
 #main {
-	position: relative;
-	padding: 28px;
-	width: 1124px;
-	margin: 0 0 0 0;
+    position: relative;
+    padding: 28px;
+    width: 1124px;
+    margin: 0 0 0 0;
 }
 
 #main .sectionList {
-	list-style: none;
-	padding-left: 0;
+    list-style: none;
+    padding-left: 0;
 }
 
 #main .sectionList li {
-	clear: both;
-	padding: 16px 0 16px 0;
+    clear: both;
+    padding: 16px 0 16px 0;
 }
 
 #main ul {
-	list-style: none;
+    list-style: none;
 }
 
 #nav {
-	position: relative;
-	bottom: 0;
-	left: 250px;
-	height: 52px;
-	line-height: 52px;
-	padding: 0 28px 0 28px;
-	width: 1124px;
-	margin: 0;
-	font-family: "Sansita One", cursive;
+    position: relative;
+    bottom: 0;
+    left: 250px;
+    height: 52px;
+    line-height: 52px;
+    padding: 0 28px 0 28px;
+    width: 1124px;
+    margin: 0;
+    font-family: "Sansita One", cursive;
 }
 
 #nav a {
-	text-decoration: none;
-	text-transform: lowercase;
-	font-size: 1.5em;
-	color: #161616;
+    text-decoration: none;
+    text-transform: lowercase;
+    font-size: 1.5em;
+    color: #161616;
 
 }
 
 #nav ul {
-	list-style: none;
+    list-style: none;
 }
 
 #nav ul li {
-	display: inline;
-	padding: 16px;
+    display: inline;
+    padding: 16px;
 }
 
 #nav ul li.first {
@@ -400,87 +384,87 @@ label {
 }
 
 #nav ul li.active {
-	background: #94c722;
+    background: #94c722;
 }
 
 #nav ul li.active a {
-	color: #FFF;
-	text-shadow: 1px 1px 2px #000;
+    color: #FFF;
+    text-shadow: 1px 1px 2px #000;
 }
 
 #outer {
-	position: relative;
-	width: 1180px;
-	margin: 0px auto 0 auto;
+    position: relative;
+    width: 1180px;
+    margin: 0px auto 0 auto;
 }
 
 #search {
-		line-height: 104px;
+    line-height: 104px;
 }
 
 #search input.button {
-	margin-left: 1em;
-	border: 0;
-	color: #FFF;
-	background: #AA6A3C;
-	padding: 4px;
-	font-family: "Sansita One", cursive;
+    margin-left: 1em;
+    border: 0;
+    color: #FFF;
+    background: #AA6A3C;
+    padding: 4px;
+    font-family: "Sansita One", cursive;
 }
 
 #search input {
-	border: dashed 1px #ADAFB0;
-	padding: 4px;
+    border: dashed 1px #ADAFB0;
+    padding: 4px;
     width: 100%;
-    height:30px;
+    height: 30px;
     margin-top: 10px;
     margin-bottom: 15px;
 }
 
 #sidebar1 {
-	width: 300px;
-	float: left;
-	padding: 0;
+    width: 300px;
+    float: left;
+    padding: 0;
 }
 
 #sidebar2 {
-	width: 330px;
-	float: right;
-	padding: 0;
+    width: 330px;
+    float: right;
+    padding: 0;
 }
 
-div.pagination ul li
-{
+div.pagination ul li {
     display: inline;
 }
 
-span.date
-{
+span.date {
     font-size: 8pt;
 }
 
-span.today{
+span.today {
     font-size: 10px;
     color: #8b0000;
 }
 
-#nav ul li.search{
+#nav ul li.search {
     display: inline-block;
 }
-li.search input{
+
+li.search input {
     width: 200px;
 }
 
-.descriptionTrigger{
+.descriptionTrigger {
     margin-right: 330px;
     cursor: pointer;
 }
-.descriptionTrigger .description{
+
+.descriptionTrigger .description {
     cursor: pointer;
     font-size: 11px;
     display: block;
 }
 
-section{
+section {
     margin: 5px 0;
     background-color: #FFFFF0;
     border-radius: 10px;
