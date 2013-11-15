@@ -452,7 +452,7 @@ span.today {
 }
 
 li.search input {
-    width: 200px;
+    width: 221px;
 }
 
 .descriptionTrigger {
@@ -476,4 +476,7 @@ section {
     -webkit-border-radius: 10px;
     moz-border-radius: 10px;
     padding: 5px 10px;
+}
+#epGuideId_field{
+    width: 200px;
 }

@@ -35,15 +35,15 @@
    </header>
    @form(action = routes.Import.importTheShow(),'class -> "form"){
        @importForm.globalError.map( error => <p class="error">{error.message}</p>)
-
+     <button class="inputButton">start import</button>
        @inputText(field = importForm("epGuideId"),
      'placeholder -> "show id from epguide.com",
-     '_label -> "enter show id from epguide.com",
+     '_label -> "",
      'class -> "inputBox importField",
      '_showConstraints -> false,
      'autocomplete -> "off")
 
-   <button class="inputButton">start import</button>
+
    }</section>
   @helper.javascriptRouter("jsRoutes")(routes.javascript.Show.epGuideData)
 
