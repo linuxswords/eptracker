@@ -6,19 +6,27 @@
 <aside id="sidebar2">
 
 
-  <h3><a href="@routes.Show.recent">recent</a></h3>
-  <ul>
-    @for(media <- sidebarItems _1) {
-      @templates.mediaAsLi(media)
-    }
-  </ul>
+ <section>
+   <header>
+     <h3><a href="@routes.Show.recent">recent</a></h3>
+   </header>
+   <ul>
+     @for(media <- sidebarItems _1) {
+       @templates.mediaAsLi(media)
+     }
+   </ul>
+ </section>
 
-  <h3><a href="@routes.Show.upcoming">upcoming</a></h3>
-  <ul>
-    @for(media <- sidebarItems _2) {
-      @templates.mediaAsLi(media)
-    }
-  </ul>
+ <section>
+   <header>
+   <h3><a href="@routes.Show.upcoming">upcoming</a></h3>
+   </header>
+   <ul>
+     @for(media <- sidebarItems _2) {
+       @templates.mediaAsLi(media)
+     }
+   </ul>
+ </section>
 
   <h3>import show</h3>
   @form(action = routes.Import.importTheShow(),'class -> "form"){
