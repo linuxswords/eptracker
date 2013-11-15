@@ -36,6 +36,7 @@ var freebase = {
                 if(response.result.length > 0) {
                     var description = response.result[0].output.description['/common/topic/description'][0];
                     $(selector).html(description);
+                    freebase.addPictureInto(title, selector);
                 } else {
                     $(selector).html('no description was not found on freebase');
 
@@ -75,21 +76,26 @@ var freebase = {
         }
     },
 
-    getPicture: function(mid){
-        var service_url = 'https://www.googleapis.com/freebase/v1/mqlread';
-        var imageuri_prefix = 'https://usercontent.googleapis.com/freebase/v1/image';
-        var query = [
-            { 'mid': mid, '/common/topic/image':[{'mid':null}]}
-        ];
-        $.getJSON( service_url + '?callback=?', {query:JSON.stringify(query)}, function(response){
-            if(response.result.length > 0) {
-                $.each(response.result, function(i, element){
-                    $('<img src="' + imageuri_prefix + element.mid + '" />').appendTo(document.body);
-                });
-            } else {
-                console.log('did not found any pictures on freebase for mid=' + mid);
-            }
+    addPictureInto: function(title, selector){
 
-        });
+        this.getMidFromTitle(title, prependPicture);
+
+        function prependPicture(mid){
+            var service_url = 'https://www.googleapis.com/freebase/v1/mqlread';
+            var imageuri_prefix = 'https://usercontent.googleapis.com/freebase/v1/image';
+            var query = [
+                { 'mid': mid, '/common/topic/image':[{'mid':null}]}
+            ];
+            $.getJSON( service_url + '?callback=?', {query:JSON.stringify(query)}, function(response){
+                if(response.result.length > 0) {
+                    $.each(response.result, function(i, element){
+                        $(selector).prepend('<img class="showthumb" src="' + imageuri_prefix + element.mid + '" />');
+                    });
+                } else {
+                    console.log('did not found any pictures on freebase for mid=' + mid);
+                }
+
+            });
+        }
     }
 }
