@@ -464,8 +464,11 @@ li.search input {
     display: block;
 }
 
+#sidebar2 > section{
+    margin: 10px 0;
+}
+
 section {
-    margin: 5px 0;
     background-color: #FFFFF0;
     border-radius: 10px;
     -webkit-border-radius: 10px;

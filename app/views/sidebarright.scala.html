@@ -2,6 +2,7 @@
 
 @import helper._
 @import _root_.forms.ImportForm.importForm
+@import helper.twitterBootstrap._
 
 <aside id="sidebar2">
 
@@ -28,20 +29,22 @@
    </ul>
  </section>
 
-  <h3>import show</h3>
-  @form(action = routes.Import.importTheShow(),'class -> "form"){
-      @importForm.globalError.map( error => <p class="error">{error.message}</p>)
+ <section class="import">
+   <header>
+     <h3>import show</h3>
+   </header>
+   @form(action = routes.Import.importTheShow(),'class -> "form"){
+       @importForm.globalError.map( error => <p class="error">{error.message}</p>)
 
-      @inputText(field = importForm("epGuideId"),
-    'placeholder -> "show id from epguide.com",
-    '_label -> "enter show id from epguide.com",
-    'class -> "inputBox importField",
-    '_showConstraints -> false,
-    'autocomplete -> "off")
+       @inputText(field = importForm("epGuideId"),
+     'placeholder -> "show id from epguide.com",
+     '_label -> "enter show id from epguide.com",
+     'class -> "inputBox importField",
+     '_showConstraints -> false,
+     'autocomplete -> "off")
 
-  <button class="inputButton">start import</button>
-  }
-
+   <button class="inputButton">start import</button>
+   }</section>
   @helper.javascriptRouter("jsRoutes")(routes.javascript.Show.epGuideData)
 
 
