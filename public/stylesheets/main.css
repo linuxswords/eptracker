@@ -316,9 +316,10 @@ label {
 }
 
 #copyright {
-	margin: 0 0 16px 0;
-	padding: 48px 0 76px 0;
-	text-align: center;
+    margin: 0 0 16px 0;
+    padding: 48px 0 0px 0;
+    text-align: center;
+    font-size: 11px;
 }
 
 #copyright a {
