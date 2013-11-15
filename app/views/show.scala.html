@@ -19,7 +19,8 @@
   <h4>
     <a href="@routes.Application.index">all shows</a>  > <span class="showtitle" title="pull freebase info">@decode(title, "UTF-8")</span>
     <span class="small">(@currentPage.total episodes)</span>
-    <a class="sprite flag-green" title="mark all as seen" href="@routes.Show.consumeAll(currentPage.items.head.showId)"><img src="@routes.Assets.at("images/trans.gif")" alt=""></a>
+
+    <a class="sprite flag-@{if(currentPage.allSeen) "green" else "red"}" title="mark all as seen" href="@routes.Show.consumeAll(currentPage.items.head.showId)"><img src="@routes.Assets.at("images/trans.gif")" alt=""></a>
     <a class="sprite update" title="update show" href="@routes.Show.update(currentPage.items.head.showId)"><img src="@routes.Assets.at("images/trans.gif")" alt=""></a>
   </h4>
 

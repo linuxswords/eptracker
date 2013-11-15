@@ -11,7 +11,7 @@ import util.TVShowABCMapCreator
 /**
  * Helper for pagination.
  */
-case class Page[A](items: Seq[A], page: Int, offset: Long, total: Long) {
+case class Page[A](items: Seq[A], page: Int, offset: Long, total: Long, allSeen: Boolean = false) {
   lazy val prev = Option(page - 1).filter(_ >= 0)
   lazy val next = Option(page + 1).filter(_ => (offset + items.size) < total)
   lazy val totalPages = Option(total / items.size.toLong).filter(_>= 0)
@@ -93,9 +93,10 @@ val dataSource = play.api.db.DB.getDataSource("default")
     val offset = pageSize * page
     val query = select from me where me.title === title orderBy(me.publishingDate)
     val medias = queryDao.query(QueryConfig(offset = Some(offset), limit = Some(pageSize)), query)
+    val allSeen = queryDao.query(query).forall(_.consumed)
     val totalRows = queryDao.count(query)
 
-    Page(medias, page, offset, totalRows)
+    Page(medias, page, offset, totalRows, allSeen)
   }
 
   def recent(limit : Int = 4) : Seq[Media] =  {
