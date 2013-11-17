@@ -2,20 +2,16 @@ package controllers
 
 
 import forms.SearchForm
-import models.Media
-import play.api.data
-import play.api.data.Form
-import data.Form
-import data.Forms._
+import models.{TVShow, Media}
 import play.api.cache.Cache
-import play.api.libs.concurrent.Akka
 import play.api.libs.json.{JsValue, Json}
-import play.api.mvc.{AnyContent, Action, Controller}
+import play.api.mvc.Controller
 import request.EpisodeRequest.EpisodeAction
-import request.EpisodeRequest._
 import java.net.URLDecoder
+import play.api.Play.current
 
-
+import controllers.Search.titleKeys
+import scala.util.Random
 /**
  *
  * @author knm
@@ -25,6 +21,20 @@ import java.net.URLDecoder
 object Show extends Controller with SearchForm
 {
 
+  def random = EpisodeAction{ implicit request =>
+    val shows =Cache.getAs[List[TVShow]](titleKeys)
+    shows match {
+      case Some(showList) => {
+        val randomShow = Random.shuffle(showList).head
+        show(randomShow.title)(request)
+      }
+      case None => {
+        val list= Media.allTitlesWithCount
+        Cache.set(titleKeys, list)
+        Redirect(routes.Show.random)
+      }
+    }
+  }
 
   def showsByAbc = EpisodeAction{ implicit request =>
       val showMap = Media.showsByAbc()

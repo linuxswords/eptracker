@@ -8,6 +8,8 @@ GET     /                                       controllers.Application.index
 GET     /import/:name                           controllers.Import.importShow(name)
 POST    /import/                                controllers.Import.importTheShow
 
+GET     /random                                 controllers.Show.random
+
 GET     /search/:title                          controllers.Search.search(title)
 
 GET     /shows                                  controllers.Show.shows(p:Int ?= 0, s:Int ?= 2)

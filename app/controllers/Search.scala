@@ -15,8 +15,9 @@ import scala.Some
  */
 object Search extends Controller with SearchForm {
 
+  val titleKeys: String = "storedShows"
+
   def search(text: String) = EpisodeAction{ implicit request =>
-    val titleKeys: String = "storedShows"
 
     val boundedForm = searchForm.bindFromRequest
     boundedForm.fold(
