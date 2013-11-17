@@ -477,10 +477,10 @@ li.search input {
 
 section {
     background-color: #FFFFF0;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    moz-border-radius: 10px;
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
     padding: 5px 10px;
+    border: 1px solid orange;
 }
 #epGuideId_field{
     width: 200px;
