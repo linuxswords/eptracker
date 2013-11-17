@@ -1,7 +1,7 @@
 @(currentPage:Page[_], currentOrderBy: Int, link:(Int, Option[Int])=>play.api.mvc.Call)
 
 @if(currentPage.next.isDefined || currentPage.prev.isDefined){
-  <div id="pagination" class="pagination">
+  <div class="pagination">
         <ul>
             @currentPage.prev.map { page =>
                 <li class="prev">
@@ -13,7 +13,7 @@
                 </li>
             }
             <li class="current">
-                Displaying @(currentPage.offset + 1) to @(currentPage.offset + currentPage.items.size) of @currentPage.total
+                @(currentPage.offset + 1)-@(currentPage.offset + currentPage.items.size) of @currentPage.total
             </li>
             @currentPage.next.map { page =>
                 <li class="next">

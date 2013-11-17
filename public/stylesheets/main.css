@@ -276,15 +276,13 @@ label {
 
 #box1 {
     margin: 0 0 24px 0;
-    overflow: hidden;
 }
 
 #box2 {
     margin: 0 0 24px 0;
-    overflow: hidden;
 }
 
-#box3 {
+#box1,#box2,#box3 {
     overflow: hidden;
 }
 
@@ -452,6 +450,19 @@ nav ul li.active a {
     width: 330px;
     float: right;
     padding: 0;
+}
+div.pagination ul{
+    width: 450px;
+    padding: 10px 0;
+    font-size: 11px;
+}
+div.pagination ul li.next{
+    float:right;
+    padding-right: 10px;
+}
+div.pagination ul li.current{
+    position: relative;
+    left: 120px;
 }
 
 div.pagination ul li {
