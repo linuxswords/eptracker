@@ -355,7 +355,7 @@ label {
     list-style: none;
 }
 
-#nav {
+nav {
     position: relative;
     bottom: 0;
     left: 250px;
@@ -367,7 +367,7 @@ label {
     font-family: "Sansita One", cursive;
 }
 
-#nav a {
+nav a {
     text-decoration: none;
     text-transform: lowercase;
     font-size: 1.5em;
@@ -375,24 +375,31 @@ label {
 
 }
 
-#nav ul {
+nav ul {
     list-style: none;
 }
+nav ul li+li:before{
+    content: '|';
 
-#nav ul li {
+}
+nav ul li:last-child:before{
+    content: '';
+
+}
+nav ul li {
     display: inline;
-    padding: 16px;
+    padding: 16px 3px;
 }
 
-#nav ul li.first {
+nav ul li.first {
 
 }
 
-#nav ul li.active {
+nav ul li.active {
     background: #94c722;
 }
 
-#nav ul li.active a {
+nav ul li.active a {
     color: #FFF;
     text-shadow: 1px 1px 2px #000;
 }
@@ -452,7 +459,7 @@ span.today {
     color: #8b0000;
 }
 
-#nav ul li.search {
+nav ul li.search {
     display: inline-block;
 }
 
