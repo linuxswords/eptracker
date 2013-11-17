@@ -379,13 +379,22 @@ nav ul {
     list-style: none;
 }
 nav ul li+li:before{
-    content: '|';
+    content: '_';
+    color: #94c722;
 
 }
 nav ul li:last-child:before{
     content: '';
 
 }
+
+nav ul li a{
+    display: inline-block;
+}
+nav ul li a:first-letter{
+    color: #94c722;
+}
+
 nav ul li {
     display: inline;
     padding: 16px 3px;
