@@ -140,6 +140,15 @@ val dataSource = play.api.db.DB.getDataSource("default")
 
 case class TVShow(title : String, count : Long)
 
+object TVShow{
+  implicit class TVShowHelper(val show: TVShow) extends AnyVal{
+    def tagCloudClass: String = show.count match {
+      case n if n < 50  => "tag1"
+      case n if n < 100 => "tag2"
+      case _            => "tag3"
+    }
+  }
+}
 
 object TVShowEntity extends Entity[Unit, NoId, TVShow]{
   val title = key("title") to (_.title)

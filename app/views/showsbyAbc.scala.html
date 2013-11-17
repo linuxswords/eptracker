@@ -1,5 +1,7 @@
 @(showMap: Map[String, List[TVShow]])(implicit request:Request[AnyContent],searchForm: Form[forms.SearchText])
 
+@import models.TVShow._
+
 @script = {
   @helper.javascriptRouter("deleteEp")(routes.javascript.Show.delete)
 }
@@ -20,7 +22,10 @@
                 @for(show <- showMap(character)) {
                 <li class="showperCharacter">
                     <a href="@routes.Show.show(show.title)">@show.title</a> (@show.count)
-                    <span class="sprite trash delete" onclick="deleteShow(this)" rel="@show.title"><img title="delete" src="@routes.Assets.at("images/trans.gif")" alt="delete"></span>
+                    <span class="sprite trash delete" onclick="deleteShow(this)"
+                      rel="@show.title">
+                      <img title="delete" src="@routes.Assets.at("images/trans.gif")" alt="delete">
+                    </span>
                 </li>
                 }
             </ul>
@@ -28,6 +33,13 @@
     </div>
     }
 </div>
+
+  <div class="titlecloud">
+    @for(show <- showMap.values.flatten.toList.sortBy(_.title)){
+      <span class="show @show.tagCloudClass"><a href="@routes.Show.show(show.title)">@show.title</a></span>
+    }
+
+  </div>
 
 } @* main end *@
 

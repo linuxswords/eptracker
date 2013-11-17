@@ -13,7 +13,7 @@ GET     /random                                 controllers.Show.random
 GET     /search/:title                          controllers.Search.search(title)
 
 GET     /shows                                  controllers.Show.shows(p:Int ?= 0, s:Int ?= 2)
-GET     /shows/byAbc                            controllers.Show.showsByAbc()
+GET     /shows/byAbc                            controllers.Show.showsByAbc
 GET     /shows/all                              controllers.Show.all(p:Int ?= 0, s:Int ?= 2)
 GET     /show/:name                             controllers.Show.show(name,p:Int ?= 0, s:Int ?= 2)
 GET     /show/:name/delete                      controllers.Show.delete(name)

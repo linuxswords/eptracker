@@ -514,3 +514,24 @@ section {
 #epGuideId_field{
     width: 200px;
 }
+
+.titlecloud{
+    padding:50px;
+    clear: left;
+}
+.titlecloud a,
+.titlecloud a:focus,
+.titlecloud a:hover
+{
+    text-decoration: none;
+}
+
+.titlecloud .tag1 {
+    font-size: 0.8em;
+}
+.titlecloud .tag2 {
+    font-size: 1.5em;
+}
+.titlecloud .tag3 {
+    font-size: 2em;
+}
