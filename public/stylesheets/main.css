@@ -457,7 +457,8 @@ div.pagination ul{
     font-size: 11px;
 }
 div.pagination ul li.next{
-    float:right;
+    position: relative;
+    left: 230px;
     padding-right: 10px;
 }
 div.pagination ul li.current{
