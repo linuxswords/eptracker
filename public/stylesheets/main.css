@@ -250,7 +250,7 @@ label {
 
 .inputBox, .inputTextArea {
 
-    width: 95%;
+    width: 93%;
     border: dashed 1px #ADAFB0;
     padding: 4px;
 }
@@ -507,7 +507,7 @@ section {
     background-color: #FFFFF0;
     border-top-left-radius: 15px;
     border-bottom-right-radius: 15px;
-    padding: 5px 10px;
+    padding: 15px 20px;
     border: 1px solid orange;
 }
 #epGuideId_field{
