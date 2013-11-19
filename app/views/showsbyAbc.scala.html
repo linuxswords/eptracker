@@ -36,7 +36,7 @@
 
   <div class="titlecloud">
     @for(show <- showMap.values.flatten.toList.sortBy(_.title)){
-      <span class="show @show.tagCloudClass"><a href="@routes.Show.show(show.title)">@show.title</a></span>
+      <span class="show @show.tagCloudClass"><a title="@show.count episodes" href="@routes.Show.show(show.title)">@show.title</a></span>
     }
 
   </div>
