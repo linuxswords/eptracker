@@ -61,6 +61,18 @@ val dataSource = play.api.db.DB.getDataSource("default")
     TVShowABCMapCreator.createMap(shows)
   }
 
+  def consumeInfoAll = {
+    val all = queryDao.query(select from me)
+    val showsByShow = all.groupBy(_.title) map { case(id, shows) =>
+      val consumestatus =
+        if(shows.forall(s => true == s.consumed)) "all"
+      else if(shows.forall(false == _.consumed)) "none"
+      else "partial"
+      (id, consumestatus)
+    }
+    showsByShow
+  }
+
   def allTitlesWithCount(): List[TVShow] = queryDao.query(select from ts)
 
   def shows(page: Int = 0, pageSize: Int = 10, orderBy: Int = 1, filter: String = "%"): Page[TVShow] = {
