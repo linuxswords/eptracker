@@ -11,7 +11,7 @@ $('.momentdate').each(function(index,element){
 function deleteShow(source) {
     var elem = $(source);
     var title = elem.attr('rel');
-    deleteEp.controllers.Show.delete(title).ajax({
+    epRouter.controllers.Show.delete(title).ajax({
         success: function(data){
             elem.closest('li').slideUp();
         },
@@ -109,7 +109,7 @@ $(document).ready(function(){
             var title = elem.closest('.descriptionTrigger').data('series');
             var state = elem.hasClass('flag-red');
             var id = elem.attr('rel');
-            consumeEp.controllers.Show.consume(id,title,state ? 1 : 0).ajax({
+            epRouter.controllers.Show.consume(id,title,state ? 1 : 0).ajax({
                 success: function(data){
                     if(state)
                     {

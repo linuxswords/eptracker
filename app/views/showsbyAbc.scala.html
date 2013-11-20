@@ -2,11 +2,7 @@
 
 @import models.TVShow._
 
-@script = {
-  @helper.javascriptRouter("deleteEp")(routes.javascript.Show.delete)
-}
-
-@main("Ep Tracker", script = script) {
+@main("Ep Tracker") {
 
   <h4>all shows <a href="@routes.Show.shows()">paged</a></h4>
 

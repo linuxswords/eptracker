@@ -12,8 +12,6 @@
 
 @main("Ep Tracker") {
 
-@helper.javascriptRouter("deleteEp")(routes.javascript.Show.delete)
-
   <h4>all shows <a href="@routes.Show.showsByAbc()">by ABC</a></h4>
 
   @templates.paging(currentPage, currentOrderBy, link)
@@ -40,7 +38,7 @@
     {
         var elem = $(source);
         var title = elem.attr('rel');
-        deleteEp.controllers.Show.delete(title).ajax({
+        epRouter.controllers.Show.delete(title).ajax({
                  success: function(data){
                     elem.closest('li').slideUp();
                 },
