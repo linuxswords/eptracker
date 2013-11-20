@@ -134,5 +134,16 @@ $(document).ready(function(){
 
     $("span.showtitle, a.update, .torrent a").tooltip();
 
+    if($('.titlecloud').size() > 0){
+        var $titleCloud = $('.titlecloud');
+        epRouter.controllers.Info.consumeInfo().ajax({
+            success: function(data){
+                console.log(data);
+                for(title in data) {
+                    $titleCloud.find("[data-title='" + title + "']").addClass(data[title]);
+                }
+            }
+        });
+    }
 
 });
