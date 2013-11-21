@@ -535,3 +535,22 @@ section {
 .titlecloud .tag3 {
     font-size: 2em;
 }
+
+.titlecloud .all,
+.titlecloud .all a{
+color: #94c722
+}
+.titlecloud .partial,
+.titlecloud .partial a{
+    color: lightsalmon;
+}
+.titlecloud .none,
+.titlecloud .none a{
+    color: lightgray;
+}
+
+.titlecloud .info{
+    border-top: 1px solid #94c722;
+    padding: 0 5px;
+    margin: auto;
+}
