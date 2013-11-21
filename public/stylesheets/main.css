@@ -502,7 +502,7 @@ li.search input {
 .descriptionTrigger .description {
     cursor: pointer;
     font-size: 11px;
-    display: block;
+    display: none;
 }
 
 #sidebar2 > section{
