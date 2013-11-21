@@ -494,6 +494,11 @@ li.search input {
     cursor: pointer;
 }
 
+.description {
+    padding: 1px 9px 10px 15px;
+    line-height: 13px;
+}
+
 .descriptionTrigger .description {
     cursor: pointer;
     font-size: 11px;
@@ -538,7 +543,7 @@ section {
 
 .titlecloud .all,
 .titlecloud .all a{
-color: #94c722
+    color: #94c722
 }
 .titlecloud .partial,
 .titlecloud .partial a{
