@@ -35,9 +35,7 @@ $(document).ready(function(){
             var series_title = $this.data('series');
 
             freebase.getEpisodeDescriptionInto(series_title, season_number, ep_number, selectorForDescription);
-            $this.data('loaded', true)
-            $(selectorForDescription).toggle();
-
+            $this.data('loaded', true);
         }
         $(selectorForDescription).toggle();
 
