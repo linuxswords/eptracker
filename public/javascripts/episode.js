@@ -143,4 +143,24 @@ $(document).ready(function(){
         });
     }
 
+
+    // keycodes catched with shift,
+    // u -> upcoming
+    // r -> recent
+    // d -> random
+    // s -> search
+    $(document).on('keypress', function(e){
+        if(e.keyCode == 85 && e.shiftKey){ // 85 = u
+            location.href = '/upcoming';
+        } else if(e.keyCode == 82 && e.shiftKey){
+            location.href = '/recent';
+        } else if(e.keyCode == 68 && e.shiftKey){
+            location.href = '/random';
+        } else if(e.keyCode == 83 && e.shiftKey){
+            $('input[type=search]').focus();
+            return false;
+        }
+    });
+
+
 });
