@@ -148,6 +148,7 @@ ul.ui-autocomplete {
 div.showinfo {
     border-top: 1px solid #000000;
     border-bottom: 1px solid #000000;
+    padding-top: 7px;
 }
 
 /*
@@ -415,7 +416,7 @@ nav ul li.active a {
 #outer {
     position: relative;
     width: 1180px;
-    margin: 0px auto 0 auto;
+    margin: 0 auto 0 auto;
 }
 
 #search {
@@ -497,12 +498,12 @@ li.search input {
 .description {
     padding: 1px 9px 10px 15px;
     line-height: 13px;
+    display: none;
+    font-size: 11px;
 }
 
 .descriptionTrigger .description {
     cursor: pointer;
-    font-size: 11px;
-    display: none;
 }
 
 #sidebar2 > section{
