@@ -14,13 +14,13 @@
         <a href="@routes.Show.shows()">Shows paged</a>
       </li>
       <li>
-        <a href="@routes.Show.recent">recent</a>
+        <a title="Shift + R" href="@routes.Show.recent">recent</a>
       </li>
       <li>
-        <a href="@routes.Show.upcoming">upcoming</a>
+        <a title="Shift + U" href="@routes.Show.upcoming">upcoming</a>
       </li>
       <li>
-        <a href="@routes.Show.random">random</a>
+        <a title="Shift + D" href="@routes.Show.random">random</a>
       </li>
       <li class="search">
           @form(action = routes.Search.search("text")){
