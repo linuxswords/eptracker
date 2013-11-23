@@ -136,7 +136,6 @@ $(document).ready(function(){
         var $titleCloud = $('.titlecloud');
         epRouter.controllers.Info.consumeInfo().ajax({
             success: function(data){
-                console.log(data);
                 for(title in data) {
                     $titleCloud.find("[data-title='" + title + "']").addClass(data[title]);
                 }
