@@ -37,6 +37,12 @@ insert into Media(consumed,title,subtitle,identifier,publishingDate, showid) val
 insert into Media(consumed,title,subtitle,identifier,publishingDate, showid) values(1, 'Game of Thrones', 'A Golden Crown', 's01e06','2011-05-22', 'GameOfThrones');
 insert into Media(consumed,title,subtitle,identifier,publishingDate, showid) values(1, 'Game of Thrones', 'You Win or You Die', 's01e07','2011-05-29', 'GameOfThrones');
 
+create index idx_media_showid on Media(showid)
+;
+create index idx_media_title on Media(title)
+;
+create index idx_media_identifier on Media(identifier)
+;
 
 # --- !Downs
 
