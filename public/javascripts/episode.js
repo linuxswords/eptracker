@@ -151,6 +151,15 @@ $(document).ready(function(){
     // s -> search
     // h -> home
     $(document).on('keypress', function(e){
+
+        var textAcceptingInputTypes = ["text", "password", "number", "email",
+            "url", "range", "date", "month", "week", "time",
+            "datetime", "datetime-local", "search", "color", "tel"];
+
+        if($.inArray(e.target.type, textAcceptingInputTypes) > -1){
+            return; // early escape if we are in a text input field
+        }
+
         if(e.keyCode == 85 && e.shiftKey){ // 85 = u
             location.href = '/upcoming';
         } else if(e.keyCode == 82 && e.shiftKey){
