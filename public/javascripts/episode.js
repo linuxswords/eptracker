@@ -160,17 +160,19 @@ $(document).ready(function(){
             return; // early escape if we are in a text input field
         }
 
-        if(e.keyCode == 85 && e.shiftKey){ // 85 = u
-            location.href = '/upcoming';
-        } else if(e.keyCode == 82 && e.shiftKey){
-            location.href = '/recent';
-        } else if(e.keyCode == 68 && e.shiftKey){
-            location.href = '/random';
-        } else if(e.keyCode == 72 && e.shiftKey){
-            location.href = '/';
-        } else if(e.keyCode == 83 && e.shiftKey){
-            $('input[type=search]').focus();
-            return false;
+        if (e.shiftKey) {
+            if (e.keyCode == 85) { // 85 = u
+                location.href = '/upcoming';
+            } else if (e.keyCode == 82) {
+                location.href = '/recent';
+            } else if (e.keyCode == 68) {
+                location.href = '/random';
+            } else if (e.keyCode == 72) {
+                location.href = '/';
+            } else if (e.keyCode == 83) {
+                $('input[type=search]').focus();
+                return false;
+            }
         }
     });
 
