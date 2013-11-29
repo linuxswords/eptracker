@@ -16,6 +16,7 @@ object ApplicationBuild extends Build {
       "com.googlecode.mapperdao" % "mapperdao" % "1.0.0.rc19-2.10.1",
       "mysql" % "mysql-connector-java" % "5.1.18",
       jdbc,
+      cache,
       javaJpa
     )
 
