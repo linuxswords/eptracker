@@ -26,7 +26,7 @@ object Show extends Controller with SearchForm
     shows match {
       case Some(showList) => {
         val randomShow = Random.shuffle(showList).head
-        show(randomShow.title)(request)
+        Redirect(routes.Show.show(randomShow.title))
       }
       case None => {
         val list= Media.allTitlesWithCount
