@@ -105,6 +105,7 @@ $(document).ready(function(){
             event.stopImmediatePropagation();
             var elem = $(this);
             var title = elem.closest('.descriptionTrigger').data('series');
+            var title = title || elem.closest('li').data('series');
             var state = elem.hasClass('flag-red');
             var id = elem.attr('rel');
             epRouter.controllers.Show.consume(id,title,state ? 1 : 0).ajax({
