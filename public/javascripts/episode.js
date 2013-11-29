@@ -149,6 +149,7 @@ $(document).ready(function(){
     // r -> recent
     // d -> random
     // s -> search
+    // h -> home
     $(document).on('keypress', function(e){
         if(e.keyCode == 85 && e.shiftKey){ // 85 = u
             location.href = '/upcoming';
@@ -156,6 +157,8 @@ $(document).ready(function(){
             location.href = '/recent';
         } else if(e.keyCode == 68 && e.shiftKey){
             location.href = '/random';
+        } else if(e.keyCode == 72 && e.shiftKey){
+            location.href = '/';
         } else if(e.keyCode == 83 && e.shiftKey){
             $('input[type=search]').focus();
             return false;
