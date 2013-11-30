@@ -30,7 +30,7 @@ object Import extends Controller with SearchForm
   val fmt = DateTimeFormat.forPattern("yyyy-MM-dd")
 
   val nrIdDateTitle = "(^[0-9]+)\\s*([0-9-]+) {8,}([0-9]{2}/[a-zA-Z]{3}/[0-9]{2})\\s*(.*)".r
-  val nrIdProdDateTitle = "(^[0-9]+)\\s*([0-9-]+)\\s+[0-9/a-zA-Z]+\\s*(([0-9]{2}/[a-zA-Z]{3}/[0-9]{2}))\\s{3}(.*)".r
+  val nrIdProdDateTitle = "(^[0-9]+)\\s*([0-9-]+)\\s+[#0-9/a-zA-Z]+\\s*(([0-9]{2}/[a-zA-Z]{3}/[0-9]{2}))\\s{3}(.*)".r
   val dateMatch = """([0-9]{2})/([a-zA-Z]{3})/([0-9]{2})""".r
   val idMatch = """([0-9]+)-([0-9]+)""".r
   val monthMap = Map(
