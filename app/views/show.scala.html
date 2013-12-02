@@ -29,7 +29,7 @@
     <img src="@routes.Assets.at("images/ajax-loader.gif")" />
 </div>
 
-<img class="showpic" src="@routes.Assets.at("images/show/"+currentPage.items.head.showId+"-cast.jpg")" alt="cast">
+<img class="showpic" src="@routes.Show.picture(currentPage.items.head.showId + "-cast.jpg")" alt="cast">
 
   @templates.paging(currentPage, currentOrderBy, link)
 

@@ -17,6 +17,8 @@ import com.googlecode.mapperdao.jdbc.Transaction
 import com.googlecode.mapperdao.jdbc.Transaction.{Isolation, Propagation}
 import _root_.forms.ImportForm.importForm
 
+import controllers.Show.defaultPicturePath
+
 /**
  *
  * @author knm
@@ -119,8 +121,9 @@ object Import extends Controller with SearchForm
     val title = html.select("h1").text
 
       // image
+    val filePrefix = Play.current.configuration.getString("picture.storage").getOrElse(defaultPicturePath)
     val url = "http://epguides.com/" + epGuideId + "/cast.jpg"
-    val file: File = Play.application.getFile("public/images/show/" + epGuideId + "-cast.jpg")
+    val file: File = Play.application.getFile( filePrefix + "/" + epGuideId + "-cast.jpg")
     util.Util.saveFileFromUrl(file, url)
 
     for{

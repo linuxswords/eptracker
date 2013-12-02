@@ -5,13 +5,15 @@ import forms.SearchForm
 import models.{TVShow, Media}
 import play.api.cache.Cache
 import play.api.libs.json.{JsValue, Json}
-import play.api.mvc.Controller
+import play.api.mvc.{Action, Controller}
 import request.EpisodeRequest.EpisodeAction
 import java.net.URLDecoder
 import play.api.Play.current
 
 import controllers.Search.titleKeys
 import scala.util.Random
+import play.api.Play
+
 /**
  *
  * @author knm
@@ -20,6 +22,7 @@ import scala.util.Random
 
 object Show extends Controller with SearchForm
 {
+  val defaultPicturePath = "/var/www/eptracker/images/eptracker"
 
   def random = EpisodeAction{ implicit request =>
     val shows =Cache.getAs[List[TVShow]](titleKeys)
@@ -41,6 +44,11 @@ object Show extends Controller with SearchForm
     Ok(views.html.showsbyAbc(showMap))
   }
 
+  def picture(name: String) = Action {
+    val filePrefix = Play.current.configuration.getString("picture.storage").getOrElse(defaultPicturePath)
+
+    Ok.sendFile(new java.io.File(filePrefix + "/" + name))
+  }
 
   def epGuideData = EpisodeAction{ implicit request =>
     import play.api.Play.current
