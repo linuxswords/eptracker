@@ -14,25 +14,40 @@ Requirements:
 
 - scala
 - awk installed
-- play! framework 2.1.1
-- optional, but recommended: local mysql-database
+- play! framework 2.2.1
+- mysql-database although other might work also
 
 start with 'play run' on the commandline, fire up localhost:9000 and start importing and flagging shows
 
+Configuration
+-------------
+
+In the [conf/application.conf](/conf/application.conf) file
+
+`torrent.searchstring` -- is the prefix used to create torrent search strings
+
+    # this url will be used to build torrent search urls
+    torrent.searchstring="http://kickass.to/torrents/search/?q="
+
+`picture.storage` -- absolute path to the location to store file
+
+    # this is where we will store the pictures
+    picture.storage="/opt/eptracker"
 
 Data-Sources
 ------------
 
-- [allshows.txt](/allshows.txt) -> downloadable from http://epguide.com, will be used for the import text field autocomplete
-- episodes and show -> will be imported into configured database, data comes from the http://epguide.com/<showID> and will be parsed by an awk script
-- show description -> freebase.com search
-- episode description -> freebase.com search
+- [allshows.txt](/allshows.txt) -- downloadable from http://epguide.com, will be used for the import text field autocomplete
+- episodes and show -- will be imported into configured database, data comes from the http://epguide.com/<showID> and will be parsed by an awk script
+- show description -- freebase.com search
+- episode description -- freebase.com search
 
 
 TODO
 ----
 
-- Save the pictures in another format
+- get the pictures in another format, other license
+- handle when picture location is crappy
 - rewrite import to another source as freebase.com or openmoviedatabase.org
 - make this application user aware. create accounts etc.
 
