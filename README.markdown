@@ -1,4 +1,4 @@
-This is a Play 2.1 application for tracking tv-episodes
+This is a Play 2.2 application for tracking tv-episodes
 =======================================================
 
 Description
