@@ -47,7 +47,8 @@ TODO
 ----
 
 - get the pictures in another format, other license
-- handle when picture location is crappy
+- rating
+- genre
 - rewrite import to another source as freebase.com or openmoviedatabase.org
 - make this application user aware. create accounts etc.
 
