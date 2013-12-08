@@ -123,7 +123,7 @@ object Import extends Controller with SearchForm
       // image
     val filePrefix = Play.current.configuration.getString("picture.storage").getOrElse(defaultPicturePath)
     val url = "http://epguides.com/" + epGuideId + "/cast.jpg"
-    val file: File = Play.application.getFile( filePrefix + "/" + epGuideId + "-cast.jpg")
+    val file: File = new File(filePrefix + "/" + epGuideId + "-cast.jpg")
     util.Util.saveFileFromUrl(file, url)
 
     for{
