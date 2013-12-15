@@ -21,7 +21,7 @@
                 </li>
             }.getOrElse {}
             @if(currentPage.total > (currentPage.offset + currentPage.items.size)){
-              <li class="next" >
+              <li class="last" >
                 @currentPage.totalPages.map { page =>
                   @if(currentPage.total % page == 0 ) {
                   <a href="@link(page.toInt - 1, None)">Last &gt;&gt;</a>

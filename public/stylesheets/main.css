@@ -457,6 +457,7 @@ div.pagination ul{
     padding: 10px 0;
     font-size: 11px;
 }
+div.pagination ul li.last,
 div.pagination ul li.next{
     position: relative;
     left: 230px;

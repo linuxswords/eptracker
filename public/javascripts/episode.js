@@ -152,6 +152,7 @@ $(document).ready(function(){
     // s -> search
     // h -> home
     // n -> next-pagination
+    // l -> last-pagination
     $(document).on('keypress', function(event){
 
         var textAcceptingInputTypes = ["text", "password", "number", "email",
@@ -172,8 +173,11 @@ $(document).ready(function(){
                 location.href = '/random';
             } else if (event.keyCode == 72) { // = h
                 location.href = '/';
-            }else if (event.keyCode == 78) { // = n
+            } else if (event.keyCode == 78) { // = n
                 var url = $('.pagination .next a').attr('href');
+                location.href = url;
+            } else if (event.keyCode == 76) { // = l
+                var url = $('.pagination .last a').attr('href');
                 location.href = url;
             } else if (event.keyCode == 83) { // = s
                 $('input[type=search]').focus();
