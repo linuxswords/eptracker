@@ -151,26 +151,31 @@ $(document).ready(function(){
     // d -> random
     // s -> search
     // h -> home
-    $(document).on('keypress', function(e){
+    // n -> next-pagination
+    $(document).on('keypress', function(event){
 
         var textAcceptingInputTypes = ["text", "password", "number", "email",
             "url", "range", "date", "month", "week", "time",
             "datetime", "datetime-local", "search", "color", "tel"];
 
-        if($.inArray(e.target.type, textAcceptingInputTypes) > -1){
+        if($.inArray(event.target.type, textAcceptingInputTypes) > -1){
             return; // early escape if we are in a text input field
         }
 
-        if (e.shiftKey) {
-            if (e.keyCode == 85) { // 85 = u
+        if (event.shiftKey) {
+
+            if (event.keyCode == 85) { // 85 = u
                 location.href = '/upcoming';
-            } else if (e.keyCode == 82) {
+            } else if (event.keyCode == 82) { // = r
                 location.href = '/recent';
-            } else if (e.keyCode == 68) {
+            } else if (event.keyCode == 68) { // = d
                 location.href = '/random';
-            } else if (e.keyCode == 72) {
+            } else if (event.keyCode == 72) { // = h
                 location.href = '/';
-            } else if (e.keyCode == 83) {
+            }else if (event.keyCode == 78) { // = n
+                var url = $('.pagination .next a').attr('href');
+                location.href = url;
+            } else if (event.keyCode == 83) { // = s
                 $('input[type=search]').focus();
                 return false;
             }
