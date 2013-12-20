@@ -73,12 +73,12 @@ object Show extends Controller with SearchForm
   }
 
   def recent() = EpisodeAction{ implicit request =>
-    val allRecents = Media.recent(10)
+    val allRecents = Media.recent(20)
     Ok(views.html.list("recent", allRecents))
   }
 
   def upcoming = EpisodeAction{ implicit request =>
-    val allUpcomings = Media.upcoming(10)
+    val allUpcomings = Media.upcoming(20)
     Ok(views.html.list("upcoming", allUpcomings))
   }
 
