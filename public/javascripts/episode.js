@@ -152,6 +152,7 @@ $(document).ready(function(){
     // s -> search
     // h -> home
     // n -> next-pagination
+    // p -> previous-pagination
     // l -> last-pagination
     $(document).on('keypress', function(event){
 
@@ -175,6 +176,9 @@ $(document).ready(function(){
                 location.href = '/';
             } else if (event.keyCode == 78) { // = n
                 var url = $('.pagination .next a').attr('href');
+                location.href = url;
+            } else if (event.keyCode == 80) { // = p
+                var url = $('.pagination .prev a').attr('href');
                 location.href = url;
             } else if (event.keyCode == 76) { // = l
                 var url = $('.pagination .last a').attr('href');
