@@ -176,13 +176,13 @@ $(document).ready(function(){
                 location.href = '/';
             } else if (event.keyCode == 78) { // = n
                 var url = $('.pagination .next a').attr('href');
-                location.href = url;
+                if(url) location.href = url;
             } else if (event.keyCode == 80) { // = p
                 var url = $('.pagination .prev a').attr('href');
-                location.href = url;
+                if(url) location.href = url;
             } else if (event.keyCode == 76) { // = l
                 var url = $('.pagination .last a').attr('href');
-                location.href = url;
+                if(url) location.href = url;
             } else if (event.keyCode == 83) { // = s
                 $('input[type=search]').focus();
                 return false;
