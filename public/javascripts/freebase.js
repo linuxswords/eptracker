@@ -1,3 +1,7 @@
+/**
+ * episode custom freebase access
+ * @type {{getMidFromTitle: getMidFromTitle, getDescriptionInto: getDescriptionInto, getEpisodeDescriptionInto: getEpisodeDescriptionInto, addPictureInto: addPictureInto}}
+ */
 var freebase = {
 
     getMidFromTitle : function(title, callback){
