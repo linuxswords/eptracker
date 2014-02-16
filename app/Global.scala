@@ -16,11 +16,11 @@ class Global extends GlobalSettings
   {
     super.onStart(app)
     import play.api.Play.current
-    Logger("application").info("startup catch!!!!")
+    Logger("application").info("importing allshows.txt from epguide")
     // allshows.txt dowload at http://epguides.com/common/allshows.txt
     val source = io.Source.fromFile("allshows.txt", "ISO-8859-1")
     val lines = source.mkString.split("\n").toList.drop(1).map{_.replace("\"","")}.map {_.replace("'", "")}
-    val epGuideKeys = lines.map { word =>
+    val epGuideKeys = lines.filter(_.contains(",")).map { word =>
       val data = word.split(",")
       String.format("{ \"label\": \"%s\", \"value\": \"%s\" }",data(0).trim,data(1).trim)
     }
