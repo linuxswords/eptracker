@@ -7,6 +7,7 @@ import com.googlecode.mapperdao._
 import com.googlecode.mapperdao.Query._
 import utils.Setup
 import util.TVShowABCMapCreator
+import play.api.libs.json.{JsString, JsValue, Writes, Json}
 
 /**
  * Helper for pagination.
@@ -47,7 +48,12 @@ object MediaEntity extends Entity[Long,SurrogateLongId, Media]{
 
 object Media {
 
-val dataSource = play.api.db.DB.getDataSource("default")
+  implicit val jodaDateWrites: Writes[DateTime] = new Writes[DateTime] {
+    def writes(d: DateTime): JsValue = JsString(d.toString())
+  }
+  implicit val mediaWrites = Json.writes[Media]
+
+  val dataSource = play.api.db.DB.getDataSource("default")
   val(jdbc, mapperDao, queryDao, transcationManager) = Setup.mysql(dataSource, List(MediaEntity, TVShowEntity))
   val me = MediaEntity
   val ts = TVShowEntity
@@ -109,6 +115,12 @@ val dataSource = play.api.db.DB.getDataSource("default")
     val totalRows = queryDao.count(query)
 
     Page(medias, page, offset, totalRows, allSeen)
+  }
+
+  def rawShow(title: String) = {
+    val query = select from me where me.title === title orderBy(me.publishingDate)
+    val medias = queryDao.query(query)
+    medias
   }
 
   def recent(limit : Int = 5) : Seq[Media] =  {

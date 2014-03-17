@@ -17,6 +17,7 @@ GET     /shows                                  controllers.Show.shows(p:Int ?= 
 GET     /shows/byAbc                            controllers.Show.showsByAbc
 GET     /shows/all                              controllers.Show.all(p:Int ?= 0, s:Int ?= 2)
 GET     /show/:name                             controllers.Show.show(name,p:Int ?= 0, s:Int ?= 2)
+GET     /show/:name/raw                         controllers.Show.rawshow(name)
 GET     /show/:name/delete                      controllers.Show.delete(name)
 GET     /show/:name/consumeAll                  controllers.Show.consumeAll(name)
 GET     /show/:name/update                      controllers.Show.update(name)

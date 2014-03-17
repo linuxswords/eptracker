@@ -11,7 +11,7 @@
 
   <link href="http://fonts.googleapis.com/css?family=Varela" rel="stylesheet" type="text/css" />
   <link href="http://fonts.googleapis.com/css?family=Sansita+One" rel="stylesheet" type="text/css" />
-  @helper.javascriptRouter("epRouter")(routes.javascript.Show.delete, routes.javascript.Show.consume, routes.javascript.Info.consumeInfo)
+  @helper.javascriptRouter("epRouter")(routes.javascript.Show.delete, routes.javascript.Show.consume, routes.javascript.Show.rawshow, routes.javascript.Info.consumeInfo)
   @helper.requireJs(core = routes.Assets.at("javascripts/require.js").url, module = routes.Assets.at("javascripts/main").url)
 
   @script

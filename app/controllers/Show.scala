@@ -4,7 +4,7 @@ package controllers
 import forms.SearchForm
 import models.{TVShow, Media}
 import play.api.cache.Cache
-import play.api.libs.json.{JsValue, Json}
+import play.api.libs.json.{Writes, JsString, JsValue, Json}
 import play.api.mvc.{Action, Controller}
 import request.EpisodeRequest.EpisodeAction
 import java.net.URLDecoder
@@ -48,6 +48,15 @@ object Show extends Controller with SearchForm
     val filePrefix = Play.current.configuration.getString("picture.storage").getOrElse(defaultPicturePath)
 
     Ok.sendFile(new java.io.File(filePrefix + "/" + name))
+  }
+
+  def rawshow(id: String) = EpisodeAction{ implicit request =>
+
+    val shows = Media.rawShow(id).map(_.asInstanceOf[Media])
+
+    import Media.mediaWrites
+
+    Ok(Json.toJson(shows))
   }
 
   def epGuideData = EpisodeAction{ implicit request =>
