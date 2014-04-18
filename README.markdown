@@ -13,7 +13,6 @@ Requirements:
 -------------
 
 - scala
-- awk installed
 - play! framework 2.2.1
 - mysql-database although other might work also
 
