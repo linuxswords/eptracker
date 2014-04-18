@@ -4,6 +4,7 @@ import play.api.cache.Cache
 import play.api.libs.json.Json
 import play.api.{Logger}
 import play.{Application, GlobalSettings}
+import scala.util.Try
 
 /**
  *
@@ -17,8 +18,9 @@ class Global extends GlobalSettings
     super.onStart(app)
     import play.api.Play.current
     Logger("application").info("importing allshows.txt from epguide")
-    // allshows.txt dowload at http://epguides.com/common/allshows.txt
-    val source = io.Source.fromFile("allshows.txt", "ISO-8859-1")
+    // allshows.txt download at http://epguides.com/common/allshows.txt
+    val source = Try(io.Source.fromURL("http://epguides.com/common/allshows.txt", "ISO-8859-1"))
+      .getOrElse(io.Source.fromFile("allshows.txt", "ISO-8859-1"))
     val lines = source.mkString.split("\n").toList.drop(1).map{_.replace("\"","")}.map {_.replace("'", "")}
     val epGuideKeys = lines.filter(_.contains(",")).map { word =>
       val data = word.split(",")
