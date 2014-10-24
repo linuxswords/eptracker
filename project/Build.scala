@@ -1,6 +1,5 @@
 import sbt._
 import Keys._
-import play.Project._
 
 object ApplicationBuild extends Build {
 
@@ -20,8 +19,9 @@ object ApplicationBuild extends Build {
       javaJpa
     )
 
-    val main = play.Project(appName, appVersion, appDependencies).settings(
-      // Add your own project settings here
+    val main = Project(appName, file(".")).enablePlugins(play.PlayScala).settings(
+      version := appVersion
+      libraryDependencies ++= appDependencies
       requireJs += "main.js"
     )
 
