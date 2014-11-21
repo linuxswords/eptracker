@@ -12,7 +12,7 @@ import collection.SortedMap
 object TVShowABCMapCreator {
 
   def createMap(shows: List[TVShow]) :Map[String, List[TVShow]]= {
-    shows.groupBy( _.title.toUpperCase().substring(0,1) )
+    shows.groupBy( _.title.toUpperCase().take(1) )
   }
 
 }
