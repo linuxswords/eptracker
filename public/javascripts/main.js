@@ -23,5 +23,7 @@ require(['jquery-1.7.2.min',
     'jquery.tools.min',
     'freebase',
     'episode-timeline',
-    'episode'], function($){
+    'episode'], function($, ui, moment, tools, freebase, eptime, ep){
+        console.log("i was here");
+        console.log($);
     });

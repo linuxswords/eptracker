@@ -92,10 +92,16 @@ object Media {
   def all(page: Int = 0, pageSize: Int = 10, orderBy: Int = 1, filter: String = "%"): Page[(Media)] = {
     val offset = pageSize * page
     val query = select from me orderBy(me.title, asc)
-    val medias = queryDao.query(QueryConfig(offset = Some(offset), limit = Some(pageSize)), query)
+    val medias: List[Media with SurrogateLongId] = showsWithoffset(pageSize, offset)
     val totalRows = queryDao.count(query)
 
     Page(medias, page, offset, totalRows)
+  }
+
+  def showsWithoffset(pageSize: Int, offset: Int): List[Media with SurrogateLongId] = {
+    val query: OrderBy[Builder[Long, SurrogateLongId, Media]] with Builder[Long, SurrogateLongId, Media] = ???
+    val medias = queryDao.query(QueryConfig(offset = Some(offset), limit = Some(pageSize)), query)
+    medias
   }
 
   /**
