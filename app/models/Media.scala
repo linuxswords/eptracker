@@ -79,6 +79,18 @@ object Media {
     showsByShow
   }
 
+  def consumeStati = {
+    val all = queryDao.query(select from me)
+    val showsByShow = all.groupBy(_.title) map { case(id, shows) =>
+      val consumestatus =
+        if(shows.forall(s => true == s.consumed)) "all"
+      else if(shows.forall(false == _.consumed)) "none"
+      else "partial"
+      models.ShowStat(id, consumestatus, shows.size)
+    }
+    showsByShow
+  }
+
   def allTitlesWithCount(): List[TVShow] = queryDao.query(select from ts)
 
   def shows(page: Int = 0, pageSize: Int = 10, orderBy: Int = 1, filter: String = "%"): Page[TVShow] = {
@@ -121,6 +133,12 @@ object Media {
     val totalRows = queryDao.count(query)
 
     Page(medias, page, offset, totalRows, allSeen)
+  }
+
+  def showByTitle(title: String) = {
+    val query = select from me where me.title === title orderBy(me.publishingDate)
+    val medias = queryDao.query(query)
+    medias
   }
 
   def rawShow(title: String) = {
@@ -178,6 +196,7 @@ object TVShow{
       case _            => "tag3"
     }
   }
+  implicit val tVShowFormats = play.api.libs.json.Json.format[TVShow]
 }
 
 object TVShowEntity extends Entity[Unit, NoId, TVShow]{

@@ -5,6 +5,8 @@
 # Home page
 GET     /                                       controllers.Application.index
 
+GET     /ang                                    controllers.Application.ang
+
 GET     /import/:name                           controllers.Import.importShow(name)
 POST    /import/                                controllers.Import.importTheShow
 
@@ -29,14 +31,14 @@ GET     /recent                                 controllers.Show.recent
 GET     /upcoming                               controllers.Show.upcoming
 GET     /epguidehelper                          controllers.Show.epGuideData
 
-GET     /api/recent                                 controllers.RestShow.recent
-GET     /api/upcoming                               controllers.RestShow.upcoming
-GET     /api/shows                                  controllers.RestShow.shows(p:Int ?= 0, s:Int ?= 2)
-GET     /api/shows/byAbc                            controllers.RestShow.showsByAbc
-#GET     /api/shows/all                              controllers.RestShow.all(p:Int ?= 0, s:Int ?= 2)
-#GET     /api/show/:name                             controllers.RestShow.show(name,p:Int ?= 0, s:Int ?= 2)
-#GET     /api/show/:name/raw                         controllers.RestShow.rawshow(name)
-#GET     /api/show/:name/delete                      controllers.RestShow.delete(name)
+GET     /api/showstat/consumed                      controllers.api.Show.consumedStat
+GET     /api/torrentengine                          controllers.api.Show.torrentEngine
+GET     /api/recent                                 controllers.api.Show.recent
+GET     /api/upcoming                               controllers.api.Show.upcoming
+GET     /api/shows                                  controllers.api.Show.shows(p:Int ?= 0, s:Int ?= 2)
+GET     /api/shows/byAbc                            controllers.api.Show.showsByAbc
+GET     /api/show/:name                             controllers.api.Show.show(name)
+DELETE  /api/show/:name                             controllers.api.Show.delete(name)
 #GET     /api/show/:name/consumeAll                  controllers.RestShow.consumeAll(name)
 #GET     /api/show/:name/update                      controllers.RestShow.update(name)
 #GET     /api/show/:id/:title/:consume               controllers.RestShow.consume(id, title, consume:Boolean)
