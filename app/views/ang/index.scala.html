@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="en-US" ng-app="eptracker">
+    <head>
+        <meta charset="UTF-8"> </meta>
+        <title>Eptracker in angular</title>
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/style.css")"/>
+        <script src="@routes.Assets.at("javascripts/moment.min.js")" type="text/javascript"></script>
+    </head>
+    <body ng-controller="MediaCtrl as mCtrl">
+
+        <header>
+            <h1>eptracker</h1>
+            <nav>
+                <ul>
+                    <li><a href="#/mediaCloud">cloud</a></li>
+                    <li><a href="">paged</a></li>
+                    <li><a href="">recent</a></li>
+                    <li><a href="">upcoming</a></li>
+                    <li><a href="">random</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div ng-view></div>
+
+        <aside-media title="Recent" medias="mCtrl.medias.recent" torrent-engine="mCtrl.torrentEngine"></aside-media>
+
+        <aside-media title="Upcoming" medias="mCtrl.medias.upcoming" torrent-engine="mCtrl.torrentEngine"></aside-media>
+
+        <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.js' type="text/javascript"></script>
+        <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-route.js' type="text/javascript"></script>
+        <script src='@routes.Assets.at("javascripts/app.js")' type="text/javascript"></script>
+    </body>
+
+</html>

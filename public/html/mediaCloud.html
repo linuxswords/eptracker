@@ -1,0 +1,9 @@
+<div ng-controller="CloudCtrl as cloudCtrl" ng-click="foo()">
+  {{cloudCtrl.cloud.data.length}} shows
+
+  <div class="titlecloud">
+    <span class="show tag2 {{show.consumeStatus}}"  ng-repeat="show in cloudCtrl.cloud.data | orderBy:'showId'" data-showId="{{show.showId}}">
+      <a showId="{{size}} episodes" href="#show/{{show.showId}}">{{show.showId}}</a>
+    </span>
+  </div>
+</div>
