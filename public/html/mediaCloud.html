@@ -2,15 +2,15 @@
   {{cloudCtrl.cloud.data.length}} shows
 
   <div class="titlecloud">
-    <span class="show {{show.size | classTag}}"  ng-repeat="show in cloudCtrl.cloud.data | orderBy:'showId'" data-showId="{{show.showId}}">
+    <span class="show {{show.size | classTag}}"  ng-repeat="show in cloudCtrl.cloud.data |  inArray:cloudCtrl.statusFilters:'consumeStatus' | orderBy:'showId'" data-showId="{{show.showId}}">
       <a showId="{{show.size}} episodes" class="{{show.consumeStatus}}" href="#show/{{show.showId}}">{{show.showId}}</a>
     </span>
     <hr/>
     <div class="info">
-      <a ng-click="" class="all">all </a>
-      <a ng-click="" class="partial">partial</a>
-      <a ng-click="" class="none">none</a>
-      <a ng-click="" class="">reset</a>
+      <a ng-click="updateStatusFilter('all')" class="all">all </a>
+      <a ng-click="updateStatusFilter('partial')" class="partial">partial</a>
+      <a ng-click="updateStatusFilter('none')" class="none">none</a>
+      <a ng-click="reset()" class="">reset</a>
     </div>
   </div>
 </div>

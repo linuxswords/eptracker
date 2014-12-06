@@ -1,4 +1,4 @@
-app = angular.module('eptracker', ['ngRoute'])
+app = angular.module('eptracker', ['ngRoute', 'filters-inArrayFilter'])
 
 app.config(['$routeProvider', ($routeProvider) ->
   $routeProvider.when('/mediaCloud', {
@@ -86,9 +86,21 @@ app.filter 'classTag', -> (size) ->
   else
     'tag3'
 
+
 app.controller 'MediaCtrl', (Media) ->
   this.data = Media
 
 app.controller 'CloudCtrl', ($scope, Cloud) ->
   this.cloud = Cloud
+  $this = this
+  startfilter = ['all','partial','none']
+  this.statusFilters = startfilter
+  $scope.statusFilters = startfilter
+  $scope.reset = ->
+    $scope.statusFilters = startfilter
+    $this.statusFilters = $scope.statusFilters
+
+  $scope.updateStatusFilter = (val) ->
+    $scope.statusFilters = [val]
+    $this.statusFilters = $scope.statusFilters
   this
