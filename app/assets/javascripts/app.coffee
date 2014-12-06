@@ -3,7 +3,7 @@ app = angular.module('eptracker', ['ngRoute'])
 app.config(['$routeProvider', ($routeProvider) ->
   $routeProvider.when('/mediaCloud', {
     templateUrl: '/assets/html/mediaCloud.html'
-#    controller: 'CloudCtrl'
+    controller: 'CloudCtrl'
   })
   .otherwise({redirectTo: '/' })
 ])
@@ -78,9 +78,17 @@ app.directive 'mediaTorrent', ->
 
 app.filter 'relDate', -> (time) -> moment(time).fromNow()
 
+app.filter 'classTag', -> (size) ->
+  if size < 50 # the coffeescript switch did not work?
+    'tag1'
+  else if size < 100
+    'tag2'
+  else
+    'tag3'
+
 app.controller 'MediaCtrl', (Media) ->
   this.data = Media
 
-app.controller 'CloudCtrl', (Cloud) ->
+app.controller 'CloudCtrl', ($scope, Cloud) ->
   this.cloud = Cloud
   this
