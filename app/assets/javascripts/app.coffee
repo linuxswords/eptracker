@@ -1,5 +1,10 @@
 app = angular.module('eptracker', ['ngRoute', 'filters-inArrayFilter'])
 
+
+
+#
+#  Routing
+#
 app.config(['$routeProvider', ($routeProvider) ->
   $routeProvider
   .when('/mediaCloud', {
@@ -14,6 +19,12 @@ app.config(['$routeProvider', ($routeProvider) ->
 ])
 
 
+
+
+
+#
+#  Factories
+#
 app.factory 'Media', ($http) ->
   appdata = {}
   appdata.medias = {}
@@ -44,16 +55,6 @@ app.factory 'Media', ($http) ->
   )
   appdata
 
- app.service 'ShowServer', ($http) ->
-   (showid, holder) ->
-     $http.get("/api/show/#{showid}")
-       .success( (data, status, headers, config) ->
-        holder.medias = data
-      )
-        .error( (data, status, headers, config) ->
-         console.log(status)
-         console.log(data)
-     )
 
 
 app.factory 'Cloud', ($http) ->
@@ -68,6 +69,27 @@ app.factory 'Cloud', ($http) ->
   )
   clouddata
 
+#
+#   Services
+#
+
+app.service 'ShowServer', ($http) ->
+  (showid, holder) ->
+    $http.get("/api/show/#{showid}")
+    .success( (data, status, headers, config) ->
+      holder.medias = data
+    )
+    .error( (data, status, headers, config) ->
+      console.log(status)
+      console.log(data)
+    )
+
+
+
+
+#
+#  Directives
+#
 app.directive 'asideMedia', ->
     restrict: 'E'
     scope:
@@ -93,6 +115,11 @@ app.directive 'mediaTorrent', ->
         !media.consumed && moment().isAfter(media.publishingDate)
 
 
+
+
+#
+#  Filters
+#
 app.filter 'relDate', -> (time) -> moment(time).fromNow()
 
 app.filter 'classTag', -> (size) ->
@@ -103,6 +130,11 @@ app.filter 'classTag', -> (size) ->
   else
     'tag3'
 
+
+
+#
+#  Controllers
+#
 app.controller 'ShowController', ($scope, $routeParams, ShowServer) ->
   $scope.show = {}
   ShowServer($routeParams.showid, $scope.show)
