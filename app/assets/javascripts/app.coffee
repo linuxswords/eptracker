@@ -84,6 +84,16 @@ app.service 'ShowServer', ($http) ->
       console.log(data)
     )
 
+app.service 'ShowConsumer', ($http) ->
+  (media) ->
+    $http.post("/api/show/#{media.identifier}/#{media.title}/#{if media.consumed then 0 else 1}")
+    .success( (data, status, headers, config) ->
+      media.consumed = !media.consumed
+    )
+    .error( (data, status, headers, config) ->
+      console.log(status)
+      console.log(data)
+    )
 
 
 
@@ -138,6 +148,10 @@ app.filter 'classTag', -> (size) ->
 app.controller 'ShowController', ($scope, $routeParams, ShowServer) ->
   $scope.show = {}
   ShowServer($routeParams.showid, $scope.show)
+
+app.controller 'ConsumeController', ($scope, ShowConsumer) ->
+  $scope.consume = ShowConsumer
+
 
 app.controller 'MediaCtrl', (Media) ->
   this.data = Media

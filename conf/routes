@@ -41,7 +41,7 @@ GET     /api/show/:name                             controllers.api.Show.show(na
 DELETE  /api/show/:name                             controllers.api.Show.delete(name)
 #GET     /api/show/:name/consumeAll                  controllers.RestShow.consumeAll(name)
 #GET     /api/show/:name/update                      controllers.RestShow.update(name)
-#GET     /api/show/:id/:title/:consume               controllers.RestShow.consume(id, title, consume:Boolean)
+POST      /api/show/:id/:title/:consume              controllers.api.Show.consume(id, title, consume:Boolean)
 #GET     /api/showstat/consumed                      controllers.RestShow.consumeInfo
 #GET     /api/epguidehelper                          controllers.RestShow.epGuideData
 

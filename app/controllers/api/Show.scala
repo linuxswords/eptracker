@@ -2,18 +2,16 @@ package controllers.api
 
 import java.net.URLDecoder
 
-import com.googlecode.mapperdao.SurrogateLongId
-import controllers.Info._
 import controllers.Search._
+import models.ShowStat.showStatFormats
 import models.{Media, TVShow}
 import play.api.Play
+import play.api.Play.current
 import play.api.cache.Cache
 import play.api.libs.json.Json
 import play.api.mvc.{Action, Controller}
 
 import scala.util.Random
-import play.api.Play.current
-import models.ShowStat.showStatFormats
 /**
   * @author knm
   */
@@ -63,7 +61,11 @@ object Show extends Controller{
       case Nil  => NotFound
       case list => Ok(Json.toJson(list))
     }
+  }
 
+  def consume(id:String, title:String, consume : Boolean) = Action{
+    Media.consume(id, title, consume)
+    Ok(consume.toString)
   }
 
 

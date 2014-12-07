@@ -1,5 +1,5 @@
 <span ng-class="{'flag-green': media.consumed, 'flag-red': !media.consumed}"
       class="sprite flag" rel="{{media.identifier}}">
-  <img title="mark as seen" src="/assets/images/trans.gif"
+  <img ng-click="consume(media)" ng-controller="ConsumeController as consumeCtrl" title="mark as seen" src="/assets/images/trans.gif"
        alt="mark as seen">
 </span>
