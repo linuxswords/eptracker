@@ -1,19 +1,19 @@
-<h3>{{title}}</h3>
-<ul>
-    <li ng-repeat="media in medias" title="{{media.title}}" data-series="{{media.title}}">
+<h2>{{show.medias[0].title}}</h2>
+<ul ng-controller="ShowController as showCtrl">
+    <li ng-repeat="media in show.medias" title="{{media.title}}" data-series="{{media.title}}">
+
         <span class="date momentdate" data-date="{{media.publishingDate| relDate}}">
-            {{media.publishingDate | relDate}}
+            {{media.publishingDate | date:'yyyy-MM-dd'}}
         </span>
 
         <media-flag media="media"> </media-flag>
 
-        <a href="#/show/{{media.title}}">{{media.title}}</a>
-
         {{media.identifier}}
+        {{media.subtitle}}
+
 
         <media-torrent torrent-engine="torrentEngine" med="media"></media-torrent>
 
         <span ng-show="media.today" class="today">today</span>
     </li>
 </ul>
-

@@ -1,10 +1,15 @@
 app = angular.module('eptracker', ['ngRoute', 'filters-inArrayFilter'])
 
 app.config(['$routeProvider', ($routeProvider) ->
-  $routeProvider.when('/mediaCloud', {
+  $routeProvider
+  .when('/mediaCloud', {
     templateUrl: '/assets/html/mediaCloud.html'
     controller: 'CloudCtrl'
   })
+  .when('/show/:showid', {
+    templateUrl: '/assets/html/show.html'
+    controller: 'ShowController'
+    })
   .otherwise({redirectTo: '/' })
 ])
 
@@ -38,6 +43,18 @@ app.factory 'Media', ($http) ->
       console.log(data)
   )
   appdata
+
+ app.service 'ShowServer', ($http) ->
+   (showid, holder) ->
+     $http.get("/api/show/#{showid}")
+       .success( (data, status, headers, config) ->
+        holder.medias = data
+      )
+        .error( (data, status, headers, config) ->
+         console.log(status)
+         console.log(data)
+     )
+
 
 app.factory 'Cloud', ($http) ->
   clouddata = {}
@@ -86,6 +103,9 @@ app.filter 'classTag', -> (size) ->
   else
     'tag3'
 
+app.controller 'ShowController', ($scope, $routeParams, ShowServer) ->
+  $scope.show = {}
+  ShowServer($routeParams.showid, $scope.show)
 
 app.controller 'MediaCtrl', (Media) ->
   this.data = Media
