@@ -15,6 +15,7 @@ object ApplicationBuild extends Build {
 
     // persistence layer
       "com.googlecode.mapperdao" % "mapperdao" % "1.0.0.rc19-2.10.1",
+      "com.sksamuel.elastic4s" %% "elastic4s" % "1.4.0",
       "mysql" % "mysql-connector-java" % "5.1.18",
       jdbc,
       cache, javaJpa
@@ -25,7 +26,8 @@ object ApplicationBuild extends Build {
     val main = Project(appName, file(".")).enablePlugins(play.PlayScala).settings(
       version := appVersion,
       libraryDependencies ++= appDependencies,
-      requireJs += "main.js"
+      requireJs += "main.js",
+      scalaVersion := "2.11.1"
     )
 
 }
