@@ -1,4 +1,4 @@
-This is a Play 2.2 application for tracking tv-episodes
+This is a Play 2.3 application for tracking tv-episodes
 =======================================================
 
 Description
@@ -13,10 +13,10 @@ Requirements:
 -------------
 
 - scala
-- play! framework 2.2.1
+- play! framework 2.3.5
 - mysql-database although other might work also
 
-start with 'play run' on the commandline, fire up localhost:9000 and start importing and flagging shows
+start with 'activator run' on the commandline, fire up localhost:9000 and start importing and flagging shows
 
 Configuration
 -------------
