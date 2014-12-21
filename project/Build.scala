@@ -2,6 +2,8 @@ import sbt._
 import Keys._
 import play.Play.autoImport._
 import PlayKeys._
+import com.typesafe.sbt.less.Import.LessKeys
+import com.typesafe.sbt.web.Import.Assets
 
 object ApplicationBuild extends Build {
 
@@ -27,7 +29,8 @@ object ApplicationBuild extends Build {
       version := appVersion,
       libraryDependencies ++= appDependencies,
       requireJs += "main.js",
-      scalaVersion := "2.11.1"
+      scalaVersion := "2.11.1",
+      includeFilter in (Assets, LessKeys.less) := "*.less"
     )
 
 }
