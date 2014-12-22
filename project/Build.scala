@@ -27,7 +27,7 @@ object ApplicationBuild extends Build {
       version := appVersion,
       libraryDependencies ++= appDependencies,
       requireJs += "main.js",
-      scalaVersion := "2.11.1"
+      scalaVersion := "2.10.3"
     )
 
 }
