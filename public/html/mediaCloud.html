@@ -2,7 +2,7 @@
   {{cloudCtrl.cloud.data.length}} shows
 
   <div class="titlecloud">
-    <span class="show {{show.size | classTag}}"  ng-repeat="show in cloudCtrl.cloud.data |  inArray:cloudCtrl.statusFilters:'consumeStatus' | orderBy:'showId'" data-showId="{{show.showId}}">
+    <span class="{{show.size | classTag}}"  ng-repeat="show in cloudCtrl.cloud.data |  inArray:cloudCtrl.statusFilters:'consumeStatus' | orderBy:'showId'" data-showId="{{show.showId}}">
       <a showId="{{show.size}} episodes" class="{{show.consumeStatus}}" href="#show/{{show.showId}}">{{show.showId}}</a>
     </span>
     <hr/>
