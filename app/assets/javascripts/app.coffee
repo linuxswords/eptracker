@@ -164,8 +164,13 @@ app.filter 'classTag', -> (size) ->
 #
 app.controller 'ShowController', ($scope, $routeParams, ShowServer, ShowUpdater) ->
   service = this
+  $scope.activeState = ''
   $scope.show = {}
-  service.update = ShowUpdater.update
+  service.update = (name) ->
+    $scope.activeState = 'active'
+    ShowUpdater.update(name).then( ->
+      $scope.activeState = ''
+    )
   ShowServer($routeParams.showid, $scope.show)
   service
 
