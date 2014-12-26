@@ -1,5 +1,5 @@
 <h2>{{show.medias[0].title}} <span class="badge">{{show.medias.length}}</span></h2>
-<span ng-controller="ShowController as showCtrl" ng-click="showCtrl.update(show.medias[0].title)" class="glyphicon glyphicon-refresh"></span>
+<span ng-controller="ShowController as showCtrl" ng-click="showCtrl.update(show.medias[0].showId)" class="glyphicon glyphicon-refresh"></span>
 <ul ng-controller="ShowController as showCtrl" class="list-unstyled">
     <li ng-repeat="media in show.medias" title="{{media.title}}" data-series="{{media.title}}">
 
