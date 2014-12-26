@@ -9,7 +9,7 @@ app.config(['$routeProvider', ($routeProvider) ->
   $routeProvider
   .when('/mediaCloud', {
     templateUrl: '/assets/html/mediaCloud.html'
-    controller: 'CloudCtrl'
+    controller: 'CloudController'
   })
   .when('/show/:showid', {
     templateUrl: '/assets/html/show.html'
@@ -55,6 +55,20 @@ app.factory 'Media', ($http) ->
   )
   appdata
 
+app.factory 'ShowUpdater', ($http, $log) ->
+  service = this
+  update = (showid) ->
+    $log.info("got update call")
+    $http.put("/api/show/#{showid}/update")
+    .success( (data, status, headers, config) ->
+      $log.info("successful update")
+    )
+    .error( (data, status, headers, config) ->
+      $log.error("error update")
+    )
+  {
+    update: update
+  }
 
 
 app.factory 'Cloud', ($http) ->
@@ -69,10 +83,13 @@ app.factory 'Cloud', ($http) ->
   )
   clouddata
 
+
+
+
+
 #
 #   Services
 #
-
 app.service 'ShowServer', ($http) ->
   (showid, holder) ->
     $http.get("/api/show/#{showid}")
@@ -145,18 +162,21 @@ app.filter 'classTag', -> (size) ->
 #
 #  Controllers
 #
-app.controller 'ShowController', ($scope, $routeParams, ShowServer) ->
+app.controller 'ShowController', ($scope, $routeParams, ShowServer, ShowUpdater) ->
+  service = this
   $scope.show = {}
+  service.update = ShowUpdater.update
   ShowServer($routeParams.showid, $scope.show)
+  service
 
 app.controller 'ConsumeController', ($scope, ShowConsumer) ->
   $scope.consume = ShowConsumer
 
 
-app.controller 'MediaCtrl', (Media) ->
+app.controller 'MediaController', (Media) ->
   this.data = Media
 
-app.controller 'CloudCtrl', ($scope, Cloud) ->
+app.controller 'CloudController', ($scope, Cloud) ->
   this.cloud = Cloud
   $this = this
   startfilter = ['all','partial','none']

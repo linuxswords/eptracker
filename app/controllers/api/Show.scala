@@ -2,10 +2,12 @@ package controllers.api
 
 import java.net.URLDecoder
 
+import controllers.{routes, Import}
 import controllers.Search._
+import controllers.Show._
 import models.ShowStat.showStatFormats
 import models.{Media, TVShow}
-import play.api.Play
+import play.api.{Logger, Play}
 import play.api.Play.current
 import play.api.cache.Cache
 import play.api.libs.json.Json
@@ -85,8 +87,14 @@ object Show extends Controller{
   }
 
 
+
+   def update(name: String) = Action{
+     Logger.info(s"updating ${name}")
+     Import.importShowIntoDb(name)
+     Ok("imported")
+   }
+
    def consumeAll = TODO
-   def update = TODO
    def consume = TODO
    def consumeInfo = TODO
    def epGuideData = TODO
