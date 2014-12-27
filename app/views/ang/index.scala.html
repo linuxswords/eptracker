@@ -14,13 +14,13 @@
                 <div class="col-sm-12 page-header">
                     <header>
                         <h1>eptracker</h1>
-                        <nav>
-                            <ul class="list-inline">
-                                <li><a class="btn btn-primary btn-sm" href="#/mediaCloud">cloud</a></li>
-                                <li><a class="btn btn-primary btn-sm" href="">paged</a></li>
-                                <li><a class="btn btn-primary btn-sm" href="">recent</a></li>
-                                <li><a class="btn btn-primary btn-sm" href="">upcoming</a></li>
-                                <li><a class="btn btn-primary btn-sm" href="">random</a></li>
+                        <nav class="navbar navbar-default">
+                            <ul class="nav nav-justified">
+                                <li><a class="" href="#/mediaCloud">cloud</a></li>
+                                <li><a class="" href="">paged</a></li>
+                                <li><a class="" href="">recent</a></li>
+                                <li><a class="" href="">upcoming</a></li>
+                                <li><a class="" href="">random</a></li>
                             </ul>
                         </nav>
                     </header>
@@ -28,15 +28,17 @@
             </div>
 
             <div class="row">
-                <div class="col-sm-8 col-lg-8">
+                <div class="col-sm-8 col-lg-8" role="main">
                     <div ng-view></div>
                 </div>
 
 
-                <div class="col-sm-4 col-lg-4">
-                    <aside-media title="Recent" medias="mCtrl.medias.recent" torrent-engine="mCtrl.torrentEngine"></aside-media>
+                <div class="col-sm-4 col-lg-4" role="complementary">
+                    <div class="affix bs-docs-sidebar">
+                        <aside-media title="Recent" medias="mCtrl.medias.recent" torrent-engine="mCtrl.torrentEngine"></aside-media>
 
-                    <aside-media title="Upcoming" medias="mCtrl.medias.upcoming" torrent-engine="mCtrl.torrentEngine"></aside-media>
+                        <aside-media title="Upcoming" medias="mCtrl.medias.upcoming" torrent-engine="mCtrl.torrentEngine"></aside-media>
+                    </div>
                 </div>
 
             </div>
