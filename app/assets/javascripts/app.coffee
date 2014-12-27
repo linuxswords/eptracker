@@ -25,7 +25,7 @@ app.config(['$routeProvider', ($routeProvider) ->
 #
 #  Factories
 #
-app.factory 'Media', ($http) ->
+app.factory 'Media', ($http, $log) ->
   appdata = {}
   appdata.medias = {}
   $http.get('/api/torrentengine')
@@ -33,7 +33,7 @@ app.factory 'Media', ($http) ->
       appdata.torrentEngine = data
     )
     .error( (data, status, header) ->
-      console.log('error getting torrentEngine #{data}')
+      $log.error('error getting torrentEngine #{data}')
   )
   $http.get('/api/recent')
     .success( (data, status, headers, config) ->
@@ -41,8 +41,8 @@ app.factory 'Media', ($http) ->
       appdata.medias.recent = data
     )
     .error( (data, status, headers, config) ->
-      console.log(status)
-      console.log(data)
+      $log.error(status)
+      $log.error(data)
   )
   $http.get('/api/upcoming')
     .success( (data, status, headers, config) ->
@@ -50,8 +50,8 @@ app.factory 'Media', ($http) ->
        appdata.medias.upcoming = data
     )
     .error( (data, status, headers, config) ->
-      console.log(status)
-      console.log(data)
+      $log.error(status)
+      $log.error(data)
   )
   appdata
 
@@ -71,7 +71,7 @@ app.factory 'ShowUpdater', ($http, $log) ->
   }
 
 
-app.factory 'Cloud', ($http) ->
+app.factory 'Cloud', ($http, $log) ->
   clouddata = {}
   clouddata.data = {}
   $http.get('/api/showstat/consumed')
@@ -79,7 +79,7 @@ app.factory 'Cloud', ($http) ->
     clouddata.data = data
   )
   .error( (data, status, header) ->
-    console.log('error getting clouddata data')
+    $log.error('error getting clouddata data')
   )
   clouddata
 
@@ -90,15 +90,15 @@ app.factory 'Cloud', ($http) ->
 #
 #   Services
 #
-app.service 'ShowServer', ($http) ->
+app.service 'ShowServer', ($http, $log) ->
   (showid, holder) ->
     $http.get("/api/show/#{showid}")
     .success( (data, status, headers, config) ->
       holder.medias = data
     )
     .error( (data, status, headers, config) ->
-      console.log(status)
-      console.log(data)
+      $log.error(status)
+      $log.error(data)
     )
 
 app.service 'ShowConsumer', ($http) ->
@@ -108,8 +108,8 @@ app.service 'ShowConsumer', ($http) ->
       media.consumed = !media.consumed
     )
     .error( (data, status, headers, config) ->
-      console.log(status)
-      console.log(data)
+      $log.error(status)
+      $log.error(data)
     )
 
 
