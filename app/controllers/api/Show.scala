@@ -88,10 +88,14 @@ object Show extends Controller{
 
 
 
-   def update(name: String) = Action{
-     Logger.info(s"updating ${name}")
-     Import.importShowIntoDb(name)
-     Ok("imported")
+   def update(showId: String) = Action{
+     Logger.info(s"updating ${showId}")
+     Import.importShowIntoDb(showId)
+
+     Media.showByShowId(showId) match {
+       case Nil  => NotFound
+       case list => Ok(Json.toJson(list))
+     }
    }
 
    def consumeAll = TODO

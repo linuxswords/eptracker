@@ -40,7 +40,7 @@ GET     /api/shows/byAbc                            controllers.api.Show.showsBy
 GET     /api/show/:name                             controllers.api.Show.show(name)
 DELETE  /api/show/:name                             controllers.api.Show.delete(name)
 #GET     /api/show/:name/consumeAll                  controllers.RestShow.consumeAll(name)
-PUT     /api/show/:name/update                      controllers.api.Show.update(name)
+PUT     /api/show/:showId/update                     controllers.api.Show.update(showId)
 POST      /api/show/:id/:title/:consume              controllers.api.Show.consume(id, title, consume:Boolean)
 #GET     /api/showstat/consumed                      controllers.RestShow.consumeInfo
 #GET     /api/epguidehelper                          controllers.RestShow.epGuideData

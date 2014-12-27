@@ -141,6 +141,12 @@ object Media {
     medias
   }
 
+  def showByShowId(showId: String) = {
+    val query = select from me where me.showId === showId
+    val medias = queryDao.query(query)
+    medias
+  }
+
   def rawShow(title: String) = {
     val query = select from me where me.title === title orderBy(me.publishingDate)
     val medias = queryDao.query(query)
