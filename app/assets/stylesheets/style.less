@@ -56,18 +56,20 @@
 }
 
 .spinner {
-  display: inline-block;
+  display: none;
   opacity: 0;
   max-width: 0;
 
-  -webkit-animation:spin 4s linear infinite;
-  -moz-animation:spin 4s linear infinite;
-  animation:spin 4s linear infinite;
 }
 
 .active .spinner {
   opacity: 1;
   max-width: 50px;
+  display: inline-block;
+
+  -webkit-animation:spin 4s linear infinite;
+  -moz-animation:spin 4s linear infinite;
+  animation:spin 4s linear infinite;
 }
 
 @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
