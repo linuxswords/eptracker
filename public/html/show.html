@@ -1,24 +1,3 @@
-<h2>{{show.medias[0].title}} <span class="badge">{{show.medias.length}}</span></h2>
-<button type="button" id="update" ng-controller="ShowController as showCtrl" data-loading-text="Loading ..."
-      ng-click="showCtrl.update(show.medias[0].showId)"
-      class="btn btn-primary btn-xs {{activeState}}">
-    <div class="spinner"><span class="glyphicon glyphicon-refresh"></span></div> Update
-</button>
-<ul ng-controller="ShowController as showCtrl" class="list-unstyled">
-    <li ng-repeat="media in show.medias" title="{{media.title}}" data-series="{{media.title}}">
+<single-show show="show" ng-controller="ShowController as showCtrl" activeState="activeState" call="showCtrl.update(name)">
 
-        <span class="date momentdate" data-date="{{media.publishingDate| relDate}}">
-            {{media.publishingDate | date:'yyyy-MM-dd'}}
-        </span>
-
-        <media-flag media="media"> </media-flag>
-
-        {{media.identifier}}
-        {{media.subtitle}}
-
-
-        <media-torrent torrent-engine="mCtrl.torrentEngine" med="media"></media-torrent>
-
-        <span ng-show="media.today" class="today">today</span>
-    </li>
-</ul>
+</single-show>

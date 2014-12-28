@@ -56,12 +56,12 @@ app.factory 'Media', ($http, $log) ->
   appdata
 
 app.factory 'ShowUpdater', ($http, $log) ->
-  service = this
   update = (showid) ->
     $log.info("got update call")
     $http.put("/api/show/#{showid}/update")
     .success( (data, status, headers, config) ->
       $log.info("successful update")
+      data
     )
     .error( (data, status, headers, config) ->
       $log.error("error update")
@@ -69,6 +69,19 @@ app.factory 'ShowUpdater', ($http, $log) ->
   {
     update: update
   }
+
+app.factory 'ShowServer', ($http, $log) ->
+  service = this
+  service.get = (showid) ->
+    $http.get("/api/show/#{showid}")
+    .success( (data, status, headers, config) ->
+      data
+    )
+    .error( (data, status, headers, config) ->
+      $log.error(status)
+      $log.error(data)
+    )
+  service
 
 
 app.factory 'Cloud', ($http, $log) ->
@@ -90,17 +103,6 @@ app.factory 'Cloud', ($http, $log) ->
 #
 #   Services
 #
-app.service 'ShowServer', ($http, $log) ->
-  (showid, holder) ->
-    $http.get("/api/show/#{showid}")
-    .success( (data, status, headers, config) ->
-      holder.medias = data
-    )
-    .error( (data, status, headers, config) ->
-      $log.error(status)
-      $log.error(data)
-    )
-
 app.service 'ShowConsumer', ($http) ->
   (media) ->
     $http.post("/api/show/#{media.identifier}/#{media.title}/#{if media.consumed then 0 else 1}")
@@ -141,7 +143,13 @@ app.directive 'mediaTorrent', ->
       $scope.showTorrent = (media) ->
         !media.consumed && moment().isAfter(media.publishingDate)
 
-
+app.directive 'singleShow', ->
+  restrict: 'E'
+  scope:
+    show: '='
+    activeState: '='
+    call: "&"
+  templateUrl: '/assets/html/singleShow.html'
 
 
 #
@@ -162,16 +170,24 @@ app.filter 'classTag', -> (size) ->
 #
 #  Controllers
 #
-app.controller 'ShowController', ($scope, $routeParams, ShowServer, ShowUpdater) ->
+app.controller 'ShowController', ($scope, $log, $routeParams, ShowServer, ShowUpdater) ->
   service = this
   $scope.activeState = ''
   $scope.show = {}
   service.update = (name) ->
+    $log.debug("called update in ShowController")
     $scope.activeState = 'active'
-    ShowUpdater.update(name).then( ->
+    ShowUpdater.update(name).then( (response) ->
+      $log.debug("update data", response.data.length)
+      $log.debug("scope.length", $scope.show.medias.length)
+      $scope.show.medias = response.data
+      $log.debug("after", $scope.show.medias.length)
       $scope.activeState = ''
     )
-  ShowServer($routeParams.showid, $scope.show)
+  ShowServer.get($routeParams.showid).then( (response) ->
+    $scope.show.medias = response.data
+  )
+
   service
 
 app.controller 'ConsumeController', ($scope, ShowConsumer) ->

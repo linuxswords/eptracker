@@ -142,7 +142,7 @@ object Media {
   }
 
   def showByShowId(showId: String) = {
-    val query = select from me where me.showId === showId
+    val query = select from me where me.showId === showId orderBy(me.publishingDate, me.identifier)
     val medias = queryDao.query(query)
     medias
   }
