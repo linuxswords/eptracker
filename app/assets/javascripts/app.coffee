@@ -131,6 +131,7 @@ app.directive 'mediaFlag', ->
     restrict: 'E'
     scope:
       media: '='
+      show: '='
     templateUrl: '/assets/html/mediaFlag.html'
 
 app.directive 'mediaTorrent', ->
@@ -188,8 +189,15 @@ app.controller 'ShowController', ($scope, $log, $routeParams, ShowServer, ShowUp
 
   service
 
-app.controller 'ConsumeController', ($scope, ShowConsumer) ->
-  $scope.consume = ShowConsumer
+app.controller 'ConsumeController', ($scope, $log, ShowConsumer) ->
+  $scope.consume = (media) ->
+    ShowConsumer(media).success( (response) ->
+      if media.consumed
+        angular.forEach($scope.show.medias, (m) ->
+          if media.publishingDate > m.publishingDate
+            m.consumed = true
+        )
+    )
 
 
 app.controller 'MediaController', (Media) ->
