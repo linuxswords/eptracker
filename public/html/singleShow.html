@@ -1,8 +1,8 @@
 <h2>{{show.medias[0].title}} <span class="badge">{{show.medias.length}}</span></h2>
 <button type="button" id="update" data-loading-text="Loading ..."
       ng-click="call({name:show.medias[0].showId})"
-      class="btn btn-primary btn-xs {{activeState}}">
-    <div class="spinner"><span class="glyphicon glyphicon-refresh"></span></div> Update
+      class="btn btn-primary btn-xs">
+    <div ng-show="loading" class="spinner"><span class="glyphicon glyphicon-refresh"></span></div> Update
 </button>
 <ul class="list-unstyled">
     <li ng-repeat="media in show.medias" title="{{media.title}}" data-series="{{media.title}}">

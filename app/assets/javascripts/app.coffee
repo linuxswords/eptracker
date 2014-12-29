@@ -148,6 +148,7 @@ app.directive 'singleShow', ->
   scope:
     show: '='
     activeState: '='
+    loading: '='
     call: "&"
   templateUrl: '/assets/html/singleShow.html'
 
@@ -172,17 +173,14 @@ app.filter 'classTag', -> (size) ->
 #
 app.controller 'ShowController', ($scope, $log, $routeParams, ShowServer, ShowUpdater) ->
   service = this
-  $scope.activeState = ''
+  $scope.loading = false
+  myScope = $scope
   $scope.show = {}
   service.update = (name) ->
-    $log.debug("called update in ShowController")
-    $scope.activeState = 'active'
+    myScope.loading = true
     ShowUpdater.update(name).then( (response) ->
-      $log.debug("update data", response.data.length)
-      $log.debug("scope.length", $scope.show.medias.length)
       $scope.show.medias = response.data
-      $log.debug("after", $scope.show.medias.length)
-      $scope.activeState = ''
+      myScope.loading = false
     )
   ShowServer.get($routeParams.showid).then( (response) ->
     $scope.show.medias = response.data
