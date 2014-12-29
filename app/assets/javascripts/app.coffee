@@ -33,7 +33,7 @@ app.factory 'Media', ($http, $log) ->
       appdata.torrentEngine = data
     )
     .error( (data, status, header) ->
-      $log.error('error getting torrentEngine #{data}')
+      $log.error 'error getting torrentEngine', data
   )
   $http.get('/api/recent')
     .success( (data, status, headers, config) ->
@@ -46,18 +46,17 @@ app.factory 'Media', ($http, $log) ->
   )
   $http.get('/api/upcoming')
     .success( (data, status, headers, config) ->
-#      console.log("upcoming call returns #{status}")
        appdata.medias.upcoming = data
     )
     .error( (data, status, headers, config) ->
-      $log.error(status)
-      $log.error(data)
+      $log.error "status", status
+      $log.error "data", data
   )
   appdata
 
 app.factory 'ShowUpdater', ($http, $log) ->
   update = (showid) ->
-    $log.info("got update call")
+    # triggers the re-import of the show
     $http.put("/api/show/#{showid}/update")
     .success( (data, status, headers, config) ->
       $log.info("successful update")
@@ -175,13 +174,12 @@ app.filter 'classTag', -> (size) ->
 app.controller 'ShowController', ($scope, $log, $routeParams, ShowServer, ShowUpdater) ->
   service = this
   $scope.loading = false
-  myScope = $scope
   $scope.show = {}
   service.update = (name) ->
-    myScope.loading = true
+    $scope.loading = true
     ShowUpdater.update(name).then( (response) ->
       $scope.show.medias = response.data
-      myScope.loading = false
+      $scope.loading = false
     )
   ShowServer.get($routeParams.showid).then( (response) ->
     $scope.show.medias = response.data
@@ -194,6 +192,7 @@ app.controller 'ConsumeController', ($scope, $log, ShowConsumer) ->
     ShowConsumer(media).success( (response) ->
       if media.consumed
         angular.forEach($scope.show.medias, (m) ->
+        # mark every media that was published before also as read
           if media.publishingDate > m.publishingDate
             m.consumed = true
         )
