@@ -4,6 +4,10 @@
       class="btn btn-primary btn-xs">
     <div ng-show="loading" class="spinner"><span class="glyphicon glyphicon-refresh"></span></div> Update
 </button>
+<a class="btn btn-danger btn-xs" ng-href="{{'https://www.netflix.com/search/' + show.medias[0].title}}"
+   target="_blank">
+    Netflix
+</a>
 <ul class="list-unstyled">
     <li ng-repeat="media in show.medias" title="{{media.title}}" data-series="{{media.title}}">
 
