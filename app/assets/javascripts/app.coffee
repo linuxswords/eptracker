@@ -37,7 +37,6 @@ app.factory 'Media', ($http, $log) ->
   )
   $http.get('/api/recent')
     .success( (data, status, headers, config) ->
-#      console.log("recent call returns #{status}")
       appdata.medias.recent = data
     )
     .error( (data, status, headers, config) ->
@@ -193,7 +192,7 @@ app.controller 'ConsumeController', ($scope, $log, ShowConsumer) ->
       if media.consumed
         angular.forEach($scope.show.medias, (m) ->
         # mark every media that was published before also as read
-          if media.publishingDate > m.publishingDate
+          if media.publishingDate > m.publishingDate && m.showId == media.showId
             m.consumed = true
         )
     )
