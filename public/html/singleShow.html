@@ -8,8 +8,11 @@
    target="_blank">
     Netflix
 </a>
+
+
 <ul class="list-unstyled">
-    <li ng-repeat="media in show.medias" title="{{media.title}}" data-series="{{media.title}}">
+  <dir-pagination-controls template-url="/assets/html/dirPagination.tpl.html"></dir-pagination-controls>
+    <li dir-paginate="media in show.medias | itemsPerPage:15" title="{{media.title}}" data-series="{{media.title}}">
 
         <span class="date momentdate" data-date="{{media.publishingDate| relDate}}">
             {{media.publishingDate | date:'yyyy-MM-dd'}}

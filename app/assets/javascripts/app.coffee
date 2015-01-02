@@ -1,4 +1,4 @@
-app = angular.module('eptracker', ['ngRoute', 'filters-inArrayFilter'])
+app = angular.module('eptracker', ['ngRoute', 'filters-inArrayFilter', 'angularUtils.directives.dirPagination'])
 
 
 
