@@ -136,7 +136,7 @@ object Media {
   }
 
   def showByTitle(title: String) = {
-    val query = select from me where me.title === title orderBy(me.publishingDate)
+    val query = select from me where me.title === title orderBy(me.publishingDate, me.identifier)
     val medias = queryDao.query(query)
     medias
   }
